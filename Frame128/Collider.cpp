@@ -116,8 +116,8 @@ void CCollider::CalcCollision(CCollider* _pOther)
 	}
 
 
-	float _W;
-	float _H;
+	float _W = 0;
+	float _H = 0;
 
 	COLLISIONMANAGER->IsCollision(&_W, &_H, this, _pOther);
 
