@@ -182,6 +182,7 @@
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="UserDefineHeaders.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BmpMgr.cpp" />

@@ -34,7 +34,7 @@ public:
 	void				Set_Active(bool _isActive) { m_bActive = _isActive; }
 	void				Set_PosX(float _x) { m_vPos.x = _x; }
 	void				Set_PosY(float _y) { m_vPos.y = _y; }
-	void				Add_Pos(VECTOR2 vec) { m_vPos + vec; }
+	void				Add_Pos(VECTOR2 vec) { m_vPos += vec; }
 	void				Add_Scale(VECTOR2 vec) { m_vScale + vec; }
 
 	//CollisionFunction

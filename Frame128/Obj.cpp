@@ -52,30 +52,3 @@ CCollider* CObj::Get_Collider()
 		return static_cast<CCollider*>(component);
 	return nullptr;
 }
-
-void CObj::OnCollision(CCollider* _pOther)
-{
-}
-
-void CObj::OnCollisionEnter(CCollider* _pOther)
-{
-
-}
-
-void CObj::OnCollisionExit(CCollider* _pOther)
-{
-}
-
-void CObj::OnTrigger(CCollider* _pOther)
-{
-}
-
-void CObj::OnTriggerEnter(CCollider* _pOther)
-{
-}
-
-void CObj::OnTriggerExit(CCollider* _pOther)
-{
-
-}
-

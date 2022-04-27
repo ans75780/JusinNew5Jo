@@ -42,7 +42,12 @@ void CCollisionMgr::CollisionUpdate(list<CObj*>& Dest, list<CObj*>& Sour)
 				m_mapColInfo.insert(make_pair(ID.ID, false));//이전에 충돌한 적이 없으니까 false로
 				iter = m_mapColInfo.find(ID.ID);
 			}
-			if (IsCollision(pDestCol, pSourCol))//CollisionCheckStart
+
+			//out 받을 float 두 개. 
+			float _w;
+			float _h;
+
+			if (IsCollision(&_w, &_h, pDestCol, pSourCol))//CollisionCheckStart
 			{
 				//현재 충돌중이다.
 				if (iter->second)
@@ -95,7 +100,7 @@ void CCollisionMgr::CollisionUpdate(list<CObj*>& Dest, list<CObj*>& Sour)
 	}
 }
 
-bool CCollisionMgr::IsCollision(CCollider* DestCollider, CCollider* SourCollider)
+bool CCollisionMgr::IsCollision(float* _outW, float* _outH, CCollider* DestCollider, CCollider* SourCollider)
 {
 	VECTOR2 vDestPos = DestCollider->Get_FinalPos();
 	VECTOR2 vDestScale = DestCollider->Get_Scale();
@@ -113,6 +118,10 @@ bool CCollisionMgr::IsCollision(CCollider* DestCollider, CCollider* SourCollider
 	{
 		float fX = fWRadius - fWidth;
 		float fY = fHRadius - fHeight;
+
+		*_outW = fX;
+		*_outH = fY;
+
 		//둘다 물리충돌을 지원할 
 		return true;
 	}

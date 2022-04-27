@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Collider.h"
 #include "Obj.h"
+#include "UserDefineHeaders.h"
 
 UINT CCollider::g_iNextID = 0;
 
@@ -109,5 +110,56 @@ void CCollider::OnTriggerExit(CCollider* _pOther)
 
 void CCollider::CalcCollision(CCollider* _pOther)
 {
-	
+	if (this->Get_Owner()->Get_ID() == OBJID::OBJ_FEATURE)
+	{
+		return;
+	}
+
+
+	float _W;
+	float _H;
+
+	COLLISIONMANAGER->IsCollision(&_W, &_H, this, _pOther);
+
+	if (_W > _H)
+	{
+		if (this->m_pOwner->Get_Pos().y < _pOther->m_pOwner->Get_Pos().y)
+		{
+			this->m_pOwner->Add_Pos(VECTOR2(0.f, -_H));
+
+			//_pOther->m_pOwner->Add_Pos(VECTOR2(0.f, _H));
+
+			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(0.f, OffsetY));
+		}
+
+		else
+		{
+			this->m_pOwner->Add_Pos(VECTOR2(0.f, _H));
+
+			//_pOther->m_pOwner->Add_Pos(VECTOR2(0.f, -_H));
+
+			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(0.f, -OffsetY));
+		}
+	}
+
+	else
+	{
+		if (this->m_pOwner->Get_Pos().x < _pOther->m_pOwner->Get_Pos().x)
+		{
+
+			this->m_pOwner->Add_Pos(VECTOR2(-_W, 0.f));
+
+			//_pOther->m_pOwner->Add_Pos(VECTOR2(_W, 0.f));
+
+			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(OffsetX, 0.f));
+		}
+
+		else
+		{
+			this->m_pOwner->Add_Pos(VECTOR2(_W, 0.f));
+
+			//_pOther->m_pOwner->Add_Pos(VECTOR2(-_W, 0.f));
+			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(-OffsetX, 0.f));
+		}
+	}
 }
