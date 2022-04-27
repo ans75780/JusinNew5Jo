@@ -57,7 +57,7 @@ void CCollider::Render(HDC hDC)
 	oldBrush = (HBRUSH)SelectObject(hDC, myBrush);
 	myPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));	// 선 스타일, 굵기, 색상
 	oldPen = (HPEN)::SelectObject(hDC, (HGDIOBJ)myPen);	// 펜 선택
-	RectDrawCenter(hDC, m_vFinalPos.x, m_vFinalPos.y, (int)m_vScale.x, (int)m_vScale.y);
+	RectDrawCenter(hDC, int(m_vFinalPos.x), int(m_vFinalPos.y), (int)m_vScale.x, (int)m_vScale.y);
 	myPen = (HPEN)::SelectObject(hDC, oldPen);	// 기존의 펜 다시 선택
 	SelectObject(hDC, oldBrush);
 	SelectObject(hDC, oldPen);

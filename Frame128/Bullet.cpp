@@ -19,10 +19,16 @@ void CBullet::Init(void)
 	vLocalScale = { 10.f, 10.f, 0.f };
 	vLocalDir = { 0.f, -1.f, 0.f };
 
+	m_eID = OBJID::OBJ_BULLET;
+	m_eRenderID = RENDERID::RENDER_OBJ;
+	m_strName = L"Bullet";
+
 	vLocalLT = { -vLocalScale.x, -vLocalScale.y, 0.f };
 	vLocalRT = { vLocalScale.x, -vLocalScale.y, 0.f };
 	vLocalRB = { vLocalScale.x, vLocalScale.y, 0.f };
 	vLocalLB = { -vLocalScale.x, vLocalScale.y, 0.f };
+
+	CreateCollider();
 }
 
 int CBullet::Update(void)
@@ -35,13 +41,13 @@ int CBullet::Update(void)
 
 	// 플레이어 방향에따라 방향 바꿔주기 --> Player Angle에서 가져오기
 	// 방향이 정해지면 그 방향으로 날라가기
-	vLocalPos.x += cosf(m_pPlayer->Get_Angle()) * m_fSpeed * DT;
-	vLocalPos.x -= sinf(m_pPlayer->Get_Angle()) * m_fSpeed * DT;
+	vLocalPos.x += cosf(m_fAngle) * m_fSpeed * DT;
+	vLocalPos.y -= sinf(m_fAngle) * m_fSpeed * DT;
 
 
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
 	// 플레이어 좌표에다가 중점 설정해주기
-	D3DXMatrixTranslation(&matTrans, m_pPlayer->Get_Pos().x, m_pPlayer->Get_Pos().y, 0.f);
+	D3DXMatrixTranslation(&matTrans, m_vPos.x, m_vPos.y, 0.f);
 	m_matWorld = matScale * matTrans;
 
 	D3DXVec3TransformCoord(&vWorldPos, &vLocalPos, &m_matWorld);

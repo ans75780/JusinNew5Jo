@@ -26,6 +26,8 @@ public:
 		return pObj;
 	}
 
+	static CObj*	Create2();	//DX좌표 쓸 때 추가할 Create함수
+
 public:
 	CAbstractFactory()	{	}
 	~CAbstractFactory() {	}

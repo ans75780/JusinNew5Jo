@@ -4,6 +4,10 @@
 #include "Collider.h"
 #include "TimeMgr.h"
 #include "ObjMgr.h"
+
+#include "AbstractFactory.h"
+#include "Bullet.h"
+
 CPlayer::CPlayer()
 {
 }
@@ -69,12 +73,13 @@ void CPlayer::key_input()
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
 		m_vPos.y += m_fSpeed;
 
-
+	m_fAngle = 0.3f;
 
 	if (KEYMANAGER->isOnceKeyUp(VK_SPACE))
 	{
 		// create bullet
-		// BJMANAGER->AddObject(OBJID::OBJ_BULLET, pBullet);
+		OBJMANAGER->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet>::Create(m_vPos.x, m_vPos.y, m_fAngle));
+		
 	}
 }
 
