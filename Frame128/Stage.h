@@ -2,7 +2,6 @@
 #include "Scene.h"
 
 #include "Player.h"
-#include "Monster.h"
 
 class CStage :
 	public CScene

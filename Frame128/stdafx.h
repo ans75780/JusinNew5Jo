@@ -29,10 +29,9 @@
 #include <d3d9.h>
 
 #include <io.h>
-
 #include "fmod.h"
 #include "fmod.hpp"
-#pragma comment(lib, "fmodex_vc.lib")
+#pragma comment(lib, "fmodex64_vc.lib")
 
 #define	KEYMANAGER			CKeyMgr::GetSingleton()
 #define	SCENEMANAGER		CSceneMgr::GetSingleton()
