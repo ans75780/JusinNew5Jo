@@ -3,6 +3,7 @@
 #include "KeyMgr.h"
 #include "Collider.h"
 #include "TimeMgr.h"
+#include "ObjMgr.h"
 CPlayer::CPlayer()
 {
 }
@@ -67,6 +68,14 @@ void CPlayer::key_input()
 		m_vPos.y -= m_fSpeed;
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
 		m_vPos.y += m_fSpeed;
+
+
+
+	if (KEYMANAGER->isOnceKeyUp(VK_SPACE))
+	{
+		// create bullet
+		// BJMANAGER->AddObject(OBJID::OBJ_BULLET, pBullet);
+	}
 }
 
 void CPlayer::OnCollision(CCollider * _pOther)
