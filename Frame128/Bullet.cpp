@@ -95,21 +95,19 @@ void CBullet::Render(HDC hDC)
 
 void CBullet::Release(void)
 {
+	for_each(m_vecComponents.begin(), m_vecComponents.end(),
+		Safe_Delete<CComponent*>);
+	m_vecComponents.clear();
 }
 
 
 void CBullet::OnCollision(CCollider * _pOther)
 {
-	if (OBJID::OBJ_FEATURE == _pOther->Get_Collider_ID())
-	{
-		// 삭제
-		m_bActive = false;
-	}
 }
 
 void CBullet::OnCollisionEnter(CCollider * _pOther)
 {
-	if (OBJID::OBJ_FEATURE == _pOther->Get_Collider_ID())
+	if (OBJID::OBJ_FEATURE == _pOther->Get_Owner()->Get_ID())
 	{
 		// 삭제
 		m_bActive = false;
