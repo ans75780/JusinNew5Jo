@@ -43,7 +43,6 @@ void CPlayer::Init(void)
 
     CreateCollider();
 
-
 }
 
 int CPlayer::Update(void)
@@ -150,7 +149,6 @@ void CPlayer::key_input()
 
 	}
 	CalcMat();
-	
 }
 
 void CPlayer::OnCollision(CCollider * _pOther)
@@ -203,7 +201,6 @@ void CPlayer::CalcMat()
 		//바퀴 입장에서는 플레이어의 m_matLocal이 월드이기에 휠 로컬을 앞에서 곱해준다.
 		// 크 * 자 * 이  * 공
 		matWheelLocal = matWheelTransform * m_matLocal;
-		int k = 0;
 		D3DXVec3TransformCoord(&m_vCoord[i], &m_vWheel[i], &matWheelLocal);
 	}
 
