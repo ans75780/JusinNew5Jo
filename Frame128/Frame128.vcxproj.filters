@@ -88,6 +88,9 @@
     <Filter Include="01. Obj\06.Feature">
       <UniqueIdentifier>{dbbf0b71-fbab-4ca7-9d47-324692b85e60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\Unit\Bullet">
+      <UniqueIdentifier>{5ceebfc5-e4c6-4a5f-b4ec-a9675e7e6294}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -183,6 +186,9 @@
     <ClInclude Include="UserDefineHeaders.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>01. Obj\Unit\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -259,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="Feature.cpp">
       <Filter>01. Obj\06.Feature</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>01. Obj\Unit\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

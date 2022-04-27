@@ -29,14 +29,9 @@ int CPlayer::Update(void)
     if (!m_bActive)
         return OBJ_DEAD;
 
-    if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-        m_vPos.x -= m_fSpeed;
-    if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-        m_vPos.x += m_fSpeed;
-    if (KEYMANAGER->isStayKeyDown(VK_UP))
-        m_vPos.y -= m_fSpeed;
-    if (KEYMANAGER->isStayKeyDown(VK_DOWN))
-        m_vPos.y += m_fSpeed;
+	// 키입력에 따른 update 따로 key_input함수로 이동
+	key_input();
+
     int a = 0;
 
     for (auto& iter : m_vecComponents)
@@ -60,6 +55,18 @@ void CPlayer::Release(void)
     for_each(m_vecComponents.begin(), m_vecComponents.end(), Safe_Delete<CComponent*>);
     m_vecComponents.clear();
     m_strName.clear();
+}
+
+void CPlayer::key_input()
+{
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+		m_vPos.x -= m_fSpeed;
+	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+		m_vPos.x += m_fSpeed;
+	if (KEYMANAGER->isStayKeyDown(VK_UP))
+		m_vPos.y -= m_fSpeed;
+	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+		m_vPos.y += m_fSpeed;
 }
 
 void CPlayer::OnCollision(CCollider * _pOther)

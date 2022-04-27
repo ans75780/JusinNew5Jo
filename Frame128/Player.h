@@ -13,9 +13,11 @@ public:
     virtual int     Update(void) override;
     virtual void    Render(HDC hDC) override;
     virtual void    Release(void) override;
-private:
 
-	// CUnit을(를) 통해 상속됨
+public:
+	void key_input();
+
+private:
 	virtual void OnCollision(CCollider * _pOther) override;
 	virtual void OnCollisionEnter(CCollider * _pOther) override;
 	virtual void OnCollisionExit(CCollider * _pOther) override;
