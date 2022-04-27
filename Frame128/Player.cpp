@@ -21,8 +21,6 @@ void CPlayer::Init(void)
     m_eRenderID = RENDERID::RENDER_OBJ;
     m_strName = L"Player";
 
-
-	float TimeTick = TIMEMANAGER->getElasedTime();
     CreateCollider();
 }
 
