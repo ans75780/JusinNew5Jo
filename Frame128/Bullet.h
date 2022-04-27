@@ -54,4 +54,6 @@ private:
 	DXV3	vWorldRT;
 	DXV3	vWorldRB;
 	DXV3	vWorldLB;
+
+	float	m_fLifeTime = 3.f;
 };

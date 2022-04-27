@@ -47,6 +47,12 @@ void CStage::Late_Update(void)
 		OBJMANAGER->Get_ObjList(OBJ_PLAYER),
 		OBJMANAGER->Get_ObjList(OBJ_FEATURE)
 	);
+
+	COLLISIONMANAGER->CollisionUpdate
+	(
+		OBJMANAGER->Get_ObjList(OBJID::OBJ_BULLET),
+		OBJMANAGER->Get_ObjList(OBJ_FEATURE)
+	);
 }
 
 void CStage::Render(HDC hDC)
