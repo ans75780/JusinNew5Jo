@@ -105,7 +105,7 @@ void CSoundMgr::LoadSoundFile()
 	_finddata_t fd;
 
 	// _findfirst : <io.h>에서 제공하며 사용자가 설정한 경로 내에서 가장 첫 번째 파일을 찾는 함수
-	long handle = _findfirst("../Sound/*.*", &fd);
+	long handle = long(_findfirst("../Sound/*.*", &fd));
 
 	if (handle == -1)
 		return;
@@ -128,7 +128,7 @@ void CSoundMgr::LoadSoundFile()
 
 		if (eRes == FMOD_OK)
 		{
-			int iLength = strlen(fd.name) + 1;
+			int iLength = int(strlen(fd.name) + 1);
 
 			TCHAR* pSoundKey = new TCHAR[iLength];
 			ZeroMemory(pSoundKey, sizeof(TCHAR) * iLength);

@@ -2,28 +2,9 @@
 #include "Unit.h"
 
 CUnit::CUnit()
+	: m_fSpeed(0.f), m_fAtk(0.f)
 {
     m_bActive = true;
 }
 
-CUnit::~CUnit()
-{
-}
-
-void CUnit::Init(void)
-{
-
-}
-
-int CUnit::Update(void)
-{
-    return 0;
-}
-
-void CUnit::Render(HDC hDC)
-{
-}
-
-void CUnit::Release(void)
-{
-}
+CUnit::~CUnit() {}

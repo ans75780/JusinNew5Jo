@@ -46,7 +46,11 @@ int CPlayer::Update(void)
 
 void CPlayer::Render(HDC hDC)
 {
-    RectDrawCenter(hDC, m_vPos.x, m_vPos.y, m_vScale.x, m_vScale.y);
+    RectDrawCenter(hDC
+		, int(m_vPos.x)
+		, int(m_vPos.y)
+		, int(m_vScale.x)
+		, int(m_vScale.y));
     for (auto& iter : m_vecComponents)
         iter->Render(hDC);
 }

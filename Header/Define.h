@@ -30,4 +30,12 @@
 #define		PI_32	(PI / 32)
 
 
+#define DT		TIMEMANAGER->getElasedTime()
+
+//#define KEY(type, state) KEY_STATE::state == KEYMANAGER->get_KeyState(KEY_TYPE::type)
+//#define KEYTAP(type)	KEY(type, TAP)
+//#define KEYHOLD(type)	KEY(type, HOLD)
+//#define KEYAWAY(type)	KEY(type, AWAY)
+//#define KEYNONE(type)	KEY(type, NONE)
+
 extern		HWND	g_hWnd;

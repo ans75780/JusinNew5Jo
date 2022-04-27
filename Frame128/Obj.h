@@ -10,19 +10,19 @@ public:
 	virtual ~CObj();
 
 public:
-	virtual void		Init(void)PURE;
-	virtual int		Update(void)	PURE;
-	virtual void		Late_Update(void) final;
-	virtual void		Render(HDC hDC)	PURE;
-	virtual void		Release(void)	PURE;
+	virtual void Init(void) PURE;
+	virtual int  Update(void) PURE;
+	virtual void Late_Update(void) final;
+	virtual void Render(HDC hDC) PURE;
+	virtual void Release(void) PURE;
 public:
 	//Getter
-	const VECTOR2&		Get_Pos() { return m_vPos; }
-	const VECTOR2&		Get_Scale() { return m_vScale; }
-	const float		&		Get_Angle() { return m_fAngle; }
-	const bool		&		Get_Active() { return m_bActive; }
-	RENDERID				Get_RenderID() { return m_eRenderID; }
-	CComponent*			Get_Component(const TCHAR* ComponentName);
+	const VECTOR2& Get_Pos() { return m_vPos; }
+	const VECTOR2& Get_Scale() { return m_vScale; }
+	const float& Get_Angle() { return m_fAngle; }
+	const bool& Get_Active() { return m_bActive; }
+	RENDERID Get_RenderID() { return m_eRenderID; }
+	CComponent*	Get_Component(const TCHAR* ComponentName);
 	void						CreateCollider();
 	CCollider*				Get_Collider();
 	OBJID						Get_ID() { return m_eID; }

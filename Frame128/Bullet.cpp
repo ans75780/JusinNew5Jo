@@ -1,57 +1,91 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
+#include "TimeMgr.h"
+
+typedef D3DXVECTOR3 DXV3;
+typedef D3DXMATRIX	DXMAT;
 
 CBullet::CBullet()
 {
+	D3DXMatrixIdentity(&m_matWorld);
 }
 
+CBullet::~CBullet() { Release(); }
 
-CBullet::~CBullet()
+void CBullet::Init(void)
 {
-	Release();
-}
+	vLocalPos = { 0.f, 0.f, 0.f };
+	vLocalScale = { 10.f, 10.f, 0.f };
+	vLocalDir = { 0.f, -1.f, 0.f };
 
-void CBullet::Initialize(void)
-{
-	m_tInfo.fCX = 30.f;
-	m_tInfo.fCY = 30.f;
-
-	m_fSpeed = 5.f;
+	vLocalLT = { -vLocalScale.x, -vLocalScale.y, 0.f };
+	vLocalRT = { vLocalScale.x, -vLocalScale.y, 0.f };
+	vLocalRB = { vLocalScale.x, vLocalScale.y, 0.f };
+	vLocalLB = { -vLocalScale.x, vLocalScale.y, 0.f };
 }
 
 int CBullet::Update(void)
 {
-	if (m_bDead)
-		return OBJ_DEAD;
+	D3DXMATRIX 	matScale, matTrans;
+	D3DXMatrixIdentity(&matScale);
+	D3DXMatrixIdentity(&matTrans);
+	
 
-	m_tInfo.fX += m_fSpeed * cosf(m_fAngle * (PI / 180.f));
-	m_tInfo.fY -= m_fSpeed * sinf(m_fAngle * (PI / 180.f));
-		
-	Update_Rect();
 
+	// 플레이어 방향에따라 방향 바꿔주기 --> Player Angle에서 가져오기
+	// 방향이 정해지면 그 방향으로 날라가기
+	vLocalPos.x += cosf(m_pPlayer->Get_Angle()) * m_fSpeed * DT;
+	vLocalPos.x -= sinf(m_pPlayer->Get_Angle()) * m_fSpeed * DT;
+
+
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+	// 플레이어 좌표에다가 중점 설정해주기
+	D3DXMatrixTranslation(&matTrans, m_pPlayer->Get_Pos().x, m_pPlayer->Get_Pos().y, 0.f);
+	m_matWorld = matScale * matTrans;
+
+	D3DXVec3TransformCoord(&vWorldPos, &vLocalPos, &m_matWorld);
+	D3DXVec3TransformCoord(&vWorldLT, &vLocalLT, &m_matWorld);
+	D3DXVec3TransformCoord(&vWorldRT, &vLocalRT, &m_matWorld);
+	D3DXVec3TransformCoord(&vWorldRB, &vLocalRB, &m_matWorld);
+	D3DXVec3TransformCoord(&vWorldLB, &vLocalLB, &m_matWorld);
 	return OBJ_NOEVENT;
-}
-
-void CBullet::Late_Update()
-{
-	if (0 >= m_tRect.left || WINCX <= m_tRect.right ||
-		0 >= m_tRect.top || WINCY <= m_tRect.bottom)
-	{
-		m_bDead = true;
-	}
 }
 
 void CBullet::Render(HDC hDC)
 {
-	Ellipse(hDC,
-		m_tRect.left,
-		m_tRect.top,
-		m_tRect.right,
-		m_tRect.bottom);
+	MoveToEx(hDC, int(vWorldLT.x), int(vWorldLT.y), nullptr);
+	LineTo(hDC, int(vWorldRT.x), int(vWorldRT.y));
+	LineTo(hDC, int(vWorldRB.x), int(vWorldRB.y));
+	LineTo(hDC, int(vWorldLB.x), int(vWorldLB.y));
+	LineTo(hDC, int(vWorldLT.x), int(vWorldLT.y));
 }
 
 void CBullet::Release(void)
 {
-	
+}
+
+
+void CBullet::OnCollision(CCollider * _pOther)
+{
+}
+
+void CBullet::OnCollisionEnter(CCollider * _pOther)
+{
+}
+
+void CBullet::OnCollisionExit(CCollider * _pOther)
+{
+}
+
+void CBullet::OnTrigger(CCollider * _pOther)
+{
+}
+
+void CBullet::OnTriggerEnter(CCollider * _pOther)
+{
+}
+
+void CBullet::OnTriggerExit(CCollider * _pOther)
+{
 }

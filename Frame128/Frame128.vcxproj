@@ -22,7 +22,7 @@
     <ProjectGuid>{F7251381-9B4B-4A69-8C43-230338D2969F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Frame128</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -71,21 +71,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\zzz11\OneDrive\문서\GitHub\JusinNew5Jo\Header;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\zzz11\OneDrive\문서\GitHub\JusinNew5Jo\Header;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <PublicIncludeDirectories>$(PublicIncludeDirectories)</PublicIncludeDirectories>
     <AllProjectIncludesArePublic>false</AllProjectIncludesArePublic>
-    <IncludePath>$(ProjectDir)../Header;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)../Header;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\zzz11\OneDrive\문서\GitHub\JusinNew5Jo\Header;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\zzz11\OneDrive\문서\GitHub\JusinNew5Jo\Header;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\zzz11\OneDrive\문서\GitHub\JusinNew5Jo\Header;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\zzz11\OneDrive\문서\GitHub\JusinNew5Jo\Header;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -99,6 +103,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d9.lib, d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -112,6 +117,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d9.lib, d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -130,6 +136,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d9.lib, d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,6 +154,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>d3d9.lib, d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -155,6 +163,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="BmpMgr.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Component.h" />
@@ -185,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BmpMgr.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Feature.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
