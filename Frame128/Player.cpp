@@ -69,14 +69,6 @@ void CPlayer::Render(HDC hDC)
 	LineTo(hDC, m_vCoord[RB].x, m_vCoord[RB].y);
 	LineTo(hDC, m_vCoord[RT].x, m_vCoord[RT].y);
 	LineTo(hDC, m_vCoord[LT].x, m_vCoord[LT].y);
-
-
-	/*
-    RectDrawCenter(hDC
-		, int(m_vPos.x)
-		, int(m_vPos.y)
-		, int(m_vScale.x)
-		, int(m_vScale.y));*/
     /*
 	for (auto& iter : m_vecComponents)
         iter->Render(hDC);*/
@@ -102,12 +94,6 @@ void CPlayer::key_input()
 		D3DXMATRIX infoWorldMat;
 		D3DXMATRIX infoParentMat;
 
-		D3DXMatrixIdentity(&infoRotZMat);
-		D3DXMatrixIdentity(&infoTransformMat);
-		D3DXMatrixIdentity(&infoWorldMat);
-		D3DXMatrixIdentity(&infoParentMat);
-
-
 		D3DXMatrixRotationZ(&infoRotZMat, m_fRadian);
 		D3DXMatrixTranslation(&infoTransformMat, 0, -m_fSpeed * DT, 0);
 		D3DXMatrixTranslation(&infoParentMat, m_vPos.x, m_vPos.y, 0);
@@ -123,12 +109,7 @@ void CPlayer::key_input()
 		D3DXMATRIX infoWorldMat;
 		D3DXMATRIX infoParentMat;
 
-		D3DXMatrixIdentity(&infoRotZMat);
-		D3DXMatrixIdentity(&infoTransformMat);
-		D3DXMatrixIdentity(&infoWorldMat);
-		D3DXMatrixIdentity(&infoParentMat);
-
-
+		//로테이션이랑 트랜스레이션 함수가 기본적으로 매트릭스를 초기화시켜줌
 		D3DXMatrixRotationZ(&infoRotZMat, m_fRadian);
 		D3DXMatrixTranslation(&infoTransformMat, 0, m_fSpeed * DT, 0);
 		D3DXMatrixTranslation(&infoParentMat, m_vPos.x, m_vPos.y, 0);
@@ -137,7 +118,7 @@ void CPlayer::key_input()
 		//D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &infoParentMat);
 	}
 
-	// 총알 날라가는지 확인하려고 임의로 준 angle 라디안 값
+
 
 
 	if (MGR(CKeyMgr)->isOnceKeyUp(VK_SPACE))
