@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Header/Include.h"
+#include "Include.h"
 
 class CMainGame
 {
