@@ -102,11 +102,11 @@ void CCollisionMgr::CollisionUpdate(list<CObj*>& Dest, list<CObj*>& Sour)
 
 bool CCollisionMgr::IsCollision(float* _outW, float* _outH, CCollider* DestCollider, CCollider* SourCollider)
 {
-	VECTOR2 vDestPos = DestCollider->Get_FinalPos();
-	VECTOR2 vDestScale = DestCollider->Get_Scale();
+	DXV3 vDestPos = DestCollider->Get_FinalPos();
+	DXV3 vDestScale = DestCollider->Get_Scale();
 
-	VECTOR2 vSourPos = SourCollider->Get_FinalPos();
-	VECTOR2 vSourScale = SourCollider->Get_Scale();
+	DXV3 vSourPos = SourCollider->Get_FinalPos();
+	DXV3 vSourScale = SourCollider->Get_Scale();
 
 	float		fWidth = abs(vSourPos.x - vDestPos.x);
 	float		fWRadius = (vDestScale.x + vSourScale.x) * 0.5f;

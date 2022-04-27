@@ -19,7 +19,7 @@ public:
 		CObj*		pObj = new T;
 		pObj->Init();
 
-		VECTOR2 vec(_fX, _fY);
+		DXV3 vec(_fX, _fY, 0.f);
 		pObj->Set_Pos(vec);
 		pObj->Set_Angle(_fAngle);
 

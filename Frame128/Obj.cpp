@@ -4,8 +4,9 @@
 #include "Collider.h"
 
 CObj::CObj()
-	:m_bActive(true), m_fRadian(0.f), m_vPos(0, 0), m_vScale(0, 0),m_strName(L"")
+	:m_bActive(true), m_fRadian(0.f), m_vPos(0, 0,0 ), m_vScale(0, 0, 0),m_strName(L"")
 {
+	D3DXMatrixIdentity(&m_matLocal);
 }
 
 CObj::~CObj()

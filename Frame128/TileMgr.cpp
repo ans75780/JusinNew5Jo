@@ -24,7 +24,7 @@ void CTileMgr::Init(void)
 			float	fX = float((TILECX * j) + (TILECX >> 1));
 			float	fY = float((TILECY * i) + (TILECY >> 1));
 			CObj*	pObj = CAbstractFactory<CTile>::Create(fX, fY, 0);
-			pObj->Set_Scale(VECTOR2(TILECX, TILECY));
+			pObj->Set_Scale(DXV3(TILECX, TILECY, 0.f));
 			m_vecTile.push_back(pObj);
 		}
 	}

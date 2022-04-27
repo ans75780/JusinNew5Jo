@@ -1,8 +1,7 @@
 #pragma once
 #include "Unit.h"
 
-typedef D3DXVECTOR3 DXV3;
-typedef D3DXMATRIX	DXMAT;
+
 
 class CBullet :
 	public CUnit

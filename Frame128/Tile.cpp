@@ -31,8 +31,14 @@ void CTile::Render(HDC hDC)
 
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
-	POINT pos = m_vPos.To_Int();
-	POINT scale = m_vScale.To_Int();
+	POINT pos;
+	POINT scale;
+	pos.x = m_vPos.x;
+	pos.y = m_vPos.y;
+	scale.x = m_vScale.x;
+	scale.y = m_vScale.y;
+
+
 	if (m_iDrawID != 0)
 	{
 		HDC		hMemDC = CBmpMgr::Get_Instance()->Find_Image(L"Tile");

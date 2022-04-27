@@ -17,23 +17,41 @@ CPlayer::~CPlayer()
 }
 void CPlayer::Init(void)
 {
-    m_vPos = { 300,300 };
-    m_vScale = { 50,50 };
-    m_fSpeed = 5.f;
-    m_fRadian = 0.f;
+	D3DXMatrixIdentity(&m_matLocal);
+    m_vPos = { 300,300, 0.f};
+	m_fWheelDist = 25;
+
+	m_vWheel[LT].x = -m_fWheelDist;
+	m_vWheel[LT].y  = -m_fWheelDist;
+
+	m_vWheel[LB].x = -m_fWheelDist;
+	m_vWheel[LB].y = +m_fWheelDist;
+
+	m_vWheel[RT].x = +m_fWheelDist;
+	m_vWheel[RT].y = -m_fWheelDist;
+
+	m_vWheel[RB].x = +m_fWheelDist;
+	m_vWheel[RB].y = +m_fWheelDist;
+
+    m_vScale = { 50,50 ,0.f};
+    m_fSpeed = 500.f;
+    m_fRadian = D3DXToRadian(0);
     m_fAtk = 0.f;
     m_eID = OBJ_PLAYER;
     m_eRenderID = RENDERID::RENDER_OBJ;
     m_strName = L"Player";
 
     CreateCollider();
+
+
 }
 
 int CPlayer::Update(void)
 {
     if (!m_bActive)
         return OBJ_DEAD;
-
+	m_vDirPos.x = 0;
+	m_vDirPos.y = 0;
 	// 키입력에 따른 update 따로 key_input함수로 이동
 	key_input();
 
@@ -41,18 +59,28 @@ int CPlayer::Update(void)
 
     for (auto& iter : m_vecComponents)
         iter->Update();
+
     return 0;
 }
 
 void CPlayer::Render(HDC hDC)
 {
+	MoveToEx(hDC, m_vCoord[LT].x, m_vCoord[LT].y, NULL);
+	LineTo(hDC, m_vCoord[LB].x, m_vCoord[LB].y);
+	LineTo(hDC, m_vCoord[RB].x, m_vCoord[RB].y);
+	LineTo(hDC, m_vCoord[RT].x, m_vCoord[RT].y);
+	LineTo(hDC, m_vCoord[LT].x, m_vCoord[LT].y);
+
+
+	/*
     RectDrawCenter(hDC
 		, int(m_vPos.x)
 		, int(m_vPos.y)
 		, int(m_vScale.x)
-		, int(m_vScale.y));
-    for (auto& iter : m_vecComponents)
-        iter->Render(hDC);
+		, int(m_vScale.y));*/
+    /*
+	for (auto& iter : m_vecComponents)
+        iter->Render(hDC);*/
 }
 
 void CPlayer::Release(void)
@@ -64,26 +92,65 @@ void CPlayer::Release(void)
 
 void CPlayer::key_input()
 {
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-		m_vPos.x -= m_fSpeed;
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
-		m_vPos.x += m_fSpeed;
-	if (KEYMANAGER->isStayKeyDown(VK_UP))
-		m_vPos.y -= m_fSpeed;
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
-		m_vPos.y += m_fSpeed;
+	if (MGR(CKeyMgr)->isStayKeyDown('A'))
+		m_fRadian -= D3DXToRadian(5.f);
+	if (MGR(CKeyMgr)->isStayKeyDown('D'))
+		m_fRadian += D3DXToRadian(5.f);
+	if (MGR(CKeyMgr)->isStayKeyDown('W'))
+	{
+		D3DXMATRIX infoRotZMat;
+		D3DXMATRIX infoTransformMat;
+		D3DXMATRIX infoWorldMat;
+		D3DXMATRIX infoParentMat;
+
+		D3DXMatrixIdentity(&infoRotZMat);
+		D3DXMatrixIdentity(&infoTransformMat);
+		D3DXMatrixIdentity(&infoWorldMat);
+		D3DXMatrixIdentity(&infoParentMat);
+
+
+		D3DXMatrixRotationZ(&infoRotZMat, m_fRadian);
+		D3DXMatrixTranslation(&infoTransformMat, 0, -m_fSpeed * DT, 0);
+		D3DXMatrixTranslation(&infoParentMat, m_vPos.x, m_vPos.y, 0);
+		infoWorldMat = infoTransformMat * infoRotZMat * infoParentMat;
+		D3DXVec3TransformCoord(&m_vPos, &D3DXVECTOR3(0, 0, 0), &infoWorldMat);
+		//D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &infoParentMat);
+
+	}
+	if (MGR(CKeyMgr)->isStayKeyDown('S'))
+	{
+		D3DXMATRIX infoRotZMat;
+		D3DXMATRIX infoTransformMat;
+		D3DXMATRIX infoWorldMat;
+		D3DXMATRIX infoParentMat;
+
+		D3DXMatrixIdentity(&infoRotZMat);
+		D3DXMatrixIdentity(&infoTransformMat);
+		D3DXMatrixIdentity(&infoWorldMat);
+		D3DXMatrixIdentity(&infoParentMat);
+
+
+		D3DXMatrixRotationZ(&infoRotZMat, m_fRadian);
+		D3DXMatrixTranslation(&infoTransformMat, 0, m_fSpeed * DT, 0);
+		D3DXMatrixTranslation(&infoParentMat, m_vPos.x, m_vPos.y, 0);
+		infoWorldMat = infoTransformMat * infoRotZMat * infoParentMat;
+		D3DXVec3TransformCoord(&m_vPos, &D3DXVECTOR3(0, 0, 0), &infoWorldMat);
+		//D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &infoParentMat);
+	}
 
 	// 총알 날라가는지 확인하려고 임의로 준 angle 라디안 값
-	m_fRadian = 0.3f;
 
-	if (KEYMANAGER->isOnceKeyUp(VK_SPACE))
+
+	if (MGR(CKeyMgr)->isOnceKeyUp(VK_SPACE))
 	{
 		// create bullet
-		OBJMANAGER->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet>::Create(m_vPos.x, m_vPos.y, m_fRadian));
-		
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet>::Create(m_vPos.x, m_vPos.y, m_fRadian));
 		// 총알 안날라감... --> 총알 날라가는 거 해결
 		// 총알 일정 시간 경과하면 삭제되는 거 추가중 --> 추가완료
+
 	}
+	CalcMat();
+	
 }
 
 void CPlayer::OnCollision(CCollider * _pOther)
@@ -108,4 +175,36 @@ void CPlayer::OnTriggerEnter(CCollider * _pOther)
 
 void CPlayer::OnTriggerExit(CCollider * _pOther)
 {
+}
+
+void CPlayer::CalcMat()
+{
+	DXMAT		matScale;
+	DXMAT		matRotZ;
+	DXMAT		matTransform;
+	DXMAT		matWheelTransform;//각각 휠의 행렬을 담을 좌표
+	DXMAT		matWheelRotZ;//각각 휠의 행렬을 담을 좌표
+	DXMAT		matWheelLocal;
+	DXV3			m_tPos;
+	DXV3			m_tAngle;
+
+	
+	m_tPos = m_vPos;
+	float angle = D3DXToDegree(m_fRadian);
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+	D3DXMatrixRotationZ(&matRotZ, m_fRadian);
+	D3DXMatrixTranslation(&matTransform, m_vPos.x, m_vPos.y, 0.f);
+	m_matLocal = matScale * matRotZ * matTransform;
+
+	for (int i = 0; i < 4; i++)
+	{
+		D3DXMatrixTranslation(&matWheelTransform, m_vWheel[i].x, m_vWheel[i].y, 0.f);
+
+		//바퀴 입장에서는 플레이어의 m_matLocal이 월드이기에 휠 로컬을 앞에서 곱해준다.
+		// 크 * 자 * 이  * 공
+		matWheelLocal = matWheelTransform * m_matLocal;
+		int k = 0;
+		D3DXVec3TransformCoord(&m_vCoord[i], &m_vWheel[i], &matWheelLocal);
+	}
+
 }

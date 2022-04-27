@@ -6,7 +6,7 @@
 UINT CCollider::g_iNextID = 0;
 
 CCollider::CCollider()	
-	:m_iID(g_iNextID++), m_vOffsetPos(0,0),m_vScale(0,0)
+	:m_iID(g_iNextID++), m_vOffsetPos(0,0, 0),m_vScale(0, 0, 0)
 {
 	m_strName = L"Collider";
 	m_bIsTriger = false;
@@ -118,21 +118,21 @@ void CCollider::CalcCollision(CCollider* _pOther)
 	float _W = 0;
 	float _H = 0;
 
-	COLLISIONMANAGER->IsCollision(&_W, &_H, this, _pOther);
+	MGR(CCollisionMgr)->IsCollision(&_W, &_H, this, _pOther);
 
 	if (_W > _H)
 	{
 		if (this->m_pOwner->Get_Pos().y < _pOther->m_pOwner->Get_Pos().y)
 		{
-			this->m_pOwner->Add_Pos(VECTOR2(0.f, -_H));
+			this->m_pOwner->Add_Pos(DXV3(0.f, -_H, 0));
 			
 		}
 
 		else
 		{
-			this->m_pOwner->Add_Pos(VECTOR2(0.f, _H));
+			this->m_pOwner->Add_Pos(DXV3(0.f, _H, 0));
 
-			//_pOther->m_pOwner->Add_Pos(VECTOR2(0.f, -_H));
+			//_pOther->m_pOwner->Add_Pos(DXV3(0.f, -_H));
 
 			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(0.f, -OffsetY));
 		}
@@ -143,18 +143,18 @@ void CCollider::CalcCollision(CCollider* _pOther)
 		if (this->m_pOwner->Get_Pos().x < _pOther->m_pOwner->Get_Pos().x)
 		{
 
-			this->m_pOwner->Add_Pos(VECTOR2(-_W, 0.f));
+			this->m_pOwner->Add_Pos(DXV3(-_W, 0.f, 0));
 
-			//_pOther->m_pOwner->Add_Pos(VECTOR2(_W, 0.f));
+			//_pOther->m_pOwner->Add_Pos(DXV3(_W, 0.f));
 
 			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(OffsetX, 0.f));
 		}
 
 		else
 		{
-			this->m_pOwner->Add_Pos(VECTOR2(_W, 0.f));
+			this->m_pOwner->Add_Pos(DXV3(_W, 0.f, 0));
 
-			//_pOther->m_pOwner->Add_Pos(VECTOR2(-_W, 0.f));
+			//_pOther->m_pOwner->Add_Pos(DXV3(-_W, 0.f));
 			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(-OffsetX, 0.f));
 		}
 	}
@@ -165,6 +165,6 @@ void CCollider::CalcCollision(CCollider* _pOther)
 
 void CCollider::SyncOwnerPos()
 {
-	VECTOR2 OwnerPos = m_pOwner->Get_Pos();
+	DXV3 OwnerPos = m_pOwner->Get_Pos();
 	m_vFinalPos = OwnerPos + m_vOffsetPos;
 }

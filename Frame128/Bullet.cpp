@@ -25,9 +25,9 @@ CBullet::~CBullet() { Release(); }
 
 void CBullet::Init(void)
 {
-	vLocalPos = { 0.f, 0.f, 0.f };
+	vLocalPos = { 0.f, 0.f, 0.f};
 	vLocalScale = { 10.f, 10.f, 0.f };
-	m_vScale = { 10.f, 10.f };
+	m_vScale = { 10.f, 10.f, 0.f};
 	vLocalDir = { 0.f, -1.f, 0.f };
 
 	m_eID = OBJID::OBJ_BULLET;

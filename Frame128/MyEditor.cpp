@@ -15,36 +15,36 @@ CMyEditor::~CMyEditor()
 
 void CMyEditor::Key_Input(void)
 {
-	if (KEYMANAGER->isOnceKeyDown('Q'))
+	if (MGR(CKeyMgr)->isOnceKeyDown('Q'))
 	{
 		CTileMgr::GetSingleton()->Save("Stage1.dat");
 	}
-	if (KEYMANAGER->isOnceKeyDown('E'))
+	if (MGR(CKeyMgr)->isOnceKeyDown('E'))
 	{
 		CTileMgr::GetSingleton()->Load("Stage1.dat");
 	}
 
-	if (KEYMANAGER->isStayKeyDown('A'))
+	if (MGR(CKeyMgr)->isStayKeyDown('A'))
 	{
 		CScrollMgr::Get_Instance()->Set_ScrollX(5.f);
 	}
 
-	if (KEYMANAGER->isStayKeyDown('D'))
+	if (MGR(CKeyMgr)->isStayKeyDown('D'))
 	{
 		CScrollMgr::Get_Instance()->Set_ScrollX(-5.f);
 	}
 
-	if (KEYMANAGER->isStayKeyDown('W'))
+	if (MGR(CKeyMgr)->isStayKeyDown('W'))
 	{
 		CScrollMgr::Get_Instance()->Set_ScrollY(5.f);
 	}
 
-	if (KEYMANAGER->isStayKeyDown('S'))
+	if (MGR(CKeyMgr)->isStayKeyDown('S'))
 	{
 		CScrollMgr::Get_Instance()->Set_ScrollY(-5.f);
 	}
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	if (MGR(CKeyMgr)->isOnceKeyDown(VK_LBUTTON))
 	{
 		POINT	Pt;
 		GetCursorPos(&Pt);

@@ -36,13 +36,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 
-#define	KEYMANAGER			CKeyMgr::GetSingleton()
-#define	SCENEMANAGER		CSceneMgr::GetSingleton()
-#define	OBJMANAGER			CObjMgr::GetSingleton()
-#define COLLISIONMANAGER	CCollisionMgr::GetSingleton()
-#define TIMEMANAGER			CTimeMgr::GetSingleton()
-#define SOUNDMANAGER		CSoundMgr::GetSingleton()
-
+#define MGR(manger) manger::GetSingleton()
 #define SAFE_DELETE(p){if(p){delete p; p = nullptr;}}
 
 #ifdef _DEBUG

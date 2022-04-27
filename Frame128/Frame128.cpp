@@ -42,7 +42,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance
 
 	if (nullptr != pMainGame) pMainGame->Initialize();
 
-    TIMEMANAGER->Init();
+    MGR(CTimeMgr)->Init();
 		  
 	while (true)
 	{
@@ -59,7 +59,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance
 		}	
 		else
 		{
-            TIMEMANAGER->Update(60.f);
+            MGR(CTimeMgr)->Update(60.f);
             pMainGame->Update();
             pMainGame->Late_Update();
             pMainGame->Render();

@@ -20,8 +20,8 @@ HRESULT CStage::Init(void)
 {
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/BackBuffer.bmp", L"BackGround");
 
-	OBJMANAGER->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
-	OBJMANAGER->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
+	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
+	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
 
 
 	return S_OK;
@@ -29,18 +29,18 @@ HRESULT CStage::Init(void)
 
 void CStage::Update(void)
 {
-	OBJMANAGER->Update();
+	MGR(CObjMgr)->Update();
 }
 
 void CStage::Late_Update(void)
 {
-	OBJMANAGER->Late_Update();
+	MGR(CObjMgr)->Late_Update();
 	
 	//面倒贸府 诀单捞飘
-	COLLISIONMANAGER->CollisionUpdate
+	MGR(CCollisionMgr)->CollisionUpdate
 	(
-		OBJMANAGER->Get_ObjList(OBJ_PLAYER),
-		OBJMANAGER->Get_ObjList(OBJ_MONSTER)
+		MGR(CObjMgr)->Get_ObjList(OBJ_PLAYER),
+		MGR(CObjMgr)->Get_ObjList(OBJ_MONSTER)
 	);
 
 	/*COLLISIONMANAGER->CollisionUpdate
@@ -49,10 +49,10 @@ void CStage::Late_Update(void)
 		OBJMANAGER->Get_ObjList(OBJ_FEATURE)
 	);*/
 
-	COLLISIONMANAGER->CollisionUpdate
+	MGR(CCollisionMgr)->CollisionUpdate
 	(
-		OBJMANAGER->Get_ObjList(OBJID::OBJ_BULLET),
-		OBJMANAGER->Get_ObjList(OBJ_FEATURE)
+		MGR(CObjMgr)->Get_ObjList(OBJID::OBJ_BULLET),
+		MGR(CObjMgr)->Get_ObjList(OBJ_FEATURE)
 	);
 	
 }
@@ -71,15 +71,15 @@ void CStage::Render(HDC hDC)
 		0,
 		0,
 		SRCCOPY);
-	OBJMANAGER->Render(hDC);
+	MGR(CObjMgr)->Render(hDC);
 }
 
 void CStage::Release(void)
 {
-	OBJMANAGER->Delete_ID(OBJ_PLAYER);
-	OBJMANAGER->Delete_ID(OBJ_MONSTER);
-	OBJMANAGER->Delete_ID(OBJ_FEATURE);
-	COLLISIONMANAGER->ClearColInfo();
+	MGR(CObjMgr)->Delete_ID(OBJ_PLAYER);
+	MGR(CObjMgr)->Delete_ID(OBJ_MONSTER);
+	MGR(CObjMgr)->Delete_ID(OBJ_FEATURE);
+	MGR(CCollisionMgr)->ClearColInfo();
 }
 
 

@@ -30,42 +30,42 @@ void CMainGame::Initialize(void)
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Background.bmp", L"Background");
 
 	//TIMEMANAGER은 windowcpp에서 초기화함(화면 루프 때문에)
-	KEYMANAGER->Init();
-	SCENEMANAGER->Init();
-	SCENEMANAGER->AddScene("Stage", new CStage);
-	SCENEMANAGER->ChangeScene("Stage");
-	SOUNDMANAGER->Init();
+	MGR(CKeyMgr)->Init();
+	MGR(CSceneMgr)->Init();
+	MGR(CSceneMgr)->AddScene("Stage", new CStage);
+	MGR(CSceneMgr)->ChangeScene("Stage");
+	MGR(CSoundMgr)->Init();
 
 }
 
 void CMainGame::Update(void)
 {
-	SCENEMANAGER->Update();
+	MGR(CSceneMgr)->Update();
 }
 
 void CMainGame::Late_Update(void)
 {
-	SCENEMANAGER->Late_Update();
+	MGR(CSceneMgr)->Late_Update();
 }
 
 void CMainGame::Render(void)
 {
-	TIMEMANAGER->Render(g_hWnd);
+	MGR(CTimeMgr)->Render(g_hWnd);
 	HDC		hBackBufferDC = CBmpMgr::Get_Instance()->Find_Image(L"BackBuffer");
-	SCENEMANAGER->Render(hBackBufferDC);
+	MGR(CSceneMgr)->Render(hBackBufferDC);
 	BitBlt(m_DC, 0, 0, WINCX, WINCY, hBackBufferDC, 0, 0, SRCCOPY);
 
 }
 
 void CMainGame::Release(void)
 {
-	SCENEMANAGER->ReleaseSingleton();
+	MGR(CSceneMgr)->ReleaseSingleton();
 	ReleaseDC(g_hWnd, m_DC);
 	CBmpMgr::Destroy_Instance();
-	OBJMANAGER->ReleaseSingleton();
-	KEYMANAGER->ReleaseSingleton();
-	TIMEMANAGER->ReleaseSingleton();
-	SOUNDMANAGER->ReleaseSingleton();
-	COLLISIONMANAGER->ReleaseSingleton();
+	MGR(CObjMgr)->ReleaseSingleton();
+	MGR(CKeyMgr)->ReleaseSingleton();
+	MGR(CTimeMgr)->ReleaseSingleton();
+	MGR(CSoundMgr)->ReleaseSingleton();
+	MGR(CCollisionMgr)->ReleaseSingleton();
 	CScrollMgr::Destroy_Instance();
 }
