@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CMovement" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Movement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainGame" Collapsed="true">
+    <Position X="20.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQBAAAAAAAAAAAAAAAAAIBBIABAAAAA=</HashCode>
+      <FileName>MainGame.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CObj" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAABCAAAACAgQQCAEAAEAAAgAEIMJBJyoJEAQAA=</HashCode>
+      <FileName>Obj.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMouse" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACABAAAAQ=</HashCode>
+      <FileName>Mouse.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CUnit" Collapsed="true">
+    <Position X="6.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAAAAAAgAAAAAAAEAAAAAAAAAAAABACABgAAAA=</HashCode>
+      <FileName>Unit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDuck" Collapsed="true">
+    <Position X="7.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAABACABAAAAI=</HashCode>
+      <FileName>Duck.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPlayer" Collapsed="true">
+    <Position X="5.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAAgAAAAABACABAAAAA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFeature" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAQAAAAAAAAIJACABAAAAA=</HashCode>
+      <FileName>Feature.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAbstractFactory&lt;T&gt;" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAEAAAAAAAAACAAA=</HashCode>
+      <FileName>AbstractFactory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCollisionMgr" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQBAAAEAAAAIAAAAgAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CollisionMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CObjMgr" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAAAAAAAAAIACAAAFAQAQAAAAJBgABAAEAA=</HashCode>
+      <FileName>ObjMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CKeyMgr" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAAAQAAAAQEAAAAAQAAABAECAAAAACAAAAAAA=</HashCode>
+      <FileName>KeyMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CScrollMgr" Collapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAwAAAAIAAQAAAQAAAQAAAAEgQw=</HashCode>
+      <FileName>ScrollMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CBmpMgr" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAEAAAAAIAAAAAAgAAAAAAARAABAEAAQ=</HashCode>
+      <FileName>BmpMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMyBmp" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAIAAgAAAAgAAAAAAAEAAAAAAAAlAAAAA=</HashCode>
+      <FileName>MyBmp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSceneMgr" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAAAAAAAAAAAAAAAAAAAQAAAAARJCABAIAgA=</HashCode>
+      <FileName>SceneMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSingletonBase&lt;T&gt;" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABABAEAAAAAAAAAQAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>SingletonBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTimeMgr" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAAAAAAAABAAAAAAAAAAAAAAAAFBCCBAAAAA=</HashCode>
+      <FileName>TimeMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSoundMgr" Collapsed="true">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAACSAAAAAAgEAAEAAQgAACAAAAAAAAACAhAAAAQ=</HashCode>
+      <FileName>SoundMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CScene" Collapsed="true">
+    <Position X="6.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABBCABAAAAg=</HashCode>
+      <FileName>Scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CStage" Collapsed="true">
+    <Position X="5.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEDBCABAAAAA=</HashCode>
+      <FileName>Stage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMyEditor" Collapsed="true">
+    <Position X="7.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAgAAAAAAAAAAAAAAAAAAAAAAAEABBCABAAAAA=</HashCode>
+      <FileName>MyEditor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTile" Collapsed="true">
+    <Position X="9.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAggAAkAAAAAAAAAAAAABACABECABA=</HashCode>
+      <FileName>Tile.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTileMgr" Collapsed="true">
+    <Position X="14.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQgIAAAAAAAAAAASAAAAAAAAAEACAAABBCABEAAAQ=</HashCode>
+      <FileName>TileMgr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CComponent" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAABAAAIAEACoAAAAAAAAQAAAAAAABBCABAAQAA=</HashCode>
+      <FileName>Component.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CComponentBase" Collapsed="true">
+    <Position X="1.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAABBCABAAAEA=</HashCode>
+      <FileName>ComponentBase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCollider" Collapsed="true">
+    <Position X="2.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAABAAiAAAgAQAAJAAAAAAMoBJiMBAAAAI=</HashCode>
+      <FileName>Collider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTimer" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAACAAAAAABECACAACBIACAAAAAgCACEABAQAA=</HashCode>
+      <FileName>Timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

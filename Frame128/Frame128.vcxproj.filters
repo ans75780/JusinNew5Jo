@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="00. MainGame">
+      <UniqueIdentifier>{bf4604e0-7775-427f-b654-550b39d6c86d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj">
+      <UniqueIdentifier>{1ce04d03-50a8-4c28-afc4-cf3208f42434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="98. Design">
+      <UniqueIdentifier>{d839d0e0-fc9c-48a1-81b9-74f128845cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\00. AbstactFactory">
+      <UniqueIdentifier>{849d700f-9ab6-4845-a063-9cf621c35740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\01. CollisionMgr">
+      <UniqueIdentifier>{fbd45718-3638-4b54-9bd4-df8662929a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\02. ObjMgr">
+      <UniqueIdentifier>{7d8ab1f3-2ad8-46e3-85e3-59fb1f6f4df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\04. KeyMgr">
+      <UniqueIdentifier>{0b6da19a-29ff-4a87-86d9-96145cb0b033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\05. ScrollMgr">
+      <UniqueIdentifier>{ad40a0c6-2373-4f5a-9406-ef3369d1d34c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\06. BmpMgr">
+      <UniqueIdentifier>{68e841d5-1b6d-4231-99e3-f74b06a02581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\06. BmpMgr\MyBmp">
+      <UniqueIdentifier>{355a9066-aab0-4575-afb6-f4cccb76a92c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene">
+      <UniqueIdentifier>{5605a629-64fa-4e83-8bcd-489713abb3f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\03. Stage">
+      <UniqueIdentifier>{64322c75-120f-4ac4-b440-fcb13d96dd7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\07. SceneMgr">
+      <UniqueIdentifier>{57e37227-51ab-4b36-a573-9045602d334f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit">
+      <UniqueIdentifier>{ad4f2370-010e-47a8-b59f-f4f0ca5b1e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Player">
+      <UniqueIdentifier>{fd7c52fb-bac3-4f94-b625-f2ad5495ec5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\Singleton">
+      <UniqueIdentifier>{315854d0-e523-4a92-a8dc-c1652d20c399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Component">
+      <UniqueIdentifier>{2d28ebab-9199-4064-bd1c-adfef6deb1f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Component\Base">
+      <UniqueIdentifier>{e26fd6aa-4640-4fce-860d-774f2b22825a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Component\Collider">
+      <UniqueIdentifier>{7cfc0f71-7b39-4e65-b434-22640bd0de01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Timer">
+      <UniqueIdentifier>{5306bfbc-3984-4502-b069-b1fb3193f77c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\96.TimeMgr">
+      <UniqueIdentifier>{a54696b2-3fd3-4f50-bb28-20310c245883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\08. SoundMgr">
+      <UniqueIdentifier>{ca5dbccf-2431-4b24-82f1-603f6daae22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\Editor">
+      <UniqueIdentifier>{5a24a8e1-8be7-4ab8-9c09-20023d919e1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\Editor\Tile">
+      <UniqueIdentifier>{ed994f30-ee4a-4b29-a9a1-e53290349747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\06.Feature">
+      <UniqueIdentifier>{dbbf0b71-fbab-4ca7-9d47-324692b85e60}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame128.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>00. MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>01. Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractFactory.h">
+      <Filter>98. Design\00. AbstactFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMgr.h">
+      <Filter>98. Design\02. ObjMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyMgr.h">
+      <Filter>98. Design\04. KeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrollMgr.h">
+      <Filter>98. Design\05. ScrollMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="BmpMgr.h">
+      <Filter>98. Design\06. BmpMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="MyBmp.h">
+      <Filter>98. Design\06. BmpMgr\MyBmp</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>98. Design\07. SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>02. Scene\03. Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>01. Obj\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>01. Obj\Unit\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>98. Design\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentBase.h">
+      <Filter>97.Component\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>97.Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>97.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionMgr.h">
+      <Filter>98. Design\01. CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>96.Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeMgr.h">
+      <Filter>98. Design\96.TimeMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundMgr.h">
+      <Filter>98. Design\08. SoundMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>02. Scene\Editor\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMgr.h">
+      <Filter>02. Scene\Editor\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="MyEditor.h">
+      <Filter>02. Scene\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Feature.h">
+      <Filter>01. Obj\06.Feature</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame128.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>00. MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj.cpp">
+      <Filter>01. Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMgr.cpp">
+      <Filter>98. Design\02. ObjMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMgr.cpp">
+      <Filter>98. Design\04. KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollMgr.cpp">
+      <Filter>98. Design\05. ScrollMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="BmpMgr.cpp">
+      <Filter>98. Design\06. BmpMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="MyBmp.cpp">
+      <Filter>98. Design\06. BmpMgr\MyBmp</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>02. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>98. Design\07. SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>02. Scene\03. Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>01. Obj\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>01. Obj\Unit\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>97.Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentBase.cpp">
+      <Filter>97.Component\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>97.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMgr.cpp">
+      <Filter>98. Design\01. CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>96.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeMgr.cpp">
+      <Filter>98. Design\96.TimeMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundMgr.cpp">
+      <Filter>98. Design\08. SoundMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>02. Scene\Editor\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMgr.cpp">
+      <Filter>02. Scene\Editor\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="MyEditor.cpp">
+      <Filter>02. Scene\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Feature.cpp">
+      <Filter>01. Obj\06.Feature</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Frame128.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Frame128.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram2.cd" />
+    <None Include="ClassDiagram3.cd" />
+    <None Include="ClassDiagram4.cd" />
+  </ItemGroup>
+</Project>
