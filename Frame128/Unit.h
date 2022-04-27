@@ -1,5 +1,6 @@
 #pragma once
 #include "Obj.h"
+// 움직일 수 있는 애들
 class CUnit :
     public CObj
 {
@@ -13,6 +14,7 @@ public:
     virtual void    Release(void) PURE;
 protected:
     float           m_fSpeed;
-    float           m_fAtk;
+    float           m_fAtk;	// 공격력
+	// 추가적으로 변수 추가 요망
 };
 

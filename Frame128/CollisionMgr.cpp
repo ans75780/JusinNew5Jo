@@ -49,12 +49,12 @@ void CCollisionMgr::CollisionUpdate(list<CObj*>& Dest, list<CObj*>& Sour)
 				{
 					//이전에도 충돌 중이다.(OnCollision)
 					if (pDestCol->Get_IsTriger())
-						pDestCol->OnTriger(pSourCol);
+						pDestCol->OnTrigger(pSourCol);
 					else
 						pDestCol->OnCollision(pSourCol);
 
 					if (pSourCol->Get_IsTriger())
-						pSourCol->OnTriger(pDestCol);
+						pSourCol->OnTrigger(pDestCol);
 					else
 						pSourCol->OnCollision(pDestCol);
 
@@ -63,12 +63,12 @@ void CCollisionMgr::CollisionUpdate(list<CObj*>& Dest, list<CObj*>& Sour)
 				{
 					//이전에는충돌하지않았다.(OnTrigerEnter)
 					if (pDestCol->Get_IsTriger())
-						pDestCol->OnTrigerEnter(pSourCol);
+						pDestCol->OnTriggerEnter(pSourCol);
 					else
 						pDestCol->OnCollisionEnter(pSourCol);
 
 					if (pSourCol->Get_IsTriger())
-						pSourCol->OnTrigerEnter(pDestCol);
+						pSourCol->OnTriggerEnter(pDestCol);
 					else
 						pSourCol->OnCollisionEnter(pDestCol);
 					iter->second = true;
@@ -80,12 +80,12 @@ void CCollisionMgr::CollisionUpdate(list<CObj*>& Dest, list<CObj*>& Sour)
 				if (iter->second)//이전에는 충돌하고있었다.
 				{
 					if (pDestCol->Get_IsTriger())
-						pDestCol->OnTrigerExit(pSourCol);
+						pDestCol->OnTriggerExit(pSourCol);
 					else
 						pDestCol->OnCollisionExit(pSourCol);
 
 					if (pSourCol->Get_IsTriger())
-						pSourCol->OnTrigerExit(pDestCol);
+						pSourCol->OnTriggerExit(pDestCol);
 					else
 						pSourCol->OnCollisionExit(pDestCol);
 					iter->second = false;

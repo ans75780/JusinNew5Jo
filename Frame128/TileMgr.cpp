@@ -92,9 +92,9 @@ bool CTileMgr::Save(const char* strData)
 	try
 	{
 		err = fopen_s(&fp, saveData, "wb");
-		if (err == -1)//open한 파일이 eof이다.(해당 주소에 파일이 없다.)
+		if (err == -1)	//open한 파일이 eof이다.(해당 주소에 파일이 없다.)
 			throw(err);
-		size = m_vecTile.size();
+		size = (int)(m_vecTile.size());	// original : size = m_vecTile.size();
 		err = fwrite(&size, sizeof(size), 1, fp) ? 0 : throw(0);
 		for (int i = 0; i < size; i++)
 		{

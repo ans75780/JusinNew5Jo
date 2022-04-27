@@ -33,9 +33,9 @@ public:// 충돌시점 함수
     void    OnCollisionExit(CCollider* _pOther);
 public:
     //OnTriger는 컬라이더에 충돌했으나, 물리적 충돌처리는 해주지 않음. 이는 m_bIsTriger가 True일때만 호출됨.
-    void    OnTriger(CCollider* _pOther);
-    void    OnTrigerEnter(CCollider* _pOther);
-    void    OnTrigerExit(CCollider* _pOther);
+    void    OnTrigger(CCollider* _pOther);
+    void    OnTriggerEnter(CCollider* _pOther);
+    void    OnTriggerExit(CCollider* _pOther);
 private:
     void    CalcCollision(CCollider* _pOther);//충돌체와 물리적인 밀어내기를 구현
 private:

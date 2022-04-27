@@ -91,20 +91,20 @@ void CCollider::OnCollisionExit(CCollider* _pOther)
 
 }
 
-void CCollider::OnTriger(CCollider* _pOther)
+void CCollider::OnTrigger(CCollider* _pOther)
 {
-	m_pOwner->OnTriger(_pOther);
+	m_pOwner->OnTrigger(_pOther);
 
 }
 
-void CCollider::OnTrigerEnter(CCollider* _pOther)
+void CCollider::OnTriggerEnter(CCollider* _pOther)
 {
-	m_pOwner->OnTrigerEnter(_pOther);
+	m_pOwner->OnTriggerEnter(_pOther);
 }
 
-void CCollider::OnTrigerExit(CCollider* _pOther)
+void CCollider::OnTriggerExit(CCollider* _pOther)
 {
-	m_pOwner->OnTrigerExit(_pOther);
+	m_pOwner->OnTriggerExit(_pOther);
 }
 
 void CCollider::CalcCollision(CCollider* _pOther)

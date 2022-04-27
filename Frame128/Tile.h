@@ -20,5 +20,13 @@ private:
 	TCHAR	m_strType[MIN_STR];
 	int		m_iDrawID = 0;
 	int		m_iOption = 0;
+
+	// CObj을(를) 통해 상속됨
+	virtual void OnCollision(CCollider * _pOther) override;
+	virtual void OnCollisionEnter(CCollider * _pOther) override;
+	virtual void OnCollisionExit(CCollider * _pOther) override;
+	virtual void OnTrigger(CCollider * _pOther) override;
+	virtual void OnTriggerEnter(CCollider * _pOther) override;
+	virtual void OnTriggerExit(CCollider * _pOther) override;
 };
 

@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "KeyMgr.h"
 #include "Collider.h"
+#include "TimeMgr.h"
 CPlayer::CPlayer()
 {
 }
@@ -20,6 +21,8 @@ void CPlayer::Init(void)
     m_eRenderID = RENDERID::RENDER_OBJ;
     m_strName = L"Player";
 
+
+	float TimeTick = TIMEMANAGER->getElasedTime();
     CreateCollider();
 }
 
@@ -55,4 +58,28 @@ void CPlayer::Release(void)
     for_each(m_vecComponents.begin(), m_vecComponents.end(), Safe_Delete<CComponent*>);
     m_vecComponents.clear();
     m_strName.clear();
+}
+
+void CPlayer::OnCollision(CCollider * _pOther)
+{
+}
+
+void CPlayer::OnCollisionEnter(CCollider * _pOther)
+{
+}
+
+void CPlayer::OnCollisionExit(CCollider * _pOther)
+{
+}
+
+void CPlayer::OnTrigger(CCollider * _pOther)
+{
+}
+
+void CPlayer::OnTriggerEnter(CCollider * _pOther)
+{
+}
+
+void CPlayer::OnTriggerExit(CCollider * _pOther)
+{
 }

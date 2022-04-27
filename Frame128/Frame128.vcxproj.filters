@@ -150,9 +150,6 @@
     <ClInclude Include="ComponentBase.h">
       <Filter>97.Component\Base</Filter>
     </ClInclude>
-    <ClInclude Include="Movement.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>97.Component\Collider</Filter>
     </ClInclude>
@@ -226,9 +223,6 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>01. Obj\Unit\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Movement.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>97.Component\Collider</Filter>

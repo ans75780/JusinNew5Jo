@@ -45,3 +45,27 @@ void CFeature::Release(void)
 	m_strName.clear();
 }
 
+void CFeature::OnCollision(CCollider * _pOther)
+{
+}
+
+void CFeature::OnCollisionEnter(CCollider * _pOther)
+{
+}
+
+void CFeature::OnCollisionExit(CCollider * _pOther)
+{
+}
+
+void CFeature::OnTrigger(CCollider * _pOther)
+{
+}
+
+void CFeature::OnTriggerEnter(CCollider * _pOther)
+{
+}
+
+void CFeature::OnTriggerExit(CCollider * _pOther)
+{
+}
+

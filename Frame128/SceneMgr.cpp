@@ -3,23 +3,15 @@
 #include "Scene.h"
 #include "CollisionMgr.h"
 
-CSceneMgr::CSceneMgr()
-{
-}
+CSceneMgr::CSceneMgr() {}
 
-CSceneMgr::~CSceneMgr()
-{
-	Release();
-}
+CSceneMgr::~CSceneMgr() { Release(); }
 
 //스태틱 변수 현재씬은 널값으로 초기화
 CScene* CSceneMgr::m_currentScene = nullptr;
 
 
-HRESULT CSceneMgr::Init()
-{
-	return S_OK;
-}
+HRESULT CSceneMgr::Init() { return S_OK; }
 
 void CSceneMgr::Release()
 {

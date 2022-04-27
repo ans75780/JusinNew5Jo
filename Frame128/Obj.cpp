@@ -66,15 +66,15 @@ void CObj::OnCollisionExit(CCollider* _pOther)
 {
 }
 
-void CObj::OnTriger(CCollider* _pOther)
+void CObj::OnTrigger(CCollider* _pOther)
 {
 }
 
-void CObj::OnTrigerEnter(CCollider* _pOther)
+void CObj::OnTriggerEnter(CCollider* _pOther)
 {
 }
 
-void CObj::OnTrigerExit(CCollider* _pOther)
+void CObj::OnTriggerExit(CCollider* _pOther)
 {
 
 }

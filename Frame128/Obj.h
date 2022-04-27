@@ -38,21 +38,21 @@ public:
 	void				Add_Scale(VECTOR2 vec) { m_vScale + vec; }
 
 	//CollisionFunction
-	virtual void    OnCollision(CCollider* _pOther);//충돌중인 경우 호출되는 함수
-	virtual void    OnCollisionEnter(CCollider* _pOther);//충돌 진입한 경우 호출되는 함수
-	virtual void    OnCollisionExit(CCollider* _pOther);//충돌이 끝나면 호출되는 함수
+	virtual void    OnCollision(CCollider* _pOther) PURE;//충돌중인 경우 호출되는 함수
+	virtual void    OnCollisionEnter(CCollider* _pOther) PURE;//충돌 진입한 경우 호출되는 함수
+	virtual void    OnCollisionExit(CCollider* _pOther) PURE;//충돌이 끝나면 호출되는 함수
 	//TrigerFunction
-	virtual void    OnTriger(CCollider* _pOther);//충돌중인 경우 호출되는 함수
-	virtual void    OnTrigerEnter(CCollider* _pOther);//충돌 진입한 경우 호출되는 함수
-	virtual void    OnTrigerExit(CCollider* _pOther);//충돌이 끝나면 호출되는 함수
+	virtual void    OnTrigger(CCollider* _pOther) PURE;//충돌중인 경우 호출되는 함수
+	virtual void    OnTriggerEnter(CCollider* _pOther) PURE;//충돌 진입한 경우 호출되는 함수
+	virtual void    OnTriggerExit(CCollider* _pOther) PURE;//충돌이 끝나면 호출되는 함수
 
 protected:
 	wstring		m_strName;//오브젝트 네임
-	VECTOR2	m_vPos;
-	VECTOR2	m_vScale;//사이즈
-	float			m_fAngle;//오브젝트 각도
-	bool			m_bActive;//오브젝트 활성화 상태
-	OBJID			m_eID;//오브젝트 아이티
+	VECTOR2		m_vPos;
+	VECTOR2		m_vScale;//사이즈
+	float		m_fAngle;//오브젝트 각도
+	bool		m_bActive;//오브젝트 활성화 상태
+	OBJID		m_eID;//오브젝트 아이티
 	RENDERID	m_eRenderID;//렌더 순서
 	vector<CComponent*> m_vecComponents;//보유한 컴포넌트
 };

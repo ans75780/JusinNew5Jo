@@ -59,3 +59,27 @@ void CTile::Release(void)
 {
 	
 }
+
+void CTile::OnCollision(CCollider * _pOther)
+{
+}
+
+void CTile::OnCollisionEnter(CCollider * _pOther)
+{
+}
+
+void CTile::OnCollisionExit(CCollider * _pOther)
+{
+}
+
+void CTile::OnTrigger(CCollider * _pOther)
+{
+}
+
+void CTile::OnTriggerEnter(CCollider * _pOther)
+{
+}
+
+void CTile::OnTriggerExit(CCollider * _pOther)
+{
+}
