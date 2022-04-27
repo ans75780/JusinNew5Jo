@@ -35,6 +35,7 @@ void CStage::Update(void)
 void CStage::Late_Update(void)
 {
 	OBJMANAGER->Late_Update();
+	
 	//面倒贸府 诀单捞飘
 	COLLISIONMANAGER->CollisionUpdate
 	(
@@ -47,6 +48,8 @@ void CStage::Late_Update(void)
 		OBJMANAGER->Get_ObjList(OBJ_PLAYER),
 		OBJMANAGER->Get_ObjList(OBJ_FEATURE)
 	);
+
+	
 }
 
 void CStage::Render(HDC hDC)

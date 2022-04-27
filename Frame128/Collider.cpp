@@ -45,8 +45,7 @@ void CCollider::Update()
 
 void CCollider::Late_Update()
 {
-	VECTOR2 OwnerPos = m_pOwner->Get_Pos();
-	m_vFinalPos = OwnerPos + m_vOffsetPos;
+	SyncOwnerPos();
 }
 
 void CCollider::Render(HDC hDC)
@@ -126,10 +125,7 @@ void CCollider::CalcCollision(CCollider* _pOther)
 		if (this->m_pOwner->Get_Pos().y < _pOther->m_pOwner->Get_Pos().y)
 		{
 			this->m_pOwner->Add_Pos(VECTOR2(0.f, -_H));
-
-			//_pOther->m_pOwner->Add_Pos(VECTOR2(0.f, _H));
-
-			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(0.f, OffsetY));
+			
 		}
 
 		else
@@ -162,4 +158,13 @@ void CCollider::CalcCollision(CCollider* _pOther)
 			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(-OffsetX, 0.f));
 		}
 	}
+
+	SyncOwnerPos();
+
+}
+
+void CCollider::SyncOwnerPos()
+{
+	VECTOR2 OwnerPos = m_pOwner->Get_Pos();
+	m_vFinalPos = OwnerPos + m_vOffsetPos;
 }

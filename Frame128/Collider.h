@@ -38,6 +38,8 @@ public:
     void    OnTriggerExit(CCollider* _pOther);
 private:
     void    CalcCollision(CCollider* _pOther);//충돌체와 물리적인 밀어내기를 구현
+    void    SyncOwnerPos();
+
 private:
     static             UINT g_iNextID;
 public:
