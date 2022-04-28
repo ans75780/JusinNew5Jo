@@ -14,6 +14,7 @@
 
 CMainGame::CMainGame()
 {
+
 }
 
 CMainGame::~CMainGame()

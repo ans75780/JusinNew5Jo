@@ -57,7 +57,7 @@ int CPlayer::Update(void)
     int a = 0;
 
     for (auto& iter : m_vecComponents)
-        iter->Update();
+        iter->Update();                                    
 
     return 0;
 }
@@ -83,6 +83,8 @@ void CPlayer::Release(void)
 
 void CPlayer::key_input()
 {
+	// 플레이어 8방향으로 수정요망
+	// 그러면 플레이어가 바라보는 방향으로 총알이 나가도록 수정 (포신없음)
 	if (MGR(CKeyMgr)->isStayKeyDown('A'))
 		m_fRadian -= D3DXToRadian(5.f);
 	if (MGR(CKeyMgr)->isStayKeyDown('D'))
@@ -90,14 +92,14 @@ void CPlayer::key_input()
 	if (MGR(CKeyMgr)->isStayKeyDown('W'))
 	{
 		D3DXMATRIX infoRotZMat;
-		D3DXMATRIX infoTransformMat;
+		D3DXMATRIX infoTranslateLocalMat;
 		D3DXMATRIX infoWorldMat;
 		D3DXMATRIX infoParentMat;
 
 		D3DXMatrixRotationZ(&infoRotZMat, m_fRadian);
-		D3DXMatrixTranslation(&infoTransformMat, 0, -m_fSpeed * DT, 0);
+		D3DXMatrixTranslation(&infoTranslateLocalMat, 0, -m_fSpeed * DT, 0);
 		D3DXMatrixTranslation(&infoParentMat, m_vPos.x, m_vPos.y, 0);
-		infoWorldMat = infoTransformMat * infoRotZMat * infoParentMat;
+		infoWorldMat = infoTranslateLocalMat * infoRotZMat * infoParentMat;
 		D3DXVec3TransformCoord(&m_vPos, &D3DXVECTOR3(0, 0, 0), &infoWorldMat);
 		//D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &infoParentMat);
 
@@ -105,15 +107,15 @@ void CPlayer::key_input()
 	if (MGR(CKeyMgr)->isStayKeyDown('S'))
 	{
 		D3DXMATRIX infoRotZMat;
-		D3DXMATRIX infoTransformMat;
+		D3DXMATRIX infoTranslateLocalMat;
 		D3DXMATRIX infoWorldMat;
 		D3DXMATRIX infoParentMat;
 
 		//로테이션이랑 트랜스레이션 함수가 기본적으로 매트릭스를 초기화시켜줌
 		D3DXMatrixRotationZ(&infoRotZMat, m_fRadian);
-		D3DXMatrixTranslation(&infoTransformMat, 0, m_fSpeed * DT, 0);
+		D3DXMatrixTranslation(&infoTranslateLocalMat, 0, m_fSpeed * DT, 0);
 		D3DXMatrixTranslation(&infoParentMat, m_vPos.x, m_vPos.y, 0);
-		infoWorldMat = infoTransformMat * infoRotZMat * infoParentMat;
+		infoWorldMat = infoTranslateLocalMat * infoRotZMat * infoParentMat;
 		D3DXVec3TransformCoord(&m_vPos, &D3DXVECTOR3(0, 0, 0), &infoWorldMat);
 		//D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &infoParentMat);
 	}
@@ -125,9 +127,6 @@ void CPlayer::key_input()
 	{
 		// create bullet
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet>::Create(m_vPos.x, m_vPos.y, m_fRadian));
-		// 총알 안날라감... --> 총알 날라가는 거 해결
-		// 총알 일정 시간 경과하면 삭제되는 거 추가중 --> 추가완료
-
 	}
 	CalcMat();
 }
