@@ -7,6 +7,8 @@
 #include "Feature.h"
 #include "CollisionMgr.h"
 
+#include "CPistol.h"
+
 CStage::CStage()
 {
 }
@@ -22,7 +24,7 @@ HRESULT CStage::Init(void)
 
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
 	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
-
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CPistol>::Create());
 
 	return S_OK;
 }

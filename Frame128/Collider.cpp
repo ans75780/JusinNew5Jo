@@ -189,5 +189,5 @@ void CCollider::SyncOwnerPos()
 	m_vScale = m_pOwner->Get_Scale();
 	m_vWheels = m_pOwner->Get_Wheels();
 	m_vDir = m_pOwner->Get_Dir();
-	m_vMoveSize = m_pOwner->Get_MoveSize();
+	// m_vMoveSize = m_pOwner->Get_MoveSize();
 }

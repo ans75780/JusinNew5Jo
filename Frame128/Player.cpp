@@ -6,7 +6,6 @@
 #include "ObjMgr.h"
 
 #include "AbstractFactory.h"
-#include "Bullet.h"
 
 CPlayer::CPlayer()
 {
@@ -269,8 +268,9 @@ void CPlayer::key_input()
 
 	if (MGR(CKeyMgr)->isOnceKeyUp(VK_SPACE))
 	{
+		// 총의 종류에 따라 쏘는 총알이 달라지도록 변경
 		// create bullet
-		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet>::Create(m_vPos.x, m_vPos.y, m_fRadian));
+		// MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet>::Create(m_vPos.x, m_vPos.y, m_fRadian));
 	}
 
 
