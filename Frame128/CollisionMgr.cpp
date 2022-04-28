@@ -47,7 +47,7 @@ void CCollisionMgr::CollisionUpdate(list<CObj*>& Dest, list<CObj*>& Sour)
 			float _w;
 			float _h;
 
-			if (IsCollision(&_w, &_h, pDestCol, pSourCol))//CollisionCheckStart
+			if (IsOBBCollision(pDestCol, pSourCol))//CollisionCheckStart
 			{
 				//현재 충돌중이다.
 				if (iter->second)
@@ -132,25 +132,27 @@ bool CCollisionMgr::IsOBBCollision(CCollider* DestCollider, CCollider* SourColli
 {
 
 	DXV3 vDestPos = DestCollider->Get_FinalPos();
-	DXV3 vDestScale = DestCollider->Get_Scale();
-	// DXV3 vDest_H_Dir = DestCollider->Get_Dir();
+	DXV3 vDestSize = DestCollider->Get_Scale() * 0.5f;
+	DXV3 vDest_H_Dir = DestCollider->Get_Dir();
 	DXV3 vDest_W_Dir;
-	// D3DXVec3Cross(&vDest_W_Dir, &vDest_H_Dir, &DXV3(0.f, 0.f, 1.0f));
+	D3DXVec3Cross(&vDest_W_Dir, &vDest_H_Dir, &DXV3(0.f, 0.f, 1.0f));
+	//vDest_W_Dir *= -1;
 
 	DXV3 vSourPos = SourCollider->Get_FinalPos();
-	DXV3 vSourScale = SourCollider->Get_Scale();
-	// DXV3 vSour_H_Dir = SourCollider->Get_Dir();
+	DXV3 vSourSize = SourCollider->Get_Scale() * 0.5f;
+	DXV3 vSour_H_Dir = SourCollider->Get_Dir();
 	DXV3 vSour_W_Dir;
-	// D3DXVec3Cross(&vSour_W_Dir, &vSour_H_Dir, &DXV3(0.f, 0.f, 1.0f));
+	D3DXVec3Cross(&vSour_W_Dir, &vSour_H_Dir, &DXV3(0.f, 0.f, 1.0f));
+	//vSour_W_Dir *= -1;
 
 	DXV3 vDistance = DestCollider->Get_FinalPos() - SourCollider->Get_FinalPos();
 
 	DXV3 v[4] = {};
 
-	// v[0] = vDestPos + (vDestScale.y * vDest_H_Dir); //D의 높이방향 벡터
-	v[1] = vDestPos + (vDestScale.x * vDest_W_Dir); //D의 좌방향 벡터
-	// v[2] = vSourPos + (vSourScale.y * vSour_H_Dir); //S의 높이방향 벡터
-	v[3] = vSourPos + (vSourScale.x * vSour_W_Dir); //S의 좌방향 벡터
+	v[0] = (vDestSize.y * vDest_H_Dir); //D의 높이방향 벡터
+	v[1] = (vDestSize.x * vDest_W_Dir); //D의 좌방향 벡터
+	v[2] = (vSourSize.y * vSour_H_Dir); //S의 높이방향 벡터
+	v[3] = (vSourSize.x * vSour_W_Dir); //S의 좌방향 벡터
 
 	for (int i = 0; i < 4; i++) {
 		float sum = 0;
@@ -159,12 +161,13 @@ bool CCollisionMgr::IsOBBCollision(CCollider* DestCollider, CCollider* SourColli
 
 		for (int j = 0; j < 4; j++) 
 		{
-			float fAbsDot = D3DXVec3Dot(&v[j], &vNormal);
-			fAbsDot = fabsf(fAbsDot);
+			float fAbsDot = fabsf(D3DXVec3Dot(&v[j], &vNormal));
 
 			sum += fAbsDot;
 		}
-		if (D3DXVec3Dot(&vDistance, &vNormal) > sum) {
+		float result = fabsf(D3DXVec3Dot(&vDistance, &vNormal));
+
+		if (result > sum) {
 			return false;
 		}
 	}

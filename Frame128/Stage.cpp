@@ -45,11 +45,11 @@ void CStage::Late_Update(void)
 		MGR(CObjMgr)->Get_ObjList(OBJ_MONSTER)
 	);
 
-	/*COLLISIONMANAGER->CollisionUpdate
+	MGR(CCollisionMgr)->CollisionUpdate
 	(
-		OBJMANAGER->Get_ObjList(OBJ_PLAYER),
-		OBJMANAGER->Get_ObjList(OBJ_FEATURE)
-	);*/
+		MGR(CObjMgr)->Get_ObjList(OBJ_PLAYER),
+		MGR(CObjMgr)->Get_ObjList(OBJ_FEATURE)
+	);
 
 	MGR(CCollisionMgr)->CollisionUpdate
 	(
