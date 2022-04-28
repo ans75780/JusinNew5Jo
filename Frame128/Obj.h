@@ -49,8 +49,22 @@ public:
 
 protected:
 	wstring		m_strName;//오브젝트 네임
+
 	DXV3		m_vPos;
 	DXV3		m_vScale;//사이즈
+
+	DXMAT		m_matWorld;
+	DXMAT		m_matScale;
+	DXMAT		m_matRotZ;
+	DXMAT		m_matTrans;
+
+	DXV3		m_vDir;	// 방향벡터
+	DXV3		m_vLook;
+	DXV3		m_vWorldDir;	//월드 벡터
+
+	DXV3		m_vPoint[4];		// render 좌표
+	DXV3		m_vWorldPoint[4];	// world 좌표
+
 	float		m_fRadian;//오브젝트 각도
 	bool		m_bActive;//오브젝트 활성화 상태
 	OBJID		m_eID;//오브젝트 아이티

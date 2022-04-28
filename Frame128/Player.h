@@ -20,6 +20,16 @@ public:
     virtual void    Render(HDC hDC) override;
     virtual void    Release(void) override;
 
+private:
+	enum class DIRECTION
+	{
+		UP, DOWN, LEFT, RIGHT,
+		UPLEFT, UPRIGHT,
+		DOWNLEFT, DOWNRIGHT,
+		NONE
+	};
+
+	DIRECTION m_eDirection = DIRECTION::NONE;
 public:
 	void key_input();
 
