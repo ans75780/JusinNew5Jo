@@ -60,10 +60,16 @@ int CPistol::Update()
 
 void CPistol::Render(HDC hDC)
 {
-	MoveToEx(hDC, m_vWorldPoint[0].x, m_vWorldPoint[0].y, nullptr);
+	MoveToEx(hDC
+		, int(m_vWorldPoint[0].x)
+		, int(m_vWorldPoint[0].y)
+		, nullptr);
+
 	for (int i(1); i < 4; ++i)
 	{
-		LineTo(hDC, m_vWorldPoint[i].x, m_vWorldPoint[i].y);
+		LineTo(hDC
+			, int(m_vWorldPoint[i].x)
+			, int(m_vWorldPoint[i].y));
 	}
 }
 

@@ -164,6 +164,7 @@
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="BmpMgr.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="CBullet_Pistol.h" />
     <ClInclude Include="CGun.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionMgr.h" />
@@ -198,6 +199,7 @@
   <ItemGroup>
     <ClCompile Include="BmpMgr.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CBullet_Pistol.cpp" />
     <ClCompile Include="CGun.cpp" />
     <ClCompile Include="CPistol.cpp" />
     <ClCompile Include="Feature.cpp" />

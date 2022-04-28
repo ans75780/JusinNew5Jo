@@ -1,8 +1,6 @@
 #pragma once
 #include "Unit.h"
 
-
-
 class CBullet :
 	public CUnit
 {
@@ -11,48 +9,23 @@ public:
 	virtual ~CBullet();
 
 public:
-	virtual void Init(void);
-	virtual int Update(void);
-	virtual void Render(HDC hDC);
-	virtual void Release(void);
+	virtual void Init() PURE;
+	virtual int Update() PURE;
+	virtual void Render(HDC hDC) PURE;
+	virtual void Release() PURE;
 
 public:
-	virtual void OnCollision(CCollider * _pOther);
-	virtual void OnCollisionEnter(CCollider * _pOther);
-	virtual void OnCollisionExit(CCollider * _pOther);
-	virtual void OnTrigger(CCollider * _pOther);
-	virtual void OnTriggerEnter(CCollider * _pOther);
-	virtual void OnTriggerExit(CCollider * _pOther);
+	virtual void OnCollision(CCollider * _pOther) PURE;
+	virtual void OnCollisionEnter(CCollider * _pOther) PURE;
+	virtual void OnCollisionExit(CCollider * _pOther) PURE;
+	virtual void OnTrigger(CCollider * _pOther) PURE;
+	virtual void OnTriggerEnter(CCollider * _pOther) PURE;
+	virtual void OnTriggerExit(CCollider * _pOther) PURE;
 
 public:
 	void set_Player(CObj* _pPlayer) { m_pPlayer = _pPlayer; }
 
-private:
+protected:
 	CObj*	m_pPlayer;
-	
-	DXV3 vLocalPos;
-	DXV3 vLocalScale;
-	DXV3 vLocalDir;
-
-	DXMAT m_matWorld;
-
-	// Local Rect
-	DXV3	vLocalLT;
-	DXV3	vLocalRT;
-	DXV3	vLocalRB;
-	DXV3	vLocalLB;
-
-	
-
-	DXV3 vWorldPos;
-	DXV3 vWorldScale;
-	DXV3 vWorldDir;
-	
-	// World Rect
-	DXV3	vWorldLT;
-	DXV3	vWorldRT;
-	DXV3	vWorldRB;
-	DXV3	vWorldLB;
-
-	float	m_fLifeTime = 3.f;
+	float	m_fLifeTime;
 };

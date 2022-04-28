@@ -97,6 +97,9 @@
     <Filter Include="01. Obj\Gun\PISTOL">
       <UniqueIdentifier>{26a361c5-1686-475c-aa4d-38d93fa30598}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\Unit\Bullet\Bullet_Pistol">
+      <UniqueIdentifier>{00599817-cd04-4e6b-91d0-63e4d2e898ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -201,6 +204,9 @@
     <ClInclude Include="CPistol.h">
       <Filter>01. Obj\Gun\PISTOL</Filter>
     </ClInclude>
+    <ClInclude Include="CBullet_Pistol.h">
+      <Filter>01. Obj\Unit\Bullet\Bullet_Pistol</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -286,6 +292,9 @@
     </ClCompile>
     <ClCompile Include="CPistol.cpp">
       <Filter>01. Obj\Gun\PISTOL</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet_Pistol.cpp">
+      <Filter>01. Obj\Unit\Bullet\Bullet_Pistol</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
