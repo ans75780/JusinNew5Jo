@@ -26,6 +26,5 @@ public:
 	bool isStayKeyDown(int key);
 	//토글키냐?(캡스락, 넘버락)
 	bool isToggleKey(int key);
-
 };
 

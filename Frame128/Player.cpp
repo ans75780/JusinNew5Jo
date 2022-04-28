@@ -85,6 +85,7 @@ void CPlayer::key_input()
 {
 	// 플레이어 8방향으로 수정요망
 	// 그러면 플레이어가 바라보는 방향으로 총알이 나가도록 수정 (포신없음)
+#pragma region original version
 	if (MGR(CKeyMgr)->isStayKeyDown('A'))
 		m_fRadian -= D3DXToRadian(5.f);
 	if (MGR(CKeyMgr)->isStayKeyDown('D'))
@@ -102,7 +103,6 @@ void CPlayer::key_input()
 		infoWorldMat = infoTranslateLocalMat * infoRotZMat * infoParentMat;
 		D3DXVec3TransformCoord(&m_vPos, &D3DXVECTOR3(0, 0, 0), &infoWorldMat);
 		//D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &infoParentMat);
-
 	}
 	if (MGR(CKeyMgr)->isStayKeyDown('S'))
 	{
@@ -119,8 +119,42 @@ void CPlayer::key_input()
 		D3DXVec3TransformCoord(&m_vPos, &D3DXVECTOR3(0, 0, 0), &infoWorldMat);
 		//D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &infoParentMat);
 	}
+#pragma endregion __
 
 
+
+#pragma region 8방향이동으로 수정, 이동방향을 바라보도록 수정중
+	// 움직이는 키는 임시로 I(상), K(하), J(좌), L(우)
+	if (MGR(CKeyMgr)->isStayKeyDown('I'))
+	{
+		// 상 이동
+		eDirection = UP;
+		vLocalDir = { 0.f, -1.f, 0.f };
+		vLocalPos.x += vLocalDir * m_fSpeed * DT;
+		vLovalPos.y += vLocalDir * m_fSpeed * DT;
+	}
+
+	if (MGR(CKeyMgr)->isStayKeyDown('K'))
+	{
+		// 하 이동
+		eDirection = DOWN;
+	}
+
+	if (MGR(CKeyMgr)->isStayKeyDown('J'))
+	{
+		// 좌 이동
+		eDirection = LEFT;
+	}
+
+	if (MGR(CKeyMgr)->isStayKeyDown('L'))
+	{
+		// 우 이동
+		eDirection = RIGHT;
+	}
+
+#pragma endregion __
+
+	
 
 
 	if (MGR(CKeyMgr)->isOnceKeyUp(VK_SPACE))
