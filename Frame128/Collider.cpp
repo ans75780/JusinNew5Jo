@@ -130,50 +130,53 @@ void CCollider::CalcCollision(CCollider* _pOther)
 		return;
 	}
 
+	m_pOwner->Add_Pos(-m_pOwner->Get_MoveSize());
 
-	float _W = 0;
-	float _H = 0;
 
-	MGR(CCollisionMgr)->IsCollision(&_W, &_H, this, _pOther);
 
-	if (_W > _H)
-	{
-		if (this->m_pOwner->Get_Pos().y < _pOther->m_pOwner->Get_Pos().y)
-		{
-			this->m_pOwner->Add_Pos(DXV3(0.f, -_H, 0));
-			
-		}
+	//float _W = 0;
+	//float _H = 0;
 
-		else
-		{
-			this->m_pOwner->Add_Pos(DXV3(0.f, _H, 0));
+	//MGR(CCollisionMgr)->IsCollision(&_W, &_H, this, _pOther);
 
-			//_pOther->m_pOwner->Add_Pos(DXV3(0.f, -_H));
+	//if (_W > _H)
+	//{
+	//	if (this->m_pOwner->Get_Pos().y < _pOther->m_pOwner->Get_Pos().y)
+	//	{
+	//		this->m_pOwner->Add_Pos(DXV3(0.f, -_H, 0));
+	//		
+	//	}
 
-			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(0.f, -OffsetY));
-		}
-	}
+	//	else
+	//	{
+	//		this->m_pOwner->Add_Pos(DXV3(0.f, _H, 0));
 
-	else
-	{
-		if (this->m_pOwner->Get_Pos().x < _pOther->m_pOwner->Get_Pos().x)
-		{
+	//		//_pOther->m_pOwner->Add_Pos(DXV3(0.f, -_H));
 
-			this->m_pOwner->Add_Pos(DXV3(-_W, 0.f, 0));
+	//		//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(0.f, -OffsetY));
+	//	}
+	//}
 
-			//_pOther->m_pOwner->Add_Pos(DXV3(_W, 0.f));
+	//else
+	//{
+	//	if (this->m_pOwner->Get_Pos().x < _pOther->m_pOwner->Get_Pos().x)
+	//	{
 
-			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(OffsetX, 0.f));
-		}
+	//		this->m_pOwner->Add_Pos(DXV3(-_W, 0.f, 0));
 
-		else
-		{
-			this->m_pOwner->Add_Pos(DXV3(_W, 0.f, 0));
+	//		//_pOther->m_pOwner->Add_Pos(DXV3(_W, 0.f));
 
-			//_pOther->m_pOwner->Add_Pos(DXV3(-_W, 0.f));
-			//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(-OffsetX, 0.f));
-		}
-	}
+	//		//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(OffsetX, 0.f));
+	//	}
+
+	//	else
+	//	{
+	//		this->m_pOwner->Add_Pos(DXV3(_W, 0.f, 0));
+
+	//		//_pOther->m_pOwner->Add_Pos(DXV3(-_W, 0.f));
+	//		//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(-OffsetX, 0.f));
+	//	}
+	//}
 
 	SyncOwnerPos();
 
@@ -186,4 +189,5 @@ void CCollider::SyncOwnerPos()
 	m_vScale = m_pOwner->Get_Scale();
 	m_vWheels = m_pOwner->Get_Wheels();
 	m_vDir = m_pOwner->Get_Dir();
+	m_vMoveSize = m_pOwner->Get_MoveSize();
 }

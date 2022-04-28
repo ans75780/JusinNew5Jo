@@ -121,9 +121,9 @@ int CPlayer::Update(void)
 	
 #pragma endregion __
 
+	m_vMoveSize = m_vWorldDir * m_fSpeed * DT;
 
-
-	m_vPos += m_vWorldDir * m_fSpeed * DT;
+	m_vPos += m_vMoveSize;
 
 	return OBJ_NOEVENT;
 }

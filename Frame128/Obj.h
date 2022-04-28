@@ -19,8 +19,9 @@ public:
 	//Getter
 	const DXV3& Get_Pos() { return m_vPos; }
 	const DXV3& Get_Scale() { return m_vScale; }
-	const DXV3& Get_Dir() { return m_vDirPos; }
+	const DXV3& Get_Dir() { return m_vDir; }
 	DXV3* Get_Wheels() { return m_vWorldPoint; }
+	const DXV3& Get_MoveSize() { return m_vMoveSize; }
 	const float& Get_Angle() { return m_fRadian; }
 	const bool& Get_Active() { return m_bActive; }
 	RENDERID Get_RenderID() { return m_eRenderID; }
@@ -67,7 +68,7 @@ protected:
 	DXV3		m_vPoint[4];		// render 좌표
 	DXV3		m_vWorldPoint[4];	// world 좌표
 
-	float		m_fRadian;//오브젝트 각도
+	float		m_fRadian = 0;//오브젝트 각도
 	bool		m_bActive;//오브젝트 활성화 상태
 	OBJID		m_eID;//오브젝트 아이티
 	RENDERID	m_eRenderID;//렌더 순서
@@ -78,5 +79,6 @@ protected:
 	DXV3		m_vCoord[4];//바퀴의 로컬 * 플레이어 월드의 계산값을 받기 위한 좌표
 	float		m_fWheelDist;
 	DXV3		m_vDirPos;
+	DXV3		m_vMoveSize = {};
 };
 
