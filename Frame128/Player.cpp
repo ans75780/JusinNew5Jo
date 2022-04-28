@@ -11,7 +11,9 @@
 CPlayer::CPlayer()
 {
 }
+
 CPlayer::~CPlayer() { Release(); }
+
 void CPlayer::Init(void)
 {
 #pragma region original version (tank version)
@@ -94,7 +96,7 @@ int CPlayer::Update(void)
 
 
 
-	if (m_bActive)
+	if (false == m_bActive)
 		return OBJ_DEAD;
 
 	key_input();
@@ -118,6 +120,10 @@ int CPlayer::Update(void)
 	
 	
 #pragma endregion __
+
+
+
+	m_vPos += m_vWorldDir * m_fSpeed * DT;
 
 	return OBJ_NOEVENT;
 }
@@ -297,12 +303,12 @@ void CPlayer::player_direction(DIRECTION _eDir)
 		break;
 
 	case DIRECTION::DOWNLEFT:
-		m_vDir = { -1.f, -1.f, 0.f };
+		m_vDir = { -1.f, 1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::DOWNRIGHT:
-		m_vDir = { 1.f, -1.f, 0.f };
+		m_vDir = { 1.f, 1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 	}
