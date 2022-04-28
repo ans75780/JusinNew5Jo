@@ -19,6 +19,8 @@ public:
 	//Getter
 	const DXV3& Get_Pos() { return m_vPos; }
 	const DXV3& Get_Scale() { return m_vScale; }
+	const DXV3& Get_Dir() { return m_vDirPos; }
+	DXV3* Get_Wheels() { return m_vWorldPoint; }
 	const float& Get_Angle() { return m_fRadian; }
 	const bool& Get_Active() { return m_bActive; }
 	RENDERID Get_RenderID() { return m_eRenderID; }
@@ -71,5 +73,10 @@ protected:
 	RENDERID	m_eRenderID;//렌더 순서
 	vector<CComponent*> m_vecComponents;//보유한 컴포넌트
 	DXMAT		m_matLocal;
+
+	DXV3		m_vWheel[4];//바퀴의 좌표값을 저장해놓은 벡터
+	DXV3		m_vCoord[4];//바퀴의 로컬 * 플레이어 월드의 계산값을 받기 위한 좌표
+	float		m_fWheelDist;
+	DXV3		m_vDirPos;
 };
 

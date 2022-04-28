@@ -44,9 +44,6 @@ private:
 private:
 	void		CalcMat();
 private:
-	DXV3		m_vWheel[4];//바퀴의 좌표값을 저장해놓은 벡터
-	DXV3		m_vCoord[4];//바퀴의 로컬 * 플레이어 월드의 계산값을 받기 위한 좌표
-	float		m_fWheelDist;
-	DXV3		m_vDirPos;
+	
 };
 

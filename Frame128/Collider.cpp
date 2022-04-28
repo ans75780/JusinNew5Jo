@@ -56,7 +56,23 @@ void CCollider::Render(HDC hDC)
 	oldBrush = (HBRUSH)SelectObject(hDC, myBrush);
 	myPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));	// 선 스타일, 굵기, 색상
 	oldPen = (HPEN)::SelectObject(hDC, (HGDIOBJ)myPen);	// 펜 선택
-	RectDrawCenter(hDC, int(m_vFinalPos.x), int(m_vFinalPos.y), (int)m_vScale.x, (int)m_vScale.y);
+	//RectDrawCenter(hDC, int(m_vFinalPos.x), int(m_vFinalPos.y), (int)m_vScale.x, (int)m_vScale.y);
+	MoveToEx(hDC
+		, int(m_vWheels[0].x)
+		, int(m_vWheels[0].y)
+		, nullptr);
+
+	for (int i(1); i < sizeof(4); ++i)
+	{
+		LineTo(hDC
+			, int(m_vWheels[i].x)
+			, int(m_vWheels[i].y));
+	}
+
+	LineTo(hDC
+		, int(m_vWheels[0].x)
+		, int(m_vWheels[0].y));
+
 	myPen = (HPEN)::SelectObject(hDC, oldPen);	// 기존의 펜 다시 선택
 	SelectObject(hDC, oldBrush);
 	SelectObject(hDC, oldPen);
@@ -167,4 +183,7 @@ void CCollider::SyncOwnerPos()
 {
 	DXV3 OwnerPos = m_pOwner->Get_Pos();
 	m_vFinalPos = OwnerPos + m_vOffsetPos;
+	m_vScale = m_pOwner->Get_Scale();
+	m_vWheels = m_pOwner->Get_Wheels();
+	m_vDir = m_pOwner->Get_Dir();
 }
