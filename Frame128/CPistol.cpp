@@ -43,8 +43,8 @@ int CPistol::Update()
 	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
 	D3DXMatrixRotationZ(&m_matRotZ, MGR(CObjMgr)->Get_Player()->Get_Angle());
 	D3DXMatrixTranslation(&m_matTrans
-		, MGR(CObjMgr)->Get_Player()->Get_Pos().x
-		, MGR(CObjMgr)->Get_Player()->Get_Pos().y - 10.f
+		, MGR(CObjMgr)->Get_Player()->Get_Pos().x + 30.f * sinf(MGR(CObjMgr)->Get_Player()->Get_Angle())
+		, MGR(CObjMgr)->Get_Player()->Get_Pos().y - 30.f * cosf(MGR(CObjMgr)->Get_Player()->Get_Angle())
 		, 0.f);
 	
 	m_matWorld = m_matScale * m_matRotZ * m_matTrans;

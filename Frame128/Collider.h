@@ -21,13 +21,13 @@ public:
     void SetOffsetPos(DXV3 vec2) { m_vOffsetPos = vec2; }
     void SetTriger(bool _triger) { m_bIsTriger = _triger; }
 public:
-<<<<<<< Updated upstream
-    DXV3 Get_Scale() { return m_vScale; }
-    DXV3 Get_OffsetPos() {return  m_vScale; }
-    DXV3 Get_FinalPos() { return m_vFinalPos; }
-    UINT Get_Collider_ID() { return m_iID; }
-    bool Get_IsTriger() { return m_bIsTriger; }
-=======
+//<<<<<<< Updated upstream
+//    DXV3 Get_Scale() { return m_vScale; }
+//    DXV3 Get_OffsetPos() {return  m_vScale; }
+//    DXV3 Get_FinalPos() { return m_vFinalPos; }
+//    UINT Get_Collider_ID() { return m_iID; }
+//    bool Get_IsTriger() { return m_bIsTriger; }
+//=======
     DXV3            Get_Scale() { return m_vScale; }
     DXV3            Get_OffsetPos() {return  m_vScale; }
     DXV3            Get_FinalPos() { return m_vFinalPos; }
@@ -35,7 +35,7 @@ public:
     DXV3            Get_Dir() { return m_vDir; }
     UINT            Get_Collider_ID() { return m_iID; }
     bool            Get_IsTriger() { return m_bIsTriger; }
->>>>>>> Stashed changes
+// >>>>>>> Stashed changes
 public:// 충돌시점 함수
     //OnCollision은 물리적 충돌처리(밀어냄 효과)를 줌
     void    OnCollision(CCollider* _pOther) ;//충돌중인 경우 호출되는 함수
