@@ -51,6 +51,22 @@ public:
 	virtual void    OnTriggerExit(CCollider* _pOther) PURE;//충돌이 끝나면 호출되는 함수
 
 protected:
+	void Set_Initial_Points()
+	{
+		m_vPoint[0] = { -m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
+		m_vPoint[1] = { m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
+		m_vPoint[2] = { m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
+		m_vPoint[3] = { -m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
+	}
+
+	void Set_Matrix_to_Identity()
+	{
+		D3DXMatrixIdentity(&m_matWorld);
+		D3DXMatrixIdentity(&m_matScale);
+		D3DXMatrixIdentity(&m_matRotZ);
+		D3DXMatrixIdentity(&m_matTrans);
+	}
+protected:
 	wstring		m_strName;//오브젝트 네임
 
 	DXV3		m_vPos;

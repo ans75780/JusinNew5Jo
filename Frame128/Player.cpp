@@ -5,6 +5,8 @@
 #include "TimeMgr.h"
 #include "ObjMgr.h"
 
+#include "CBullet_Pistol.h"
+
 #include "AbstractFactory.h"
 
 CPlayer::CPlayer()
@@ -270,7 +272,7 @@ void CPlayer::key_input()
 	{
 		// 총의 종류에 따라 쏘는 총알이 달라지도록 변경
 		// create bullet
-		// MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet>::Create(m_vPos.x, m_vPos.y, m_fRadian));
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Pistol>::Create(m_vPos.x, m_vPos.y, m_fRadian));
 	}
 
 

@@ -19,20 +19,14 @@ void CPistol::Init()
 	m_strName = L"Pistol";
 	m_vDir = { 0.f, -1.f, 0.f };
 
-	m_vPoint[0] = { -m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
-	m_vPoint[1] = { m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
-	m_vPoint[2] = { m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
-	m_vPoint[3] = { -m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
+	Set_Initial_Points();
 
 	m_bActive = true;
 	m_eID = OBJID::OBJ_GUN;
 	m_eRenderID = RENDERID::RENDER_OBJ;
 	m_eType = GUN_TYPE::PISTOL;
 
-	D3DXMatrixIdentity(&m_matWorld);
-	D3DXMatrixIdentity(&m_matScale);
-	D3DXMatrixIdentity(&m_matRotZ);
-	D3DXMatrixIdentity(&m_matTrans);
+	Set_Matrix_to_Identity();
 }
 
 int CPistol::Update()
