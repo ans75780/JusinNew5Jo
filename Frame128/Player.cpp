@@ -177,8 +177,7 @@ void CPlayer::Release(void)
 void CPlayer::key_input()
 {
 	m_fSpeed = 100.f;
-	// 플레이어 8방향으로 수정요망
-	// 그러면 플레이어가 바라보는 방향으로 총알이 나가도록 수정 (포신없음)
+		
 #pragma region original version (tank mode)
 	//if (MGR(CKeyMgr)->isStayKeyDown('A'))
 	//	m_fRadian -= D3DXToRadian(5.f);
@@ -219,41 +218,41 @@ void CPlayer::key_input()
 
 #pragma region 8방향이동으로 수정, 이동방향을 바라보도록 수정중
 	// 움직이는 키는 임시로 I(상), K(하), J(좌), L(우)
-	if (MGR(CKeyMgr)->isStayKeyDown('I'))
+	if (MGR(CKeyMgr)->isStayKeyDown(VK_UP))
 	{
 		// 상 이동
 		m_eDirection = DIRECTION::UP;
-		if (MGR(CKeyMgr)->isStayKeyDown('J'))
+		if (MGR(CKeyMgr)->isStayKeyDown(VK_LEFT))
 		{
 			m_eDirection = DIRECTION::UPLEFT;
 		}
-		else if (MGR(CKeyMgr)->isStayKeyDown('L'))
+		else if (MGR(CKeyMgr)->isStayKeyDown(VK_RIGHT))
 		{
 			m_eDirection = DIRECTION::UPRIGHT;
 		}
 	}
 
-	else if (MGR(CKeyMgr)->isStayKeyDown('K'))
+	else if (MGR(CKeyMgr)->isStayKeyDown(VK_DOWN))
 	{
 		// 하 이동
 		m_eDirection = DIRECTION::DOWN;
-		if (MGR(CKeyMgr)->isStayKeyDown('J'))
+		if (MGR(CKeyMgr)->isStayKeyDown(VK_LEFT))
 		{
 			m_eDirection = DIRECTION::DOWNLEFT;
 		}
-		else if (MGR(CKeyMgr)->isStayKeyDown('L'))
+		else if (MGR(CKeyMgr)->isStayKeyDown(VK_RIGHT))
 		{
 			m_eDirection = DIRECTION::DOWNRIGHT;
 		}
 	}
 
-	else if (MGR(CKeyMgr)->isStayKeyDown('J'))
+	else if (MGR(CKeyMgr)->isStayKeyDown(VK_LEFT))
 	{
 		// 좌 이동
 		m_eDirection = DIRECTION::LEFT;
 	}
 
-	else if (MGR(CKeyMgr)->isStayKeyDown('L'))
+	else if (MGR(CKeyMgr)->isStayKeyDown(VK_RIGHT))
 	{
 		// 우 이동
 		m_eDirection = DIRECTION::RIGHT;
@@ -262,6 +261,7 @@ void CPlayer::key_input()
 
 	else
 	{
+		// 키를 누르고 있지 않은 동안은 움직이지 않도록
 		m_eDirection = DIRECTION::NONE;
 		m_fSpeed = 0.f;
 	}
