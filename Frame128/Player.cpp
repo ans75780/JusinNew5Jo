@@ -154,6 +154,10 @@ void CPlayer::Render(HDC hDC)
 			, int(m_vWorldPoint[i].y));
 	}
 
+	LineTo(hDC
+		, int(m_vWorldPoint[0].x)
+		, int(m_vWorldPoint[0].y));
+
 
 
 #pragma endregion __

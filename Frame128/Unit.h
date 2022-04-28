@@ -17,5 +17,7 @@ protected:
     float           m_fSpeed;
     float           m_fAtk;	// 공격력
 	// 추가적으로 변수 추가 요망
+
+    
 };
 
