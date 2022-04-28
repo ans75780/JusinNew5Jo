@@ -129,9 +129,6 @@ void CPlayer::key_input()
 	{
 		// 상 이동
 		eDirection = UP;
-		vLocalDir = { 0.f, -1.f, 0.f };
-		vLocalPos.x += vLocalDir * m_fSpeed * DT;
-		vLovalPos.y += vLocalDir * m_fSpeed * DT;
 	}
 
 	if (MGR(CKeyMgr)->isStayKeyDown('K'))
@@ -150,6 +147,11 @@ void CPlayer::key_input()
 	{
 		// 우 이동
 		eDirection = RIGHT;
+	}
+
+	switch (eDirection)
+	{
+
 	}
 
 #pragma endregion __
