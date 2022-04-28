@@ -53,10 +53,10 @@ void CPlayer::Init(void)
 	m_vScale = { 50.f, 50.f, 0.f };
 	m_vDir = { 0.f, -1.f, 0.f };
 
-	m_vPoint[0] = { -m_vScale.x, -m_vScale.y, 0.f };
-	m_vPoint[1] = { m_vScale.x, -m_vScale.y, 0.f };
-	m_vPoint[2] = { m_vScale.x, m_vScale.y, 0.f };
-	m_vPoint[3] = { -m_vScale.x, m_vScale.y, 0.f };
+	m_vPoint[0] = { -m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
+	m_vPoint[1] = { m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
+	m_vPoint[2] = { m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
+	m_vPoint[3] = { -m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
 
 	m_fSpeed = 100.f;
 
@@ -172,6 +172,7 @@ void CPlayer::Release(void)
 
 void CPlayer::key_input()
 {
+	m_fSpeed = 100.f;
 	// 플레이어 8방향으로 수정요망
 	// 그러면 플레이어가 바라보는 방향으로 총알이 나가도록 수정 (포신없음)
 #pragma region original version (tank mode)
@@ -255,7 +256,11 @@ void CPlayer::key_input()
 	}
 #pragma endregion __
 
-	
+	else
+	{
+		m_eDirection = DIRECTION::NONE;
+		m_fSpeed = 0.f;
+	}
 
 
 	if (MGR(CKeyMgr)->isOnceKeyUp(VK_SPACE))
@@ -272,43 +277,52 @@ void CPlayer::player_direction(DIRECTION _eDir)
 {
 	switch (_eDir)
 	{
+
 	case DIRECTION::UP:
-		m_vDir = { 0.f, -1.f, 0.f };
+		// m_vDir = { 0.f, -1.f, 0.f };
+		m_fRadian = D3DXToRadian(0);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::DOWN:
-		m_vDir = { 0.f, 1.f, 0.f };
+		// m_vDir = { 0.f, 1.f, 0.f };
+		m_fRadian = D3DXToRadian(180);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::LEFT:
-		m_vDir = { -1.f, 0.f, 0.f };
+		// m_vDir = { -1.f, 0.f, 0.f };
+		m_fRadian = D3DXToRadian(-90);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::RIGHT:
-		m_vDir = { 1.f, 0.f, 0.f };
+		// m_vDir = { 1.f, 0.f, 0.f };
+		m_fRadian = D3DXToRadian(90);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::UPLEFT:
-		m_vDir = { -1.f, -1.f, 0.f };
+		// m_vDir = { -1.f, -1.f, 0.f };
+		m_fRadian = D3DXToRadian(-45);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::UPRIGHT:
-		m_vDir = { 1.f, -1.f, 0.f };
+		// m_vDir = { 1.f, -1.f, 0.f };
+		m_fRadian = D3DXToRadian(45);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::DOWNLEFT:
-		m_vDir = { -1.f, 1.f, 0.f };
+		// m_vDir = { -1.f, 1.f, 0.f };
+		m_fRadian = D3DXToRadian(-135);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::DOWNRIGHT:
-		m_vDir = { 1.f, 1.f, 0.f };
+		// m_vDir = { 1.f, 1.f, 0.f };
+		m_fRadian = D3DXToRadian(135);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 	}

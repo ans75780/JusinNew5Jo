@@ -10,22 +10,22 @@ public:
     CCollider& operator    =(CCollider& _origin) = delete;
 public:
     // CComponentBase을(를) 통해 상속됨
-    virtual void    Init() override;
-    virtual void    Release() override;
-    virtual void    Update() override;
-    virtual void    Late_Update() override;
-    virtual void    Render(HDC hDC) override;
+    virtual void Init() override;
+    virtual void Release() override;
+    virtual void Update() override;
+    virtual void Late_Update() override;
+    virtual void Render(HDC hDC) override;
 public:
     virtual void   Set_Owner(CObj* pObj);
-    void            Set_Scale(DXV3 vec2) { m_vScale = vec2; }
-    void            SetOffsetPos(DXV3 vec2) { m_vOffsetPos = vec2; }
-    void            SetTriger(bool _triger) { m_bIsTriger = _triger; }
+    void Set_Scale(DXV3 vec2) { m_vScale = vec2; }
+    void SetOffsetPos(DXV3 vec2) { m_vOffsetPos = vec2; }
+    void SetTriger(bool _triger) { m_bIsTriger = _triger; }
 public:
-    DXV3     Get_Scale() { return m_vScale; }
-    DXV3     Get_OffsetPos() {return  m_vScale; }
-    DXV3     Get_FinalPos() { return m_vFinalPos; }
-    UINT            Get_Collider_ID() { return m_iID; }
-    bool            Get_IsTriger() { return m_bIsTriger; }
+    DXV3 Get_Scale() { return m_vScale; }
+    DXV3 Get_OffsetPos() {return  m_vScale; }
+    DXV3 Get_FinalPos() { return m_vFinalPos; }
+    UINT Get_Collider_ID() { return m_iID; }
+    bool Get_IsTriger() { return m_bIsTriger; }
 public:// 충돌시점 함수
     //OnCollision은 물리적 충돌처리(밀어냄 효과)를 줌
     void    OnCollision(CCollider* _pOther) ;//충돌중인 경우 호출되는 함수

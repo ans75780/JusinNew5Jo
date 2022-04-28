@@ -34,7 +34,7 @@ void CBullet::Init(void)
 	m_eRenderID = RENDERID::RENDER_OBJ;
 	m_strName = L"Bullet";
 
-	m_fSpeed = 100.f;
+	m_fSpeed = 300.f;
 
 	vLocalLT = { -vLocalScale.x, -vLocalScale.y, 0.f };
 	vLocalRT = { vLocalScale.x, -vLocalScale.y, 0.f };
@@ -59,8 +59,8 @@ int CBullet::Update(void)
 
 	// 플레이어 방향에따라 방향 바꿔주기 --> Player Angle에서 가져오기
 	// 방향이 정해지면 그 방향으로 날라가기
-	vLocalPos.x += cosf(m_fRadian) * m_fSpeed * DT;
-	vLocalPos.y -= sinf(m_fRadian) * m_fSpeed * DT;
+	vLocalPos.x += sinf(m_fRadian) * m_fSpeed * DT;
+	vLocalPos.y -= cosf(m_fRadian) * m_fSpeed * DT;
 
 	DXMAT temp;
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);

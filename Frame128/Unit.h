@@ -12,6 +12,7 @@ public:
     virtual int      Update(void) PURE;
     virtual void    Render(HDC hDC) PURE;
     virtual void    Release(void) PURE;
+
 protected:
     float           m_fSpeed;
     float           m_fAtk;	// °ø°Ý·Â
