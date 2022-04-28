@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TimeMgr.h"
 #include "../Header/Define.h"
+
 CTimeMgr::CTimeMgr()
 {
 }
@@ -32,6 +33,8 @@ void CTimeMgr::Update(float lock)
 	{
 		m_pTimer->Tick(lock);
 	}
+
+	UpdateTimerEvent();
 }
 
 void CTimeMgr::Render(HDC hdc)
@@ -73,4 +76,61 @@ void CTimeMgr::Render(HWND hWnd)
 	TCHAR str[MAX_STR];
 	wsprintf(str, L"FPS: %d", m_pTimer->GetFrameRate());
 	SetWindowText(g_hWnd, str);
+}
+
+void CTimeMgr::AddEvent(float _fTime, ITimerEvent* _pTimerEvent, int _iEventNum)
+{
+	pair<float, TimerEventGroup> temp;
+
+	temp.first = _fTime;
+	temp.second.iEventNum = _iEventNum;
+	temp.second.pTimerEvent = _pTimerEvent;
+
+	m_TimerEvents.push_back(temp);
+}
+
+void CTimeMgr::AddLoopEvent(float _fTime, ITimerEvent* _pTimerEvent, int _iEventNum)
+{
+	pair<float, TimerEventGroup> temp;
+
+	temp.first = _fTime;
+	temp.second.iEventNum = _iEventNum;
+	temp.second.pTimerEvent = _pTimerEvent;
+
+	m_LoopTimerEvents.push_back(temp);
+}
+
+void CTimeMgr::UpdateTimerEvent()
+{
+	list<pair<float, TimerEventGroup>>::iterator iter = m_TimerEvents.end();
+
+	for (iter; iter != m_TimerEvents.end();)
+	{
+		if (iter->first <= 0.0)
+		{
+			iter->second.pTimerEvent->OnTimerEvent(iter->second.iEventNum);
+			iter = m_TimerEvents.erase(iter);
+		}
+
+		else
+		{
+			iter->first -= DT;
+			iter++;
+		}
+	}
+
+	for (auto& elem : m_LoopTimerEvents)
+	{
+		if (elem.first <= 0.0)
+		{
+			elem.second.pTimerEvent->OnTimerEvent(elem.second.iEventNum);
+		}
+
+		else
+		{
+			elem.first -= DT;
+		}
+	}
+
+
 }

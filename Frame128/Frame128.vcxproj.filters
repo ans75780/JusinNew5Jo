@@ -97,8 +97,8 @@
     <Filter Include="01. Obj\Gun\PISTOL">
       <UniqueIdentifier>{26a361c5-1686-475c-aa4d-38d93fa30598}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\Unit\Bullet\Bullet_Pistol">
-      <UniqueIdentifier>{00599817-cd04-4e6b-91d0-63e4d2e898ef}</UniqueIdentifier>
+    <Filter Include="03. Interface">
+      <UniqueIdentifier>{49190cef-47ee-4502-aef5-35638b3075ca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -204,8 +204,8 @@
     <ClInclude Include="CPistol.h">
       <Filter>01. Obj\Gun\PISTOL</Filter>
     </ClInclude>
-    <ClInclude Include="CBullet_Pistol.h">
-      <Filter>01. Obj\Unit\Bullet\Bullet_Pistol</Filter>
+    <ClInclude Include="TimerEvent.h">
+      <Filter>03. Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -293,8 +293,8 @@
     <ClCompile Include="CPistol.cpp">
       <Filter>01. Obj\Gun\PISTOL</Filter>
     </ClCompile>
-    <ClCompile Include="CBullet_Pistol.cpp">
-      <Filter>01. Obj\Unit\Bullet\Bullet_Pistol</Filter>
+    <ClCompile Include="TimerEvent.cpp">
+      <Filter>03. Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

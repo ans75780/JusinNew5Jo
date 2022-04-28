@@ -1,6 +1,15 @@
 #pragma once
 #include "SingletonBase.h"
 #include "Timer.h"
+#include "TimerEvent.h"
+
+
+struct TimerEventGroup
+{
+	ITimerEvent* pTimerEvent;
+	int iEventNum;
+};
+
 
 class CTimeMgr : public CSingletonBase<CTimeMgr>
 {
@@ -21,5 +30,18 @@ public:
 	float getElasedTime() const { return m_pTimer->GetElapsedTime(); }
 	//전체 시간 경과량 가져오기
 	float getWorldTime() const { return m_pTimer->GetWorldTime(); }
+
+	void AddEvent(float _fTime, ITimerEvent* _pTimerEvent, int _iEventNum);
+	void AddLoopEvent(float _fTime, ITimerEvent* _pTimerEvent, int _iEventNum);
+	//void RemoveLoopEvent();
+
+
+private:
+	void UpdateTimerEvent();
+
+private:
+	list<pair<float, TimerEventGroup>> m_TimerEvents;
+	list<pair<float, TimerEventGroup>> m_LoopTimerEvents;
+
 };
 
