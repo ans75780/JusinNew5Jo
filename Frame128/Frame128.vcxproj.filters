@@ -97,6 +97,9 @@
     <Filter Include="01. Obj\Gun\PISTOL">
       <UniqueIdentifier>{26a361c5-1686-475c-aa4d-38d93fa30598}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Interface">
+      <UniqueIdentifier>{49190cef-47ee-4502-aef5-35638b3075ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -201,6 +204,9 @@
     <ClInclude Include="CPistol.h">
       <Filter>01. Obj\Gun\PISTOL</Filter>
     </ClInclude>
+    <ClInclude Include="TimerEvent.h">
+      <Filter>03. Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -286,6 +292,9 @@
     </ClCompile>
     <ClCompile Include="CPistol.cpp">
       <Filter>01. Obj\Gun\PISTOL</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerEvent.cpp">
+      <Filter>03. Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
