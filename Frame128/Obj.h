@@ -30,14 +30,14 @@ public:
 
 
 	//Setter
-	void				Set_Pos(const DXV3& _DXV3) { m_vPos = _DXV3; }
-	void				Set_Scale(const DXV3& _DXV3) { m_vScale = _DXV3; };
-	void				Set_Angle(float _f) { m_fRadian = _f; }
-	void				Set_Active(bool _isActive) { m_bActive = _isActive; }
-	void				Set_PosX(float _x) { m_vPos.x = _x; }
-	void				Set_PosY(float _y) { m_vPos.y = _y; }
-	void				Add_Pos(DXV3 vec) { m_vPos += vec; }
-	void				Add_Scale(DXV3 vec) { m_vScale + vec; }
+	void Set_Pos(const DXV3& _DXV3) { m_vPos = _DXV3; }
+	void Set_Scale(const DXV3& _DXV3) { m_vScale = _DXV3; };
+	void Set_Angle(float _f) { m_fRadian = _f; }
+	void Set_Active(bool _isActive) { m_bActive = _isActive; }
+	void Set_PosX(float _x) { m_vPos.x = _x; }
+	void Set_PosY(float _y) { m_vPos.y = _y; }
+	void Add_Pos(DXV3 vec) { m_vPos += vec; }
+	void Add_Scale(DXV3 vec) { m_vScale + vec; }
 	//CollisionFunction
 	virtual void    OnCollision(CCollider* _pOther) PURE;//충돌중인 경우 호출되는 함수
 	virtual void    OnCollisionEnter(CCollider* _pOther) PURE;//충돌 진입한 경우 호출되는 함수
