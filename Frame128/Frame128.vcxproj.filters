@@ -100,6 +100,18 @@
     <Filter Include="03. Interface">
       <UniqueIdentifier>{49190cef-47ee-4502-aef5-35638b3075ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\Unit\Monster">
+      <UniqueIdentifier>{1318a5c2-565e-4a7c-a3e3-299daee68e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Bullet\Bullet_Pistol">
+      <UniqueIdentifier>{8deb904d-6ef2-4c03-ba2e-0e1237b2dd24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Monster\Zombie">
+      <UniqueIdentifier>{b9eaac2e-dd81-4e7c-8b54-5355310ddbcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Hand">
+      <UniqueIdentifier>{13a0c30b-26f0-46ab-b644-55aa4ad2cc8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -207,6 +219,18 @@
     <ClInclude Include="TimerEvent.h">
       <Filter>03. Interface</Filter>
     </ClInclude>
+    <ClInclude Include="CBullet_Pistol.h">
+      <Filter>01. Obj\Unit\Bullet\Bullet_Pistol</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>01. Obj\Unit\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Zombie.h">
+      <Filter>01. Obj\Unit\Monster\Zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="Hand.h">
+      <Filter>01. Obj\Hand</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -295,6 +319,18 @@
     </ClCompile>
     <ClCompile Include="TimerEvent.cpp">
       <Filter>03. Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet_Pistol.cpp">
+      <Filter>01. Obj\Unit\Bullet\Bullet_Pistol</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>01. Obj\Unit\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Zombie.cpp">
+      <Filter>01. Obj\Unit\Monster\Zombie</Filter>
+    </ClCompile>
+    <ClCompile Include="Hand.cpp">
+      <Filter>01. Obj\Hand</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

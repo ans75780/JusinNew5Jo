@@ -45,6 +45,6 @@ private:
 	virtual void OnTriggerEnter(CCollider * _pOther);
 	virtual void OnTriggerExit(CCollider * _pOther);
 private:
-	void CalcMat();
+	//virtual void CalcMat();
 };
 
