@@ -4,14 +4,27 @@
 #include "Collider.h"
 
 CObj::CObj()
-	:m_bActive(true), m_fRadian(0.f), m_vPos(0, 0,0 ), m_vScale(0, 0, 0),m_strName(L"")
+	: m_strName(L"")
+	, m_bActive(true)
+	, m_fRadian(0.f)
+	, m_eID(OBJID::OBJ_END)
+	, m_eRenderID(RENDERID::RENDER_END)
 {
+	ZeroMemory(&m_vPos, sizeof(DXV3));
+	ZeroMemory(&m_vScale, sizeof(DXV3));
+	D3DXMatrixIdentity(&m_matWorld);
+	D3DXMatrixIdentity(&m_matScale);
+	D3DXMatrixIdentity(&m_matRotZ);
+	D3DXMatrixIdentity(&m_matTrans);
+
+	ZeroMemory(&m_vDir, sizeof(DXV3));
+	ZeroMemory(&m_vLook, sizeof(DXV3));
+	ZeroMemory(&m_vWorldDir, sizeof(DXV3));
+
 	D3DXMatrixIdentity(&m_matLocal);
 }
 
-CObj::~CObj()
-{
-}
+CObj::~CObj() {}
 
 void CObj::Late_Update(void)
 {

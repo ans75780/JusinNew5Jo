@@ -32,6 +32,7 @@ private:
 	DIRECTION m_eDirection = DIRECTION::NONE;
 public:
 	void key_input();
+	void player_direction(DIRECTION _eDir);
 
 private:
 	virtual void OnCollision(CCollider * _pOther) override;

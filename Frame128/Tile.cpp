@@ -29,14 +29,14 @@ int CTile::Update(void)
 void CTile::Render(HDC hDC)
 {
 
-	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
-	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
+	int iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
+	int iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 	POINT pos;
 	POINT scale;
-	pos.x = m_vPos.x;
-	pos.y = m_vPos.y;
-	scale.x = m_vScale.x;
-	scale.y = m_vScale.y;
+	pos.x = long(m_vPos.x);
+	pos.y = long(m_vPos.y);
+	scale.x = long(m_vScale.x);
+	scale.y = long(m_vScale.y);
 
 
 	if (m_iDrawID != 0)

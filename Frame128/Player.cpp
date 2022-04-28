@@ -11,10 +11,7 @@
 CPlayer::CPlayer()
 {
 }
-CPlayer::~CPlayer()
-{
-    Release();
-}
+CPlayer::~CPlayer() { Release(); }
 void CPlayer::Init(void)
 {
 #pragma region original version (tank version)
@@ -47,6 +44,9 @@ void CPlayer::Init(void)
 
 
 #pragma region ver2 - 8 direction movements
+
+
+
 	m_vPos = { WINCX / 2.f, WINCY / 2.f, 0.f };
 	m_vScale = { 50.f, 50.f, 0.f };
 	m_vDir = { 0.f, -1.f, 0.f };
@@ -69,6 +69,9 @@ void CPlayer::Init(void)
 	D3DXMatrixIdentity(&m_matTrans);
 
 	CreateCollider();
+
+
+
 #pragma endregion __
 }
 
@@ -90,14 +93,33 @@ int CPlayer::Update(void)
 #pragma endregion __
 
 
-#pragma region ver2 - 8 direction movements
+
 	if (m_bActive)
 		return OBJ_DEAD;
 
 	key_input();
+	player_direction(m_eDirection);
+
+
+#pragma region ver2 - 8 direction movements
+
+
+	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
+	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);
+	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
+
+	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
+	for (int i(0); i < 4; ++i)
+	{
+		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
+	}
+
+	D3DXVec3TransformNormal(&m_vWorldDir, &m_vDir, &m_matRotZ);
+	
+	
+#pragma endregion __
 
 	return OBJ_NOEVENT;
-#pragma endregion __
 }
 
 void CPlayer::Render(HDC hDC)
@@ -110,14 +132,27 @@ void CPlayer::Render(HDC hDC)
 	LineTo(hDC, m_vCoord[LT].x, m_vCoord[LT].y);*/
 #pragma endregion __
 
-#pragma region #pragma region ver2 - 8 direction movements
-	MoveToEx(hDC, m_vWorldPoint[0].x, m_vWorldPoint[0].y, nullptr);
+#pragma region ver2 - 8 direction movements
+	
+	
+	
+	MoveToEx(hDC
+		, int(m_vWorldPoint[0].x)
+		, int(m_vWorldPoint[0].y)
+		, nullptr);
 	
 	for (int i(1); i < sizeof(4); ++i)
 	{
-		LineTo(hDC, m_vWorldPoint[i].x, m_vWorldPoint[i].y);
+		LineTo(hDC
+			, int(m_vWorldPoint[i].x)
+			, int(m_vWorldPoint[i].y));
 	}
+
+
+
 #pragma endregion __
+
+
 	for (auto& iter : m_vecComponents)
         iter->Render(hDC);
 }
@@ -177,27 +212,59 @@ void CPlayer::key_input()
 	{
 		// 상 이동
 		m_eDirection = DIRECTION::UP;
+		if (MGR(CKeyMgr)->isStayKeyDown('J'))
+		{
+			m_eDirection = DIRECTION::UPLEFT;
+		}
+		else if (MGR(CKeyMgr)->isStayKeyDown('L'))
+		{
+			m_eDirection = DIRECTION::UPRIGHT;
+		}
 	}
 
-	if (MGR(CKeyMgr)->isStayKeyDown('K'))
+	else if (MGR(CKeyMgr)->isStayKeyDown('K'))
 	{
 		// 하 이동
 		m_eDirection = DIRECTION::DOWN;
+		if (MGR(CKeyMgr)->isStayKeyDown('J'))
+		{
+			m_eDirection = DIRECTION::DOWNLEFT;
+		}
+		else if (MGR(CKeyMgr)->isStayKeyDown('L'))
+		{
+			m_eDirection = DIRECTION::DOWNRIGHT;
+		}
 	}
 
-	if (MGR(CKeyMgr)->isStayKeyDown('J'))
+	else if (MGR(CKeyMgr)->isStayKeyDown('J'))
 	{
 		// 좌 이동
 		m_eDirection = DIRECTION::LEFT;
 	}
 
-	if (MGR(CKeyMgr)->isStayKeyDown('L'))
+	else if (MGR(CKeyMgr)->isStayKeyDown('L'))
 	{
 		// 우 이동
 		m_eDirection = DIRECTION::RIGHT;
 	}
+#pragma endregion __
 
-	switch (m_eDirection)
+	
+
+
+	if (MGR(CKeyMgr)->isOnceKeyUp(VK_SPACE))
+	{
+		// create bullet
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet>::Create(m_vPos.x, m_vPos.y, m_fRadian));
+	}
+
+
+	CalcMat();
+}
+
+void CPlayer::player_direction(DIRECTION _eDir)
+{
+	switch (_eDir)
 	{
 	case DIRECTION::UP:
 		m_vDir = { 0.f, -1.f, 0.f };
@@ -218,18 +285,27 @@ void CPlayer::key_input()
 		m_vDir = { 1.f, 0.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+
+	case DIRECTION::UPLEFT:
+		m_vDir = { -1.f, -1.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+
+	case DIRECTION::UPRIGHT:
+		m_vDir = { 1.f, -1.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+
+	case DIRECTION::DOWNLEFT:
+		m_vDir = { -1.f, -1.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+
+	case DIRECTION::DOWNRIGHT:
+		m_vDir = { 1.f, -1.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
 	}
-#pragma endregion __
-
-	
-
-
-	if (MGR(CKeyMgr)->isOnceKeyUp(VK_SPACE))
-	{
-		// create bullet
-		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet>::Create(m_vPos.x, m_vPos.y, m_fRadian));
-	}
-	CalcMat();
 }
 
 void CPlayer::OnCollision(CCollider * _pOther)
