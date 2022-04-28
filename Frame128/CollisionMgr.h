@@ -26,6 +26,7 @@ private:
 public:
 	void	CollisionUpdate(list<CObj*>& Dest, list<CObj*>& Sour);
 	bool	IsCollision(float* _outW, float* _outH, CCollider* DestCollider, CCollider* SourCollider);
+	bool	IsOBBCollision(CCollider* DestCollider, CCollider* SourCollider);
 	void	ClearColInfo();
 
 };

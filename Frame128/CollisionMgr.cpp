@@ -128,6 +128,49 @@ bool CCollisionMgr::IsCollision(float* _outW, float* _outH, CCollider* DestColli
 	return false;
 }
 
+bool CCollisionMgr::IsOBBCollision(CCollider* DestCollider, CCollider* SourCollider)
+{
+
+	DXV3 vDestPos = DestCollider->Get_FinalPos();
+	DXV3 vDestScale = DestCollider->Get_Scale();
+	DXV3 vDest_H_Dir = DestCollider->Get_Dir();
+	DXV3 vDest_W_Dir;
+	D3DXVec3Cross(&vDest_W_Dir, &vDest_H_Dir, &DXV3(0.f, 0.f, 1.0f));
+
+	DXV3 vSourPos = SourCollider->Get_FinalPos();
+	DXV3 vSourScale = SourCollider->Get_Scale();
+	DXV3 vSour_H_Dir = SourCollider->Get_Dir();
+	DXV3 vSour_W_Dir;
+	D3DXVec3Cross(&vSour_W_Dir, &vSour_H_Dir, &DXV3(0.f, 0.f, 1.0f));
+
+	DXV3 vDistance = DestCollider->Get_FinalPos() - SourCollider->Get_FinalPos();
+
+	DXV3 v[4] = {};
+
+	v[0] = vDestPos + (vDestScale.y * vDest_H_Dir); //D¿« ≥Ù¿ÃπÊ«‚ ∫§≈Õ
+	v[1] = vDestPos + (vDestScale.x * vDest_W_Dir); //D¿« ¡¬πÊ«‚ ∫§≈Õ
+	v[2] = vSourPos + (vSourScale.y * vSour_H_Dir); //S¿« ≥Ù¿ÃπÊ«‚ ∫§≈Õ
+	v[3] = vSourPos + (vSourScale.x * vSour_W_Dir); //S¿« ¡¬πÊ«‚ ∫§≈Õ
+
+	for (int i = 0; i < 4; i++) {
+		float sum = 0;
+		DXV3 vNormal;
+		D3DXVec3Normalize(&vNormal, &v[i]);
+
+		for (int j = 0; j < 4; j++) 
+		{
+			float fAbsDot = D3DXVec3Dot(&v[j], &vNormal);
+			fAbsDot = fabsf(fAbsDot);
+
+			sum += fAbsDot;
+		}
+		if (D3DXVec3Dot(&vDistance, &vNormal) > sum) {
+			return false;
+		}
+	}
+	return true;
+}
+
 void CCollisionMgr::ClearColInfo()
 {
 	m_mapColInfo.clear();
