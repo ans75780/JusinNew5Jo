@@ -75,7 +75,7 @@ void CStage::Render(HDC hDC)
 {
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
-	HDC img = CBmpMgr::Get_Instance()->Find_Image(L"BackGround");
+	HDC img = CBmpMgr::Get_Instance()->Find_Image(L"Background");
 	BitBlt(hDC,
 		iScrollX,
 		iScrollY,

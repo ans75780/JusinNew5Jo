@@ -17,6 +17,7 @@ public:
 	virtual void Release(void) PURE;
 public:
 	//Getter
+	const wstring& Get_Name() { return m_strName; }
 	const DXV3& Get_Pos() { return m_vPos; }
 	const DXV3& Get_Scale() { return m_vScale; }
 	const DXV3& Get_Dir() { return m_vDir; }

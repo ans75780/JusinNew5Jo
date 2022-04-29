@@ -20,7 +20,7 @@ CZombie::~CZombie()
 
 void CZombie::Init(void)
 {
-	m_vPos = { 400, 200, 0.f };
+	m_vPos = { 400, 100, 0.f };
 	m_vScale = { 50.f, 50.f, 0.f };
 
 	m_vPoint[0] = { -m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
@@ -42,8 +42,6 @@ void CZombie::Init(void)
 
 	CreateCollider();
 	FindTarget();
-
-
 }
 
 int CZombie::Update(void)

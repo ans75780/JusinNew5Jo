@@ -35,10 +35,10 @@ int CHand::Update(void)
 		return OBJ_DEAD;
 
 
-	float	PlayerRadian =m_pTarget->Get_Radian();
+	float	TargetRadian =m_pTarget->Get_Radian();
 	DXV3 TargetPos = m_pTarget->Get_Pos();
 	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
-	D3DXMatrixRotationZ(&m_matRotZ, PlayerRadian);
+	D3DXMatrixRotationZ(&m_matRotZ, TargetRadian);
 	D3DXMatrixTranslation(&m_matTrans
 		, TargetPos.x
 		, TargetPos.y
@@ -50,19 +50,11 @@ int CHand::Update(void)
 	{
 		D3DXVec3TransformCoord(&m_vWorldPoint[i], &(m_vPoint[i] + m_vOffset), &m_matWorld);
 	}
+	//D3DXVec3TransformCoord(&m_vPos, &m_vPos, &m_matWorld);
+
 	D3DXVec3TransformNormal(&m_vWorldDir, &m_vDir, &m_matRotZ);
-	
-	float minX = 5000.f;
-	float minY = 5000.f;
-	for (int i = 0; i < 4; i++)
-	{
-		if (minX > m_vWorldPoint[i].x)
-			minX = m_vWorldPoint[i].x;
-		if (minY > m_vWorldPoint[i].y)
-			minY = m_vWorldPoint[i].y;
-	}
-	m_vPos.x = minX + m_vScale.x * 0.5;
-	m_vPos.y = minY + m_vScale.y * 0.5;
+	m_vPos = (m_vWorldPoint[0] + m_vWorldPoint[2]) / 2;
+	int a = 10;
 	return OBJ_NOEVENT;
 }
 
@@ -105,9 +97,13 @@ void CHand::OnTrigger(CCollider* _pOther)
 
 void CHand::OnTriggerEnter(CCollider* _pOther)
 {
-	if (_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_PLAYER)
+	if (_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_PLAYER && m_eID == OBJID::OBJ_MONSTER)
 	{
 	 m_bActive = false;
+	}
+	if (_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_BULLET && m_eID == OBJID::OBJ_MONSTER)
+	{
+		m_bActive = false;
 	}
 }
 
