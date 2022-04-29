@@ -22,6 +22,8 @@ public:
 	virtual void OnTriggerEnter(CCollider * _pOther) PURE;
 	virtual void OnTriggerExit(CCollider * _pOther) PURE;
 
+protected:
+	DXMAT	m_matPos;
 
 protected:
 	float	m_fLifeTime;

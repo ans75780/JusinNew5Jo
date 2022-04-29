@@ -8,5 +8,5 @@
 
 #include "CBullet_Pistol.h"
 
-CGun::CGun() {}
+CGun::CGun(){}
 CGun::~CGun() {}

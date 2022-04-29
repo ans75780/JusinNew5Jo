@@ -6,10 +6,12 @@
 #include "ObjMgr.h"
 
 #include "CBullet_Pistol.h"
+#include "CBullet_SMG.h"
 
 #include "AbstractFactory.h"
 
 CPlayer::CPlayer()
+	: tik(0.f), time(1.f), bFire(true)
 {
 }
 
@@ -17,37 +19,6 @@ CPlayer::~CPlayer() { Release(); }
 
 void CPlayer::Init(void)
 {
-#pragma region original version (tank version)
-	/*D3DXMatrixIdentity(&m_matLocal);
-    m_vPos = { 300,300, 0.f};
-	m_fWheelDist = 25;
-
-	m_vWheel[LT].x = -m_fWheelDist;
-	m_vWheel[LT].y  = -m_fWheelDist;
-
-	m_vWheel[LB].x = -m_fWheelDist;
-	m_vWheel[LB].y = +m_fWheelDist;
-
-	m_vWheel[RT].x = +m_fWheelDist;
-	m_vWheel[RT].y = -m_fWheelDist;
-
-	m_vWheel[RB].x = +m_fWheelDist;
-	m_vWheel[RB].y = +m_fWheelDist;
-
-    m_vScale = { 50,50 ,0.f};
-    m_fSpeed = 500.f;
-    m_fRadian = D3DXToRadian(0);
-    m_fAtk = 0.f;
-    m_eID = OBJ_PLAYER;
-    m_eRenderID = RENDERID::RENDER_OBJ;
-    m_strName = L"Player";
-
-    CreateCollider();*/
-#pragma endregion __
-
-
-#pragma region ver2 - 8 direction movements
-
 	m_vPos = { WINCX / 2.f, WINCY / 2.f, 0.f };
 	m_vScale = { 50.f, 50.f, 0.f };
 
@@ -72,27 +43,12 @@ void CPlayer::Init(void)
 
 	m_fRadian = D3DXToRadian(-90.f);
 
-#pragma endregion __
 }
 
 int CPlayer::Update(void)
 {
 	if (false == m_bActive)
 		return OBJ_DEAD;
-#pragma region original version (tank mode)
-	//   if (!m_bActive)
-	//       return OBJ_DEAD;
-
-	   //m_vDirPos.x = 0;
-	   //m_vDirPos.y = 0;
-	   //// 키입력에 따른 update 따로 key_input함수로 이동
-	   //key_input();
-
-	//   for (auto& iter : m_vecComponents)
-	//       iter->Update();                                    
-
-	//   return 0;
-#pragma endregion __
 
 	key_input();
 	player_direction(m_eDirection);
@@ -112,16 +68,6 @@ int CPlayer::Update(void)
 
 void CPlayer::Render(HDC hDC)
 {
-#pragma region original version (tank mode)
-	/*MoveToEx(hDC, m_vCoord[LT].x, m_vCoord[LT].y, NULL);
-	LineTo(hDC, m_vCoord[LB].x, m_vCoord[LB].y);
-	LineTo(hDC, m_vCoord[RB].x, m_vCoord[RB].y);
-	LineTo(hDC, m_vCoord[RT].x, m_vCoord[RT].y);
-	LineTo(hDC, m_vCoord[LT].x, m_vCoord[LT].y);*/
-#pragma endregion __
-
-#pragma region ver2 - 8 direction movements
-	
 	MoveToEx(hDC
 		, int(m_vWorldPoint[0].x)
 		, int(m_vWorldPoint[0].y)
@@ -145,10 +91,6 @@ void CPlayer::Render(HDC hDC)
 
 	EllipseDrawCenter(hDC, m_vWorldPoint[2].x, m_vWorldPoint[2].y, 10, 10);
 
-
-#pragma endregion __
-
-
 	for (auto& iter : m_vecComponents)
         iter->Render(hDC);
 }
@@ -163,112 +105,76 @@ void CPlayer::Release(void)
 void CPlayer::key_input()
 {
 	m_fSpeed = 100.f;
-		
-#pragma region original version (tank mode)
-	//if (MGR(CKeyMgr)->isStayKeyDown('A'))
-	//	m_fRadian -= D3DXToRadian(5.f);
-	//if (MGR(CKeyMgr)->isStayKeyDown('D'))
-	//	m_fRadian += D3DXToRadian(5.f);
-	//if (MGR(CKeyMgr)->isStayKeyDown('W'))
-	//{
-	//	D3DXMATRIX infoRotZMat;
-	//	D3DXMATRIX infoTranslateLocalMat;
-	//	D3DXMATRIX infoWorldMat;
-	//	D3DXMATRIX infoParentMat;
-
-	//	D3DXMatrixRotationZ(&infoRotZMat, m_fRadian);
-	//	D3DXMatrixTranslation(&infoTranslateLocalMat, 0, -m_fSpeed * DT, 0);
-	//	D3DXMatrixTranslation(&infoParentMat, m_vPos.x, m_vPos.y, 0);
-	//	infoWorldMat = infoTranslateLocalMat * infoRotZMat * infoParentMat;
-	//	D3DXVec3TransformCoord(&m_vPos, &D3DXVECTOR3(0, 0, 0), &infoWorldMat);
-	//	//D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &infoParentMat);
-	//}
-	//if (MGR(CKeyMgr)->isStayKeyDown('S'))
-	//{
-	//	D3DXMATRIX infoRotZMat;
-	//	D3DXMATRIX infoTranslateLocalMat;
-	//	D3DXMATRIX infoWorldMat;
-	//	D3DXMATRIX infoParentMat;
-
-	//	//로테이션이랑 트랜스레이션 함수가 기본적으로 매트릭스를 초기화시켜줌
-	//	D3DXMatrixRotationZ(&infoRotZMat, m_fRadian);
-	//	D3DXMatrixTranslation(&infoTranslateLocalMat, 0, m_fSpeed * DT, 0);
-	//	D3DXMatrixTranslation(&infoParentMat, m_vPos.x, m_vPos.y, 0);
-	//	infoWorldMat = infoTranslateLocalMat * infoRotZMat * infoParentMat;
-	//	D3DXVec3TransformCoord(&m_vPos, &D3DXVECTOR3(0, 0, 0), &infoWorldMat);
-	//	//D3DXVec3TransformCoord(&m_tInfo.vPos, &m_tInfo.vPos, &infoParentMat);
-	//}
-#pragma endregion __
+	player_movement();
+	player_change_gun();
 
 
+		if (MGR(CKeyMgr)->isStayKeyDown(VK_SPACE))
+		{
+			if (bFire == true)
+			{
+				bFire = false;
 
-#pragma region 8방향이동으로 수정, 이동방향을 바라보도록 수정중
-	// 움직이는 키는 임시로 I(상), K(하), J(좌), L(우)
+				tik += DT;
+
+				if (tik >= time)
+				{
+					tik = 0;
+					bFire = true;
+				}
+			}
+		}
+	
+	
+	
+	
+
+
+	CalcMat();
+}
+
+void CPlayer::player_movement()
+{
 	if (MGR(CKeyMgr)->isStayKeyDown(VK_UP))
 	{
-		// 상 이동
 		m_eDirection = DIRECTION::UP;
+
 		if (MGR(CKeyMgr)->isStayKeyDown(VK_LEFT))
-		{
 			m_eDirection = DIRECTION::UPLEFT;
-		}
 		else if (MGR(CKeyMgr)->isStayKeyDown(VK_RIGHT))
-		{
 			m_eDirection = DIRECTION::UPRIGHT;
-		}
 	}
 
 	else if (MGR(CKeyMgr)->isStayKeyDown(VK_DOWN))
 	{
-		// 하 이동
 		m_eDirection = DIRECTION::DOWN;
+
 		if (MGR(CKeyMgr)->isStayKeyDown(VK_LEFT))
-		{
 			m_eDirection = DIRECTION::DOWNLEFT;
-		}
 		else if (MGR(CKeyMgr)->isStayKeyDown(VK_RIGHT))
-		{
 			m_eDirection = DIRECTION::DOWNRIGHT;
-		}
 	}
 
 	else if (MGR(CKeyMgr)->isStayKeyDown(VK_LEFT))
-	{
-		// 좌 이동
 		m_eDirection = DIRECTION::LEFT;
-	}
 
 	else if (MGR(CKeyMgr)->isStayKeyDown(VK_RIGHT))
-	{
-		// 우 이동
 		m_eDirection = DIRECTION::RIGHT;
-	}
-#pragma endregion __
 
 	else
 	{
-		// 키를 누르고 있지 않은 동안은 움직이지 않도록
 		m_eDirection = DIRECTION::NONE;
 		m_fSpeed = 0.f;
 	}
+}
 
+void CPlayer::player_change_gun()
+{
+	if (MGR(CKeyMgr)->isOnceKeyUp('M'))
+		m_ePlayerGun = GUN_TYPE::PISTOL;
 
-	if (MGR(CKeyMgr)->isStayKeyDown(VK_SPACE))
-	{
-		// 총의 종류에 따라 쏘는 총알이 달라지도록 변경
-		// create bullet
-
-		// tik 이랑 time을 줘서
-		// bFire bool형 변수 --> 한발을 쏠 수 있을 때는 true, 쏠 수 없을 때는 fasle
-		// space를 누르고 있을 떄
-		// bfire가 false이면 tik
-		// time에 예를 들어 0.2를 주면 tik에 dt를 계속 더해서 time보다 커지면 bfire다시 true로 만듬
-		// 
-		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Pistol>::Create(m_vPos.x, m_vPos.y, m_fRadian));
-	}
-
-
-	CalcMat();
+	if (MGR(CKeyMgr)->isOnceKeyUp('N'))
+		m_ePlayerGun = GUN_TYPE::SMG;
 }
 
 void CPlayer::player_direction(DIRECTION _eDir)

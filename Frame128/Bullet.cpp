@@ -8,7 +8,9 @@
 CBullet::CBullet()
 	: m_fLifeTime(0.f), m_iSpreadRate(0),
 	m_fSpreadX(0.f), m_fSpreadY(0.f)
-{}
+{
+	D3DXMatrixIdentity(&m_matPos);
+}
 
 CBullet::~CBullet() {}
 

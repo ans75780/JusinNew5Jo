@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "CBullet_Pistol.h"
 
+#include "AbstractFactory.h"
 #include "Player.h"
 #include "ObjMgr.h"
 #include "TimeMgr.h"
-
 
 
 CBullet_Pistol::CBullet_Pistol()
@@ -15,9 +15,7 @@ CBullet_Pistol::~CBullet_Pistol() { Release(); }
 
 void CBullet_Pistol::Init()
 {
-	m_vPos = { MGR(CObjMgr)->Get_Player()->Get_Pos().x + 45.f * cosf(MGR(CObjMgr)->Get_Player()->Get_Angle())
-		, MGR(CObjMgr)->Get_Player()->Get_Pos().y - 45.f * sinf(MGR(CObjMgr)->Get_Player()->Get_Angle())
-		, 0.f };
+	m_vPos = { 0.f, 0.f, 0.f };
 	m_vScale = { 10.f, 10.f, 0.f };
 
 	m_strName = L"Bullet_Pistol";
@@ -31,7 +29,7 @@ void CBullet_Pistol::Init()
 	Set_Matrix_to_Identity();
 
 	m_fSpeed = 300.f;
-	m_iSpreadRate = 15;
+	m_iSpreadRate = 5;
 	m_fSpreadX = create_x_spread();
 	m_fSpreadY = create_y_spread();
 
@@ -51,17 +49,19 @@ int CBullet_Pistol::Update()
 
 	m_vPos += m_vDir * m_fSpeed * DT;
 
+	D3DXMatrixTranslation(&m_matPos, m_vPos.x, m_vPos.y, 0.f);
+
 	D3DXMatrixScaling(&m_matScale
 		, 1.f
 		, 1.f
 		, 0.f);
 
 	D3DXMatrixTranslation(&m_matTrans
-		, m_vPos.x
-		, m_vPos.y
+		, MGR(CObjMgr)->Get_Player()->Get_Pos().x
+		, MGR(CObjMgr)->Get_Player()->Get_Pos().y
 		, 0.f);
 	
-	m_matWorld = m_matScale * m_matTrans;
+	m_matWorld = m_matPos * m_matScale * m_matTrans;
 
 	for (int i(0); i < 4; ++i)
 	{

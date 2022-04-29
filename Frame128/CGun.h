@@ -14,7 +14,7 @@ public:
 	virtual void Release() PURE;
 
 protected:
-	GUN_TYPE	m_eType = GUN_TYPE::END;
+	GUN_TYPE	m_eType = GUN_TYPE::NONE;
 
 private:
 	GUN_TYPE	get_Type() { return m_eType; }

@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "CPistol.h"
 
+#include "CBullet_Pistol.h"
+#include "AbstractFactory.h"
 #include "ObjMgr.h"
+#include "Player.h"
 
 CPistol::CPistol()
 {
@@ -51,6 +54,13 @@ int CPistol::Update()
 	}
 
 	D3DXVec3TransformNormal(&m_vWorldDir, &m_vDir, &m_matRotZ);
+
+	if (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->shoot())
+	{
+		CreateBullet(CBullet_Pistol);
+	}
+
+
 	return OBJ_NOEVENT;
 }
 

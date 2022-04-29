@@ -40,6 +40,8 @@ typedef D3DXMATRIX	DXMAT;
 //#define KEYAWAY(type)	KEY(type, AWAY)
 //#define KEYNONE(type)	KEY(type, NONE)
 
+#define CreateBullet(type) MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<type>::Create(m_vPos.x, m_vPos.y, m_fRadian));
+
 
 
 extern		HWND	g_hWnd;
