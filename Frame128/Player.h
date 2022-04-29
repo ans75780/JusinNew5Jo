@@ -20,17 +20,13 @@ public:
     virtual void Render(HDC hDC);
     virtual void Release();
 
-private:
-	enum class DIRECTION
-	{
-		UP, DOWN, LEFT, RIGHT,
-		UPLEFT, UPRIGHT,
-		DOWNLEFT, DOWNRIGHT,
-		NONE
-	};
+public:
 
 	DIRECTION m_eDirection = DIRECTION::NONE;
 
+
+public:
+	DIRECTION get_eDir() { return m_eDirection; }
 	
 
 public:
