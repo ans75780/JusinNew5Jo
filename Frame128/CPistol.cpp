@@ -13,12 +13,15 @@ CPistol::~CPistol()
 
 void CPistol::Init()
 {
+	dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->set_gun(this);
 	m_vPos = { 0.f, 0.f, 0.f };
 	m_vScale = { 30.f, 10.f, 0.f };
 
 	m_strName = L"Pistol";
 
 	Set_Initial_Points();
+	m_fShootInterval = 0.1f;
+
 
 	m_bActive = true;
 	m_eID = OBJID::OBJ_GUN;

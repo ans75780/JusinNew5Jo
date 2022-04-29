@@ -29,16 +29,26 @@
 #define		PI_16	(PI / 16)
 #define		PI_32	(PI / 32)
 
+#define KEY(type, state) KEY_STATE::state == MGR(CKeyMgr)->get_KeyState(KEY_TYPE::type)
+#define KEYTAP(type)	KEY(type, TAP)
+#define KEYHOLD(type)	KEY(type, HOLD)
+#define KEYAWAY(type)	KEY(type, AWAY)
+#define KEYNONE(type)	KEY(type, NONE)
+
 typedef D3DXVECTOR3 DXV3;
 typedef D3DXMATRIX	DXMAT;
 
 #define DT		MGR(CTimeMgr)->getElasedTime()
 
+<<<<<<< Updated upstream
 //#define KEY(type, state) KEY_STATE::state == KEYMANAGER->get_KeyState(KEY_TYPE::type)
 //#define KEYTAP(type)	KEY(type, TAP)
 //#define KEYHOLD(type)	KEY(type, HOLD)
 //#define KEYAWAY(type)	KEY(type, AWAY)
 //#define KEYNONE(type)	KEY(type, NONE)
+=======
+#define CreateBullet(type) MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<type>::Create(m_vPos.x, m_vPos.y, m_fRadian));
+>>>>>>> Stashed changes
 
 
 

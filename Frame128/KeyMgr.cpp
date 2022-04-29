@@ -1,74 +1,125 @@
 #include "stdafx.h"
 #include "KeyMgr.h"
 
+
+int g_arrVK[(int)KEY_TYPE::LAST] =
+{
+	VK_LEFT
+	, VK_RIGHT
+	, VK_UP
+	, VK_DOWN
+
+	, 'Q'
+	, 'W'
+	, 'E'
+	, 'R'
+	, 'A'
+	, 'S'
+	, 'D'
+	, 'F'
+	, 'Z'
+	, 'X'
+	, 'C'
+	, 'V'
+	, 'B'
+	, VK_MENU
+	, VK_LSHIFT
+	, VK_SPACE
+	, VK_LCONTROL
+	, VK_RETURN
+	, VK_ESCAPE
+	, VK_TAB
+	, VK_LBUTTON
+	, VK_RBUTTON
+	, VK_F1
+	, VK_F2
+	, VK_F3
+	, VK_F4
+	, VK_F5
+	, VK_F6
+	, VK_F7
+	, VK_F8
+	, VK_F9
+	, VK_F10
+	, VK_F11
+	, VK_F12
+};
+
+
+
+
+
+
 CKeyMgr::CKeyMgr()
 {
+
 }
 
 CKeyMgr::~CKeyMgr()
 {
+
 }
 
-HRESULT CKeyMgr::Init()
+
+void CKeyMgr::init()
 {
-	//키값을 전부 눌려있지 않는 상태로 초기화 한다.
-	for (int i = 0; i < KEYMAX; i++)
+	for (int i(0); i < (int)KEY_TYPE::LAST; ++i)
 	{
-		m_keyUp.set(i, false);
-		m_keyDown.set(i, false);
+		m_vecKey.push_back(tKeyInfo{ KEY_STATE::NONE, false });
 	}
-
-	return S_OK;
 }
 
-void CKeyMgr::release()
+void CKeyMgr::update()
 {
-}
+	// HWND hMainWnd = CMainCore::get_inst()->get_main_hWnd();
+	HWND hWnd = GetFocus();
 
-bool CKeyMgr::isOnceKeyDown(int key)
-{
-	//0x8000 : 이전에 누른적이 없고, 호출 시점에서는 눌려있는상태
-	if (GetAsyncKeyState(key) & 0x8000)
+	if (nullptr != hWnd)
 	{
-		if (!m_keyDown[key])
+		for (int i(0); i < (int)KEY_TYPE::LAST; ++i)
 		{
-			m_keyDown.set(key, true);
-			return true;
+			if (GetAsyncKeyState(g_arrVK[i]) & 0x8000) // 키가 눌려 있다
+			{
+				if (m_vecKey[i].bPrevPush) // 전에도 눌렸으면
+				{
+					m_vecKey[i].eState = KEY_STATE::HOLD; // 홀드인걸로
+				}
+				else
+				{
+					m_vecKey[i].eState = KEY_STATE::TAP; // 아니면 걍 탭
+				}
+
+				m_vecKey[i].bPrevPush = true; // 전에 눌린거 활성화
+			}
+			else // 키가 안눌려있다
+			{
+				if (m_vecKey[i].bPrevPush) // 전에는 눌렸다면
+				{
+					m_vecKey[i].eState = KEY_STATE::AWAY;
+				}
+				else
+				{
+					m_vecKey[i].eState = KEY_STATE::NONE;
+				}
+
+				m_vecKey[i].bPrevPush = false; // 전에 눌린거 비활성화
+			}
+
 		}
 	}
 	else
 	{
-		m_keyDown.set(key, false);
-	}
-	return false;
-}
-
-bool CKeyMgr::isOnceKeyUp(int key)
-{
-	if (GetAsyncKeyState(key) & 0x8000)
-	{
-		m_keyUp.set(key, true);
-	}
-	else
-	{
-		if (m_keyUp[key])
+		for (int i(0); i < (int)KEY_TYPE::LAST; ++i)
 		{
-			m_keyUp.set(key, false);
-			return true;
+			m_vecKey[i].bPrevPush = false;
+
+			if (KEY_STATE::TAP == m_vecKey[i].eState ||
+				KEY_STATE::HOLD == m_vecKey[i].eState)
+			{
+				m_vecKey[i].eState = KEY_STATE::AWAY;
+			}
+			else if (KEY_STATE::AWAY == m_vecKey[i].eState)
+				m_vecKey[i].eState = KEY_STATE::NONE;
 		}
 	}
-	return false;
-}
-
-bool CKeyMgr::isStayKeyDown(int key)
-{
-	if (GetAsyncKeyState(key) & 0x8000) return true;
-	return false;
-}
-
-bool CKeyMgr::isToggleKey(int key)
-{
-	//0x0001 : 이전에 누른 적이 있고, 눌려있지 않는 상태
-	if (GetKeyState(key) & 0x0001) return true;
-	return false;
 }

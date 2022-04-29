@@ -22,6 +22,14 @@ public:
 	virtual void OnTriggerEnter(CCollider * _pOther) PURE;
 	virtual void OnTriggerExit(CCollider * _pOther) PURE;
 
+<<<<<<< Updated upstream
+=======
+protected:
+	DXV3	vInitPos;
+	DXMAT	m_matPos;
+>>>>>>> Stashed changes
+
+	DXV3	m_vLocalPos;
 
 protected:
 	float	m_fLifeTime;

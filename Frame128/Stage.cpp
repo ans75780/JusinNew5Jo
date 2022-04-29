@@ -9,6 +9,7 @@
 #include "Zombie.h"
 #include "CPistol.h"
 #include "Hand.h"
+#include "KeyMgr.h"
 CStage::CStage()
 {
 }
@@ -24,7 +25,7 @@ HRESULT CStage::Init(void)
 
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
 	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
-	MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CPistol>::Create());
+	
 
 	CObj* zombie = CAbstractFactory<CZombie>::Create();
 	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, zombie);
@@ -40,6 +41,7 @@ HRESULT CStage::Init(void)
 void CStage::Update(void)
 {
 	MGR(CObjMgr)->Update();
+	MGR(CKeyMgr)->update();
 }
 
 void CStage::Late_Update(void)
