@@ -112,6 +112,9 @@
     <Filter Include="01. Obj\Hand">
       <UniqueIdentifier>{13a0c30b-26f0-46ab-b644-55aa4ad2cc8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\Unit\Bullet\Bullet_SMG">
+      <UniqueIdentifier>{53c56425-22f7-491a-a3e8-7a9948532dcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -231,6 +234,9 @@
     <ClInclude Include="Hand.h">
       <Filter>01. Obj\Hand</Filter>
     </ClInclude>
+    <ClInclude Include="CBullet_SMG.h">
+      <Filter>01. Obj\Unit\Bullet\Bullet_SMG</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -331,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="Hand.cpp">
       <Filter>01. Obj\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet_SMG.cpp">
+      <Filter>01. Obj\Unit\Bullet\Bullet_SMG</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

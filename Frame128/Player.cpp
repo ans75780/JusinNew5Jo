@@ -138,7 +138,11 @@ void CPlayer::Render(HDC hDC)
 		, int(m_vWorldPoint[0].x)
 		, int(m_vWorldPoint[0].y));
 
-	EllipseDrawCenter(hDC, m_vWorldPoint[1].x, m_vWorldPoint[1].y, 10, 10);
+	EllipseDrawCenter(hDC
+		, int(m_vWorldPoint[1].x)
+		, int(m_vWorldPoint[1].y)
+		, 10, 10);
+
 	EllipseDrawCenter(hDC, m_vWorldPoint[2].x, m_vWorldPoint[2].y, 10, 10);
 
 

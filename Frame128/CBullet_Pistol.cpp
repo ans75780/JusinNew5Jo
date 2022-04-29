@@ -5,17 +5,13 @@
 #include "ObjMgr.h"
 #include "TimeMgr.h"
 
-#include <time.h>
-
 
 
 CBullet_Pistol::CBullet_Pistol()
 {
 }
 
-CBullet_Pistol::~CBullet_Pistol()
-{
-}
+CBullet_Pistol::~CBullet_Pistol() { Release(); }
 
 void CBullet_Pistol::Init()
 {
@@ -35,117 +31,11 @@ void CBullet_Pistol::Init()
 	Set_Matrix_to_Identity();
 
 	m_fSpeed = 300.f;
+	m_iSpreadRate = 15;
+	m_fSpreadX = create_x_spread();
+	m_fSpreadY = create_y_spread();
 
-	switch (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir())
-	{
-	case DIRECTION::UP:
-	{
-		float tempx = float(rand() % 15) / 100.f;
-		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
-		float x_final = float(tempx) * tempx2;
-		m_vDir = { x_final, -1.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-		
-
-	case DIRECTION::DOWN:
-	{
-		float tempx = float(rand() % 15) / 100.f;
-		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
-		float x_final = float(tempx) * tempx2;
-		m_vDir = { x_final, 1.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-		
-
-	case DIRECTION::LEFT:
-	{
-		float tempx = float(rand() % 15) / 100.f;
-		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
-		float x_final = float(tempx) * tempx2;
-		m_vDir = { -1.f, x_final, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-		
-
-	case DIRECTION::RIGHT:
-	{
-		float tempx = float(rand() % 15) / 100.f;
-		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
-		float x_final = float(tempx) * tempx2;
-		m_vDir = { 1.f, x_final, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-	
-
-	case DIRECTION::UPLEFT:
-	{
-		float tempx = float(rand() % 15) / 100.f;
-		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
-		float x_final = float(tempx) * tempx2;
-
-		float tempy = float(rand() % 15) / 100.f;
-		int tempy2 = ((rand() % 2) == 0) ? 1 : -1;
-		float y_final = float(tempy) * tempy2;
-
-		m_vDir = { -1.f + x_final, -1.f + y_final, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-		
-
-	case DIRECTION::UPRIGHT:
-	{
-		float tempx = float(rand() % 15) / 100.f;
-		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
-		float x_final = float(tempx) * tempx2;
-
-		float tempy = float(rand() % 15) / 100.f;
-		int tempy2 = ((rand() % 2) == 0) ? 1 : -1;
-		float y_final = float(tempy) * tempy2;
-
-		m_vDir = { 1.f + x_final, -1.f + y_final, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-		
-
-	case DIRECTION::DOWNLEFT:
-	{
-		float tempx = float(rand() % 15) / 100.f;
-		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
-		float x_final = float(tempx) * tempx2;
-
-		float tempy = float(rand() % 15) / 100.f;
-		int tempy2 = ((rand() % 2) == 0) ? 1 : -1;
-		float y_final = float(tempy) * tempy2;
-
-		m_vDir = { -1.f + x_final, 1.f + y_final, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-		
-
-	case DIRECTION::DOWNRIGHT:
-	{
-		float tempx = float(rand() % 15) / 100.f;
-		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
-		float x_final = float(tempx) * tempx2;
-
-		float tempy = float(rand() % 15) / 100.f;
-		int tempy2 = ((rand() % 2) == 0) ? 1 : -1;
-		float y_final = float(tempy) * tempy2;
-
-		m_vDir = { 1.f + x_final, 1.f + y_final, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-	}
-
+	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
 	CreateCollider();
 }
 
@@ -158,26 +48,25 @@ int CBullet_Pistol::Update()
 
 	if (m_fLifeTime >= 3)
 		return OBJ_DEAD;
-	
-	
-	
 
 	m_vPos += m_vDir * m_fSpeed * DT;
 
-	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
+	D3DXMatrixScaling(&m_matScale
+		, 1.f
+		, 1.f
+		, 0.f);
+
 	D3DXMatrixTranslation(&m_matTrans
 		, m_vPos.x
 		, m_vPos.y
 		, 0.f);
-
-
-	// 총알이 나가게 할건데
 	
 	m_matWorld = m_matScale * m_matTrans;
 
 	for (int i(0); i < 4; ++i)
 	{
-		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
+		D3DXVec3TransformCoord(&m_vWorldPoint[i]
+			, &m_vPoint[i], &m_matWorld);
 	}
 
 	return OBJ_NOEVENT;

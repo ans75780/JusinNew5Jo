@@ -25,6 +25,13 @@ public:
 
 protected:
 	float	m_fLifeTime;
-	
+	int m_iSpreadRate;
+	float m_fSpreadX;
+	float m_fSpreadY;
+
+protected:
+	float create_x_spread();
+	float create_y_spread();
+	void set_bullet_dir(DIRECTION _eDir);
 
 };
