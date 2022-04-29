@@ -2,7 +2,7 @@
 #include "Frame128.h"
 #include "MainGame.h"
 #include "TimeMgr.h"
-
+#include <time.h>
 #define MAX_LOADSTRING 100
 
 #pragma region globals
@@ -25,6 +25,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance
 #ifdef _DEBUG
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif // _DEBUG
+
+	srand(unsigned(time(NULL)));
 
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_FRAME128, szWindowClass, MAX_LOADSTRING);

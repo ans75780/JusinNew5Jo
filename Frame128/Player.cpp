@@ -253,6 +253,13 @@ void CPlayer::key_input()
 	{
 		// 총의 종류에 따라 쏘는 총알이 달라지도록 변경
 		// create bullet
+
+		// tik 이랑 time을 줘서
+		// bFire bool형 변수 --> 한발을 쏠 수 있을 때는 true, 쏠 수 없을 때는 fasle
+		// space를 누르고 있을 떄
+		// bfire가 false이면 tik
+		// time에 예를 들어 0.2를 주면 tik에 dt를 계속 더해서 time보다 커지면 bfire다시 true로 만듬
+		// 
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Pistol>::Create(m_vPos.x, m_vPos.y, m_fRadian));
 	}
 

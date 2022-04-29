@@ -19,9 +19,6 @@ CBullet_Pistol::~CBullet_Pistol()
 
 void CBullet_Pistol::Init()
 {
-	srand(unsigned(time(NULL)));
-	int tempx = rand() % 100 + 1;
-
 	m_vPos = { MGR(CObjMgr)->Get_Player()->Get_Pos().x + 45.f * cosf(MGR(CObjMgr)->Get_Player()->Get_Angle())
 		, MGR(CObjMgr)->Get_Player()->Get_Pos().y - 45.f * sinf(MGR(CObjMgr)->Get_Player()->Get_Angle())
 		, 0.f };
@@ -42,45 +39,111 @@ void CBullet_Pistol::Init()
 	switch (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir())
 	{
 	case DIRECTION::UP:
-		float tempx = rand() % 3 - 1;
-		m_vDir = { 0.f, -1.f, 0.f };
+	{
+		float tempx = float(rand() % 15) / 100.f;
+		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
+		float x_final = float(tempx) * tempx2;
+		m_vDir = { x_final, -1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::DOWN:
-		m_vDir = { 0.f, 1.f, 0.f };
+	{
+		float tempx = float(rand() % 15) / 100.f;
+		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
+		float x_final = float(tempx) * tempx2;
+		m_vDir = { x_final, 1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::LEFT:
-		m_vDir = { -1.f, 0.f, 0.f };
+	{
+		float tempx = float(rand() % 15) / 100.f;
+		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
+		float x_final = float(tempx) * tempx2;
+		m_vDir = { -1.f, x_final, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::RIGHT:
-		m_vDir = { 1.f, 0.f, 0.f };
+	{
+		float tempx = float(rand() % 15) / 100.f;
+		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
+		float x_final = float(tempx) * tempx2;
+		m_vDir = { 1.f, x_final, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+	
 
 	case DIRECTION::UPLEFT:
-		m_vDir = { -1.f, -1.f, 0.f };
+	{
+		float tempx = float(rand() % 15) / 100.f;
+		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
+		float x_final = float(tempx) * tempx2;
+
+		float tempy = float(rand() % 15) / 100.f;
+		int tempy2 = ((rand() % 2) == 0) ? 1 : -1;
+		float y_final = float(tempy) * tempy2;
+
+		m_vDir = { -1.f + x_final, -1.f + y_final, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::UPRIGHT:
-		m_vDir = { 1.f, -1.f, 0.f };
+	{
+		float tempx = float(rand() % 15) / 100.f;
+		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
+		float x_final = float(tempx) * tempx2;
+
+		float tempy = float(rand() % 15) / 100.f;
+		int tempy2 = ((rand() % 2) == 0) ? 1 : -1;
+		float y_final = float(tempy) * tempy2;
+
+		m_vDir = { 1.f + x_final, -1.f + y_final, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::DOWNLEFT:
-		m_vDir = { -1.f, 1.f, 0.f };
+	{
+		float tempx = float(rand() % 15) / 100.f;
+		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
+		float x_final = float(tempx) * tempx2;
+
+		float tempy = float(rand() % 15) / 100.f;
+		int tempy2 = ((rand() % 2) == 0) ? 1 : -1;
+		float y_final = float(tempy) * tempy2;
+
+		m_vDir = { -1.f + x_final, 1.f + y_final, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::DOWNRIGHT:
-		m_vDir = { 1.f, 1.f, 0.f };
+	{
+		float tempx = float(rand() % 15) / 100.f;
+		int tempx2 = ((rand() % 2) == 0) ? 1 : -1;
+		float x_final = float(tempx) * tempx2;
+
+		float tempy = float(rand() % 15) / 100.f;
+		int tempy2 = ((rand() % 2) == 0) ? 1 : -1;
+		float y_final = float(tempy) * tempy2;
+
+		m_vDir = { 1.f + x_final, 1.f + y_final, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
 	}
 
 	CreateCollider();
