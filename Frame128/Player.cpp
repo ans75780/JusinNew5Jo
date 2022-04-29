@@ -249,7 +249,7 @@ void CPlayer::key_input()
 	}
 
 
-	if (MGR(CKeyMgr)->isOnceKeyUp(VK_SPACE))
+	if (MGR(CKeyMgr)->isStayKeyDown(VK_SPACE))
 	{
 		// 총의 종류에 따라 쏘는 총알이 달라지도록 변경
 		// create bullet
@@ -290,7 +290,6 @@ void CPlayer::player_direction(DIRECTION _eDir)
 		break;
 
 	case DIRECTION::UPLEFT:
-		// m_vDir = { -1.f, -1.f, 0.f };
 		m_fRadian = D3DXToRadian(-135);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
