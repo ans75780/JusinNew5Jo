@@ -16,6 +16,11 @@ public:
 protected:
     float           m_fSpeed;
     float           m_fAtk;	// 공격력
+    float           m_fHP;
+    float           m_fMaxHP;
+
+
+    
 	// 추가적으로 변수 추가 요망
 
     

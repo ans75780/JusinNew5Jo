@@ -2,10 +2,7 @@
 #include "Include.h"
 #include "Unit.h"
 
-#define LT 0
-#define LB 1
-#define RT 2
-#define RB 3
+
 
 
 class CPlayer :
@@ -42,5 +39,6 @@ private:
 	virtual void OnTriggerExit(CCollider * _pOther);
 private:
 	//virtual void CalcMat();
+	int             m_iCoin;
 };
 

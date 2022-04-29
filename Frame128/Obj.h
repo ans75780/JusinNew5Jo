@@ -3,6 +3,11 @@
 
 class CCollider;
 
+#define LT 0
+#define RT 1
+#define RB 2
+#define LB 3
+
 class CObj abstract
 {
 public:

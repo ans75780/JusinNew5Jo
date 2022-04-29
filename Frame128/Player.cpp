@@ -151,9 +151,7 @@ void CPlayer::Render(HDC hDC)
 
 void CPlayer::Release(void)
 {
-    for_each(m_vecComponents.begin(), m_vecComponents.end(), Safe_Delete<CComponent*>);
-    m_vecComponents.clear();
-    m_strName.clear();
+    
 }
 
 void CPlayer::key_input()

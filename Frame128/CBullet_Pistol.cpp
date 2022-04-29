@@ -42,45 +42,69 @@ void CBullet_Pistol::Init()
 	switch (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir())
 	{
 	case DIRECTION::UP:
+	{
 		float tempx = rand() % 3 - 1;
 		m_vDir = { 0.f, -1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::DOWN:
+	{
 		m_vDir = { 0.f, 1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::LEFT:
+	{
 		m_vDir = { -1.f, 0.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::RIGHT:
+	{
 		m_vDir = { 1.f, 0.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::UPLEFT:
+	{
 		m_vDir = { -1.f, -1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::UPRIGHT:
+	{
 		m_vDir = { 1.f, -1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::DOWNLEFT:
+	{
 		m_vDir = { -1.f, 1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 
 	case DIRECTION::DOWNRIGHT:
+	{
 		m_vDir = { 1.f, 1.f, 0.f };
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
+	}
+		
 	}
 
 	CreateCollider();
@@ -96,9 +120,6 @@ int CBullet_Pistol::Update()
 	if (m_fLifeTime >= 3)
 		return OBJ_DEAD;
 	
-	
-	
-
 	m_vPos += m_vDir * m_fSpeed * DT;
 
 	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);

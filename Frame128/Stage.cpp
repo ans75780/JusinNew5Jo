@@ -1,14 +1,8 @@
 #include "stdafx.h"
 #include "Stage.h"
-#include "BmpMgr.h"
-#include "ObjMgr.h"
-#include "AbstractFactory.h"
-#include "ScrollMgr.h"
-#include "Feature.h"
-#include "CollisionMgr.h"
-#include "Zombie.h"
-#include "CPistol.h"
-#include "Hand.h"
+
+#include "UserDefineHeaders.h"
+
 CStage::CStage()
 {
 }
@@ -32,6 +26,19 @@ HRESULT CStage::Init(void)
 	MGR(CObjMgr)->AddObject(OBJ_MONSTER, hand);
 	hand = new CHand(zombie, DXV3(45, 15, 0));
 	MGR(CObjMgr)->AddObject(OBJ_MONSTER, hand);
+
+	CObj* Coin = CAbstractFactory<CCoin>::Create();
+	Coin->Set_Pos(DXV3(300.f, 100.f, 0.f));
+	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);
+
+	CObj* Coin2 = CAbstractFactory<CCoin>::Create();
+	Coin2->Set_Pos(DXV3(600.f, 300.f, 0.f));
+	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin2);
+
+	CObj* Coin3 = CAbstractFactory<CCoin>::Create();
+	Coin3->Set_Pos(DXV3(200.f, 300.f, 0.f));
+	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin3);
+
 
 
 	return S_OK;
@@ -57,6 +64,12 @@ void CStage::Late_Update(void)
 	(
 		MGR(CObjMgr)->Get_ObjList(OBJ_PLAYER),
 		MGR(CObjMgr)->Get_ObjList(OBJ_FEATURE)
+	);
+
+	MGR(CCollisionMgr)->CollisionUpdate
+	(
+		MGR(CObjMgr)->Get_ObjList(OBJ_PLAYER),
+		MGR(CObjMgr)->Get_ObjList(OBJ_ITEM)
 	);
 
 	MGR(CCollisionMgr)->CollisionUpdate

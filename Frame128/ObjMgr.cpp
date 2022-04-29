@@ -73,15 +73,12 @@ void CObjMgr::Late_Update(void)
 {
 	for (int i = 0; i < OBJ_END; ++i)
 	{
-		for (auto& iter : m_ObjList[i])
+		for (auto& elem : m_ObjList[i])
 		{
-			iter->Late_Update();
+			elem->Late_Update();
 
-			if (m_ObjList[i].empty())
-				break;
-
-			RENDERID eRender = iter->Get_RenderID();
-			m_RenderSort[eRender].push_back(iter);
+			RENDERID eRender = elem->Get_RenderID();
+			m_RenderSort[eRender].push_back(elem);
 		}
 	}
 	//CCollisionMgr::Collision_RectEx(m_ObjList[OBJ_MONSTER], m_ObjList[OBJ_PLAYER]);

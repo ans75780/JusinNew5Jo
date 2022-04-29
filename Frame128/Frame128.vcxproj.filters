@@ -112,6 +112,12 @@
     <Filter Include="01. Obj\Hand">
       <UniqueIdentifier>{13a0c30b-26f0-46ab-b644-55aa4ad2cc8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\Item">
+      <UniqueIdentifier>{01f66089-ad22-4308-a896-3395a89e13fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Item\Coin">
+      <UniqueIdentifier>{292855a2-be06-4b7d-9e98-19950060834d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -231,6 +237,12 @@
     <ClInclude Include="Hand.h">
       <Filter>01. Obj\Hand</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>01. Obj\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Coin.h">
+      <Filter>01. Obj\Item\Coin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -331,6 +343,12 @@
     </ClCompile>
     <ClCompile Include="Hand.cpp">
       <Filter>01. Obj\Hand</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>01. Obj\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>01. Obj\Item\Coin</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
