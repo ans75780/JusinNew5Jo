@@ -100,6 +100,27 @@ void CTimeMgr::AddLoopEvent(float _fTime, ITimerEvent* _pTimerEvent, int _iEvent
 	m_LoopTimerEvents.push_back(temp);
 }
 
+void CTimeMgr::RemoveLoopEvent(ITimerEvent* _pTimerEvent, int _iEventNum)
+{
+	list<pair<float, TimerEventGroup>>::iterator iter = m_LoopTimerEvents.end();
+
+	for (iter; iter != m_LoopTimerEvents.end();)
+	{
+		if (iter->second.iEventNum == _iEventNum &&
+			iter->second.pTimerEvent == _pTimerEvent)
+		{
+			iter = m_TimerEvents.erase(iter);
+		}
+
+		else
+		{
+			iter++;
+		}
+	}
+
+
+}
+
 void CTimeMgr::UpdateTimerEvent()
 {
 	list<pair<float, TimerEventGroup>>::iterator iter = m_TimerEvents.end();

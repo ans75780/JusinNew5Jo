@@ -33,7 +33,7 @@ public:
 
 	void AddEvent(float _fTime, ITimerEvent* _pTimerEvent, int _iEventNum);
 	void AddLoopEvent(float _fTime, ITimerEvent* _pTimerEvent, int _iEventNum);
-	//void RemoveLoopEvent();
+	void RemoveLoopEvent(ITimerEvent* _pTimerEvent, int _iEventNum);
 
 
 private:

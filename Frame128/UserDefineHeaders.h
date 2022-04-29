@@ -17,6 +17,8 @@
 #include "Player.h"
 #include "Feature.h"
 #include "Unit.h"
+#include "Bullet.h"
+#include "CGun.h"
 
 //Scene
 #include "Stage.h"
