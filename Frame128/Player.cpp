@@ -48,11 +48,8 @@ void CPlayer::Init(void)
 
 #pragma region ver2 - 8 direction movements
 
-
-
 	m_vPos = { WINCX / 2.f, WINCY / 2.f, 0.f };
 	m_vScale = { 50.f, 50.f, 0.f };
-	m_vDir = { 0.f, -1.f, 0.f };
 
 	m_vPoint[0] = { -m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
 	m_vPoint[1] = { m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
@@ -73,54 +70,38 @@ void CPlayer::Init(void)
 
 	CreateCollider();
 
-
+	m_fRadian = D3DXToRadian(-90.f);
 
 #pragma endregion __
 }
 
 int CPlayer::Update(void)
 {
-#pragma region original version (tank mode)
- //   if (!m_bActive)
- //       return OBJ_DEAD;
-
-	//m_vDirPos.x = 0;
-	//m_vDirPos.y = 0;
-	//// 키입력에 따른 update 따로 key_input함수로 이동
-	//key_input();
-
- //   for (auto& iter : m_vecComponents)
- //       iter->Update();                                    
-
- //   return 0;
-#pragma endregion __
-
-
-
 	if (false == m_bActive)
 		return OBJ_DEAD;
+#pragma region original version (tank mode)
+	//   if (!m_bActive)
+	//       return OBJ_DEAD;
+
+	   //m_vDirPos.x = 0;
+	   //m_vDirPos.y = 0;
+	   //// 키입력에 따른 update 따로 key_input함수로 이동
+	   //key_input();
+
+	//   for (auto& iter : m_vecComponents)
+	//       iter->Update();                                    
+
+	//   return 0;
+#pragma endregion __
 
 	key_input();
 	player_direction(m_eDirection);
-
-
-#pragma region ver2 - 8 direction movements
-
-
-	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
-	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);
-	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
-
-	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
+	CalcMat();//이동과 회전 관련 매트릭스 처리를 관리하는 함수
 	for (int i(0); i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
 	}
-
 	D3DXVec3TransformNormal(&m_vWorldDir, &m_vDir, &m_matRotZ);
-	
-	
-#pragma endregion __
 
 	m_vMoveSize = m_vWorldDir * m_fSpeed * DT;
 
@@ -141,8 +122,6 @@ void CPlayer::Render(HDC hDC)
 
 #pragma region ver2 - 8 direction movements
 	
-	
-	
 	MoveToEx(hDC
 		, int(m_vWorldPoint[0].x)
 		, int(m_vWorldPoint[0].y)
@@ -159,6 +138,8 @@ void CPlayer::Render(HDC hDC)
 		, int(m_vWorldPoint[0].x)
 		, int(m_vWorldPoint[0].y));
 
+	EllipseDrawCenter(hDC, m_vWorldPoint[1].x, m_vWorldPoint[1].y, 10, 10);
+	EllipseDrawCenter(hDC, m_vWorldPoint[2].x, m_vWorldPoint[2].y, 10, 10);
 
 
 #pragma endregion __
@@ -268,7 +249,7 @@ void CPlayer::key_input()
 	}
 
 
-	if (MGR(CKeyMgr)->isOnceKeyUp(VK_SPACE))
+	if (MGR(CKeyMgr)->isStayKeyDown(VK_SPACE))
 	{
 		// 총의 종류에 따라 쏘는 총알이 달라지도록 변경
 		// create bullet
@@ -286,49 +267,48 @@ void CPlayer::player_direction(DIRECTION _eDir)
 
 	case DIRECTION::UP:
 		// m_vDir = { 0.f, -1.f, 0.f };
-		m_fRadian = D3DXToRadian(0);
+		m_fRadian = D3DXToRadian(-90);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::DOWN:
 		// m_vDir = { 0.f, 1.f, 0.f };
-		m_fRadian = D3DXToRadian(180);
+		m_fRadian = D3DXToRadian(90);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::LEFT:
 		// m_vDir = { -1.f, 0.f, 0.f };
-		m_fRadian = D3DXToRadian(-90);
+		m_fRadian = D3DXToRadian(-180);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::RIGHT:
 		// m_vDir = { 1.f, 0.f, 0.f };
-		m_fRadian = D3DXToRadian(90);
+		m_fRadian = D3DXToRadian(0);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::UPLEFT:
-		// m_vDir = { -1.f, -1.f, 0.f };
-		m_fRadian = D3DXToRadian(-45);
+		m_fRadian = D3DXToRadian(-135);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::UPRIGHT:
 		// m_vDir = { 1.f, -1.f, 0.f };
-		m_fRadian = D3DXToRadian(45);
+		m_fRadian = D3DXToRadian(-45);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::DOWNLEFT:
 		// m_vDir = { -1.f, 1.f, 0.f };
-		m_fRadian = D3DXToRadian(-135);
+		m_fRadian = D3DXToRadian(135);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 
 	case DIRECTION::DOWNRIGHT:
 		// m_vDir = { 1.f, 1.f, 0.f };
-		m_fRadian = D3DXToRadian(135);
+		m_fRadian = D3DXToRadian(45);
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 	}
@@ -356,35 +336,4 @@ void CPlayer::OnTriggerEnter(CCollider * _pOther)
 
 void CPlayer::OnTriggerExit(CCollider * _pOther)
 {
-}
-
-void CPlayer::CalcMat()
-{
-	DXMAT		matScale;
-	DXMAT		matRotZ;
-	DXMAT		matTransform;
-	DXMAT		matWheelTransform;//각각 휠의 행렬을 담을 좌표
-	DXMAT		matWheelRotZ;//각각 휠의 행렬을 담을 좌표
-	DXMAT		matWheelLocal;
-	DXV3		m_tPos;
-	DXV3		m_tAngle;
-
-	
-	m_tPos = m_vPos;
-	float angle = D3DXToDegree(m_fRadian);
-	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
-	D3DXMatrixRotationZ(&matRotZ, m_fRadian);
-	D3DXMatrixTranslation(&matTransform, m_vPos.x, m_vPos.y, 0.f);
-	m_matLocal = matScale * matRotZ * matTransform;
-
-	for (int i = 0; i < 4; i++)
-	{
-		D3DXMatrixTranslation(&matWheelTransform, m_vWheel[i].x, m_vWheel[i].y, 0.f);
-
-		//바퀴 입장에서는 플레이어의 m_matLocal이 월드이기에 휠 로컬을 앞에서 곱해준다.
-		// 크 * 자 * 이  * 공
-		matWheelLocal = matWheelTransform * m_matLocal;
-		D3DXVec3TransformCoord(&m_vCoord[i], &m_vWheel[i], &matWheelLocal);
-	}
-
 }

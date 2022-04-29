@@ -22,7 +22,7 @@
     <ProjectGuid>{F7251381-9B4B-4A69-8C43-230338D2969F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Frame128</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -172,6 +172,8 @@
     <ClInclude Include="ComponentBase.h" />
     <ClInclude Include="CPistol.h" />
     <ClInclude Include="Feature.h" />
+    <ClInclude Include="Hand.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="TimerEvent.h" />
     <ClInclude Include="MyEditor.h" />
     <ClInclude Include="SingletonBase.h" />
@@ -196,6 +198,7 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UserDefineHeaders.h" />
+    <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BmpMgr.cpp" />
@@ -209,6 +212,8 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentBase.cpp" />
     <ClCompile Include="Frame128.cpp" />
+    <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="TimerEvent.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="MainGame.cpp" />
@@ -233,6 +238,7 @@
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Frame128.rc" />

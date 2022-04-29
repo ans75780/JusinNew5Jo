@@ -20,8 +20,8 @@ CObj::CObj()
 	ZeroMemory(&m_vDir, sizeof(DXV3));
 	ZeroMemory(&m_vLook, sizeof(DXV3));
 	ZeroMemory(&m_vWorldDir, sizeof(DXV3));
+	m_vDir = { 1,0,0 };
 
-	D3DXMatrixIdentity(&m_matLocal);
 }
 
 CObj::~CObj() {}
@@ -65,4 +65,13 @@ CCollider* CObj::Get_Collider()
 	if (component)
 		return static_cast<CCollider*>(component);
 	return nullptr;
+}
+
+void CObj::CalcMat()
+{
+	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
+	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);
+	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
+	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
+
 }

@@ -6,7 +6,7 @@
 #include "Collider.h"
 
 CBullet::CBullet()
-	: m_pPlayer(nullptr), m_fLifeTime(0.f)
+	: m_fLifeTime(0.f)
 {}
 
 CBullet::~CBullet() {}

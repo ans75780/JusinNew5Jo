@@ -20,17 +20,13 @@ public:
     virtual void Render(HDC hDC);
     virtual void Release();
 
-private:
-	enum class DIRECTION
-	{
-		UP, DOWN, LEFT, RIGHT,
-		UPLEFT, UPRIGHT,
-		DOWNLEFT, DOWNRIGHT,
-		NONE
-	};
+public:
 
 	DIRECTION m_eDirection = DIRECTION::NONE;
 
+
+public:
+	DIRECTION get_eDir() { return m_eDirection; }
 	
 
 public:
@@ -45,6 +41,6 @@ private:
 	virtual void OnTriggerEnter(CCollider * _pOther);
 	virtual void OnTriggerExit(CCollider * _pOther);
 private:
-	void CalcMat();
+	//virtual void CalcMat();
 };
 

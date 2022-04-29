@@ -17,25 +17,28 @@ public:
 	virtual void Release(void) PURE;
 public:
 	//Getter
+	const wstring& Get_Name() { return m_strName; }
 	const DXV3& Get_Pos() { return m_vPos; }
 	const DXV3& Get_Scale() { return m_vScale; }
 	const DXV3& Get_Dir() { return m_vDir; }
 	DXV3* Get_Wheels() { return m_vWorldPoint; }
 	const DXV3& Get_MoveSize() { return m_vMoveSize; }
-	const float& Get_Angle() { return m_fRadian; }
+	const float& Get_Angle() { return D3DXToDegree(m_fRadian); }
+	const float& Get_Radian() { return m_fRadian; }
 	const bool& Get_Active() { return m_bActive; }
 	RENDERID Get_RenderID() { return m_eRenderID; }
 	CComponent*	Get_Component(const TCHAR* ComponentName);
 	void						CreateCollider();
 	CCollider*				Get_Collider();
 	OBJID						Get_ID() { return m_eID; }
-	const DXMAT	GetWorld() { return m_matLocal; }//월드 매트릭스 이 월드 매트릭스는 자신의 월드로서, 자식 오브젝트는 이 부모의 월드에 영향을 받는다.
+	const DXMAT	GetWorld() { return m_matWorld; }//월드 매트릭스 이 월드 매트릭스는 자신의 월드로서, 자식 오브젝트는 이 부모의 월드에 영향을 받는다.
 
 
 	//Setter
 	void Set_Pos(const DXV3& _DXV3) { m_vPos = _DXV3; }
 	void Set_Scale(const DXV3& _DXV3) { m_vScale = _DXV3; };
-	void Set_Angle(float _f) { m_fRadian = _f; }
+	void Set_Angle(float _f) { m_fRadian = D3DXToRadian(_f); }
+	void Set_Radian(float _f) { m_fRadian = _f; }
 	void Set_Active(bool _isActive) { m_bActive = _isActive; }
 	void Set_PosX(float _x) { m_vPos.x = _x; }
 	void Set_PosY(float _y) { m_vPos.y = _y; }
@@ -49,16 +52,15 @@ public:
 	virtual void    OnTrigger(CCollider* _pOther) PURE;//충돌중인 경우 호출되는 함수
 	virtual void    OnTriggerEnter(CCollider* _pOther) PURE;//충돌 진입한 경우 호출되는 함수
 	virtual void    OnTriggerExit(CCollider* _pOther) PURE;//충돌이 끝나면 호출되는 함수
-
 protected:
 	void Set_Initial_Points()
 	{
+		//LT,RT,RB,LB
 		m_vPoint[0] = { -m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
 		m_vPoint[1] = { m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
 		m_vPoint[2] = { m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
 		m_vPoint[3] = { -m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
 	}
-
 	void Set_Matrix_to_Identity()
 	{
 		D3DXMatrixIdentity(&m_matWorld);
@@ -66,6 +68,7 @@ protected:
 		D3DXMatrixIdentity(&m_matRotZ);
 		D3DXMatrixIdentity(&m_matTrans);
 	}
+	virtual void		CalcMat();
 protected:
 	wstring		m_strName;//오브젝트 네임
 
@@ -89,11 +92,7 @@ protected:
 	OBJID		m_eID;//오브젝트 아이티
 	RENDERID	m_eRenderID;//렌더 순서
 	vector<CComponent*> m_vecComponents;//보유한 컴포넌트
-	DXMAT		m_matLocal;
 
-	DXV3		m_vWheel[4];//바퀴의 좌표값을 저장해놓은 벡터
-	DXV3		m_vCoord[4];//바퀴의 로컬 * 플레이어 월드의 계산값을 받기 위한 좌표
-	float		m_fWheelDist;
 	DXV3		m_vDirPos;
 	DXV3		m_vMoveSize = {};
 };

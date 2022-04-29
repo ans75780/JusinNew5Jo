@@ -6,9 +6,9 @@
 #include "ScrollMgr.h"
 #include "Feature.h"
 #include "CollisionMgr.h"
-
+#include "Zombie.h"
 #include "CPistol.h"
-
+#include "Hand.h"
 CStage::CStage()
 {
 }
@@ -25,6 +25,14 @@ HRESULT CStage::Init(void)
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
 	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
 	MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CPistol>::Create());
+
+	CObj* zombie = CAbstractFactory<CZombie>::Create();
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, zombie);
+	CHand* hand = new CHand(zombie, DXV3(45, -15, 0));
+	MGR(CObjMgr)->AddObject(OBJ_MONSTER, hand);
+	hand = new CHand(zombie, DXV3(45, 15, 0));
+	MGR(CObjMgr)->AddObject(OBJ_MONSTER, hand);
+
 
 	return S_OK;
 }
@@ -56,14 +64,18 @@ void CStage::Late_Update(void)
 		MGR(CObjMgr)->Get_ObjList(OBJID::OBJ_BULLET),
 		MGR(CObjMgr)->Get_ObjList(OBJ_FEATURE)
 	);
-	
+	MGR(CCollisionMgr)->CollisionUpdate
+	(
+		MGR(CObjMgr)->Get_ObjList(OBJID::OBJ_BULLET),
+		MGR(CObjMgr)->Get_ObjList(OBJ_MONSTER)
+	);
 }
 
 void CStage::Render(HDC hDC)
 {
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
-	HDC img = CBmpMgr::Get_Instance()->Find_Image(L"BackGround");
+	HDC img = CBmpMgr::Get_Instance()->Find_Image(L"Background");
 	BitBlt(hDC,
 		iScrollX,
 		iScrollY,

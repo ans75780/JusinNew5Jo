@@ -14,10 +14,9 @@ CPistol::~CPistol()
 void CPistol::Init()
 {
 	m_vPos = { 0.f, 0.f, 0.f };
-	m_vScale = { 10.f, 30.f, 0.f };
+	m_vScale = { 30.f, 10.f, 0.f };
 
 	m_strName = L"Pistol";
-	m_vDir = { 0.f, -1.f, 0.f };
 
 	Set_Initial_Points();
 
@@ -34,11 +33,14 @@ int CPistol::Update()
 	if (false == m_bActive)
 		return OBJ_DEAD;
 
+
+	float	PlayerRadian = MGR(CObjMgr)->Get_Player()->Get_Radian();
+
 	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
-	D3DXMatrixRotationZ(&m_matRotZ, MGR(CObjMgr)->Get_Player()->Get_Angle());
+	D3DXMatrixRotationZ(&m_matRotZ, PlayerRadian);
 	D3DXMatrixTranslation(&m_matTrans
-		, MGR(CObjMgr)->Get_Player()->Get_Pos().x + 30.f * sinf(MGR(CObjMgr)->Get_Player()->Get_Angle())
-		, MGR(CObjMgr)->Get_Player()->Get_Pos().y - 30.f * cosf(MGR(CObjMgr)->Get_Player()->Get_Angle())
+		, MGR(CObjMgr)->Get_Player()->Get_Pos().x + 45.f * cosf(PlayerRadian)
+		, MGR(CObjMgr)->Get_Player()->Get_Pos().y - 45.f * -sinf(PlayerRadian)
 		, 0.f);
 	
 	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
