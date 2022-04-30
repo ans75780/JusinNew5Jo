@@ -12,6 +12,8 @@
 #include "TileMgr.h"
 #include "TimeMgr.h"
 #include "AbstractFactory.h"
+#include "Device.h"
+#include "TextureMgr.h"
 
 //Obj
 #include "Obj.h"
