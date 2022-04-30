@@ -6,7 +6,7 @@
 #include "ObjMgr.h"
 
 #include "CBullet_Pistol.h"
-
+#include "Device.h"
 #include "AbstractFactory.h"
 #include "CGun.h"
 #include "CPistol.h"
@@ -73,18 +73,7 @@ int CPlayer::Update(void)
 
 void CPlayer::Render(HDC hDC)
 {
-	MoveToEx(hDC
-		, int(m_vWorldPoint[0].x)
-		, int(m_vWorldPoint[0].y)
-		, nullptr);
-	
-	for (int i(1); i < sizeof(4); ++i)
-	{
-		LineTo(hDC
-			, int(m_vWorldPoint[i].x)
-			, int(m_vWorldPoint[i].y));
-	}
-
+	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
 
 	LineTo(hDC
 		, int(m_vWorldPoint[0].x)
@@ -170,7 +159,6 @@ void CPlayer::player_movement()
 
 	CalcMat();
 }
-
 
 void CPlayer::player_change_gun()
 {

@@ -20,7 +20,7 @@ HRESULT CStage::Init(void)
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
 	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
 	
-	for (int i = 0; i < 500 ; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX + rand() % 400, WINCY + rand () % 400, 0));
 	}
