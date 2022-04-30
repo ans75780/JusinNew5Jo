@@ -10,7 +10,6 @@
 #include "Stage.h"
 #include "MyEditor.h"
 #include "CollisionMgr.h"
-#include "UserDefineHeaders.h"
 
 
 CMainGame::CMainGame()
@@ -38,30 +37,6 @@ void CMainGame::Initialize(void)
 	MGR(CSceneMgr)->ChangeScene("Stage");
 	MGR(CSoundMgr)->Init();
 
-	MGR(CDevice)->Set_BufferSize({ WINCX, WINCY });
-
-	if (FAILED(MGR(CDevice)->Init()))
-	{
-		assert(false);
-	}
-
-	/*m_pSingle = new CSingleTexture;
-	m_pSingle->InsertTexture(L"../Texture/Cube.png");*/
-
-	
-
-	/*if (FAILED(MGR(CTextureMgr)->InsertTexture(L"../Texture/Cube.png", TEX_SINGLE, L"Cube")))
-	{
-		assert(false);
-		return;
-	}
-
-	if (FAILED(MGR(CTextureMgr)->InsertTexture(L"../Texture/Stage/Terrain/Tile/Tile%d.png", TEX_MULTI, L"Terrain", L"Tile", 36)))
-	{
-		assert(false);
-		return;
-	}*/
-
 }
 
 void CMainGame::Update(void)
@@ -76,14 +51,11 @@ void CMainGame::Late_Update(void)
 
 void CMainGame::Render(void)
 {
-	MGR(CDevice)->Render_Begin();
-
 	MGR(CTimeMgr)->Render(g_hWnd);
 	HDC		hBackBufferDC = CBmpMgr::Get_Instance()->Find_Image(L"BackBuffer");
 	MGR(CSceneMgr)->Render(hBackBufferDC);
 	BitBlt(m_DC, 0, 0, WINCX, WINCY, hBackBufferDC, 0, 0, SRCCOPY);
 
-	MGR(CDevice)->Render_End();
 }
 
 void CMainGame::Release(void)
@@ -96,8 +68,5 @@ void CMainGame::Release(void)
 	MGR(CTimeMgr)->ReleaseSingleton();
 	MGR(CSoundMgr)->ReleaseSingleton();
 	MGR(CCollisionMgr)->ReleaseSingleton();
-	MGR(CDevice)->ReleaseSingleton();
-	MGR(CTextureMgr)->ReleaseSingleton();
-
 	CScrollMgr::Destroy_Instance();
 }

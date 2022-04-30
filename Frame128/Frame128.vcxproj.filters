@@ -61,6 +61,21 @@
     <Filter Include="98. Design\Singleton">
       <UniqueIdentifier>{315854d0-e523-4a92-a8dc-c1652d20c399}</UniqueIdentifier>
     </Filter>
+    <Filter Include="97.Component">
+      <UniqueIdentifier>{2d28ebab-9199-4064-bd1c-adfef6deb1f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Component\Base">
+      <UniqueIdentifier>{e26fd6aa-4640-4fce-860d-774f2b22825a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Component\Collider">
+      <UniqueIdentifier>{7cfc0f71-7b39-4e65-b434-22640bd0de01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Timer">
+      <UniqueIdentifier>{5306bfbc-3984-4502-b069-b1fb3193f77c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\96.TimeMgr">
+      <UniqueIdentifier>{a54696b2-3fd3-4f50-bb28-20310c245883}</UniqueIdentifier>
+    </Filter>
     <Filter Include="98. Design\08. SoundMgr">
       <UniqueIdentifier>{ca5dbccf-2431-4b24-82f1-603f6daae22f}</UniqueIdentifier>
     </Filter>
@@ -102,36 +117,6 @@
     </Filter>
     <Filter Include="01. Obj\Item\Coin">
       <UniqueIdentifier>{292855a2-be06-4b7d-9e98-19950060834d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="96. Timer">
-      <UniqueIdentifier>{5306bfbc-3984-4502-b069-b1fb3193f77c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97. Component">
-      <UniqueIdentifier>{2d28ebab-9199-4064-bd1c-adfef6deb1f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97. Component\Base">
-      <UniqueIdentifier>{e26fd6aa-4640-4fce-860d-774f2b22825a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="97. Component\Collider">
-      <UniqueIdentifier>{7cfc0f71-7b39-4e65-b434-22640bd0de01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="98. Design\09. Device">
-      <UniqueIdentifier>{ade6287f-5173-4f48-8c31-0c85e576d9c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="98. Design\08. TextureMgr">
-      <UniqueIdentifier>{e4bb7390-04fe-4c23-a747-bc3078ed898b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="98. Design\96. TimeMgr">
-      <UniqueIdentifier>{a54696b2-3fd3-4f50-bb28-20310c245883}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Texture">
-      <UniqueIdentifier>{402d21c3-fa9b-420f-8c5f-6d580c179dc5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Texture\00. SingleTexture">
-      <UniqueIdentifier>{9c6b7d61-cc22-4a50-877f-b66119080731}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Texture\01. MultiTexture">
-      <UniqueIdentifier>{f16a4f92-6444-4f0b-9a4a-d9f333725145}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -193,22 +178,22 @@
       <Filter>98. Design\Singleton</Filter>
     </ClInclude>
     <ClInclude Include="ComponentBase.h">
-      <Filter>97. Component\Base</Filter>
+      <Filter>97.Component\Base</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>97. Component\Collider</Filter>
+      <Filter>97.Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>97. Component</Filter>
+      <Filter>97.Component</Filter>
     </ClInclude>
     <ClInclude Include="CollisionMgr.h">
       <Filter>98. Design\01. CollisionMgr</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
-      <Filter>96. Timer</Filter>
+      <Filter>96.Timer</Filter>
     </ClInclude>
     <ClInclude Include="TimeMgr.h">
-      <Filter>98. Design\96. TimeMgr</Filter>
+      <Filter>98. Design\96.TimeMgr</Filter>
     </ClInclude>
     <ClInclude Include="SoundMgr.h">
       <Filter>98. Design\08. SoundMgr</Filter>
@@ -258,21 +243,6 @@
     <ClInclude Include="Coin.h">
       <Filter>01. Obj\Item\Coin</Filter>
     </ClInclude>
-    <ClInclude Include="Device.h">
-      <Filter>98. Design\09. Device</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureMgr.h">
-      <Filter>98. Design\08. TextureMgr</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>04. Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="SingleTexture.h">
-      <Filter>04. Texture\00. SingleTexture</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiTexture.h">
-      <Filter>04. Texture\01. MultiTexture</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -318,22 +288,22 @@
       <Filter>01. Obj\Unit\Player</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>97. Component\Collider</Filter>
+      <Filter>97.Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="ComponentBase.cpp">
-      <Filter>97. Component\Base</Filter>
+      <Filter>97.Component\Base</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>97. Component</Filter>
+      <Filter>97.Component</Filter>
     </ClCompile>
     <ClCompile Include="CollisionMgr.cpp">
       <Filter>98. Design\01. CollisionMgr</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>96. Timer</Filter>
+      <Filter>96.Timer</Filter>
     </ClCompile>
     <ClCompile Include="TimeMgr.cpp">
-      <Filter>98. Design\96. TimeMgr</Filter>
+      <Filter>98. Design\96.TimeMgr</Filter>
     </ClCompile>
     <ClCompile Include="SoundMgr.cpp">
       <Filter>98. Design\08. SoundMgr</Filter>
@@ -379,21 +349,6 @@
     </ClCompile>
     <ClCompile Include="Coin.cpp">
       <Filter>01. Obj\Item\Coin</Filter>
-    </ClCompile>
-    <ClCompile Include="Device.cpp">
-      <Filter>98. Design\09. Device</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureMgr.cpp">
-      <Filter>98. Design\08. TextureMgr</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>04. Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="SingleTexture.cpp">
-      <Filter>04. Texture\00. SingleTexture</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiTexture.cpp">
-      <Filter>04. Texture\01. MultiTexture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
