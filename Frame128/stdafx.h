@@ -27,6 +27,7 @@
 #include <ctime>
 #include <bitset>
 #include <d3d9.h>
+#include <assert.h>
 
 #include <io.h>
 #include "fmod.h"
