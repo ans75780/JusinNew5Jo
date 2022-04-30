@@ -51,7 +51,6 @@ void CBullet::set_bullet_dir(DIRECTION _eDir)
 		break;
 	case DIRECTION::UPLEFT:
 		m_vDir = { -1.f + m_fSpreadX, -1.f + m_fSpreadY, 0.f };
-		m_vDir;
 		break;
 	case DIRECTION::UPRIGHT:
 		m_vDir = { 1.f + m_fSpreadX, -1.f + m_fSpreadY, 0.f };
