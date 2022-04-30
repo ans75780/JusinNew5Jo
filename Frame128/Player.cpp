@@ -11,6 +11,7 @@
 #include "CGun.h"
 #include "CPistol.h"
 #include "CSMG.h"
+#include "CShotgun.h"
 #include "AbstractFactory.h"
 
 CPlayer::CPlayer()

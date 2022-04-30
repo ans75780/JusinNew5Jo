@@ -9,8 +9,8 @@ public:
 
 public:
 	virtual void Init() PURE;
-	virtual int Update() PURE;
-	virtual void Render(HDC hDC) PURE;
+	virtual int Update();
+	virtual void Render(HDC hDC);
 	virtual void Release() PURE;
 
 protected:

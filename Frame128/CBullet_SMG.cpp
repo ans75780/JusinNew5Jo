@@ -76,7 +76,6 @@ int CBullet_SMG::Update()
 		, 0.f);
 
 	
-
 	D3DXMatrixTranslation(&m_matTrans
 		, vInitPos.x + 50.f * cosf(m_fRadian)
 		, vInitPos.y - 45.f * sinf(m_fRadian)

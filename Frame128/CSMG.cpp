@@ -6,7 +6,7 @@
 #include "AbstractFactory.h"
 
 #include "Player.h"
-#include "CBullet_SMG.h"
+#include "CBullet_Shotgun.h"
 
 
 CSMG::CSMG()
@@ -23,10 +23,13 @@ void CSMG::Init()
 	m_vPos = { 0.f, 0.f, 0.f };
 	m_vScale = { 40.f, 15.f, 0.f };
 
+	m_iMaxLoad = 500;
+	m_iCurLoad = m_iMaxLoad;
+
 	m_strName = L"SMG";
 
 	Set_Initial_Points();
-	m_fShootInterval = 0.3f;
+	m_fShootInterval = 0.05f;
 
 	m_bActive = true;
 	m_eID = OBJID::OBJ_GUN;
@@ -38,6 +41,9 @@ void CSMG::Init()
 
 int CSMG::Update()
 {
+	if (m_iCurLoad == 0)
+		return OBJ_DEAD;
+
 	float player_Radian = MGR(CObjMgr)->Get_Player()->Get_Radian();
 	DXV3	player_Pos = MGR(CObjMgr)->Get_Player()->Get_Pos();
 
@@ -59,7 +65,8 @@ int CSMG::Update()
 
 	if (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->shoot())
 	{
-		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_SMG>::Create());
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Shotgun>::Create());
+		--m_iCurLoad;
 	}
 
 	return OBJ_NOEVENT;
@@ -67,7 +74,6 @@ int CSMG::Update()
 
 void CSMG::Render(HDC hDC)
 {
-	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
 }
 
 void CSMG::Release()
