@@ -4,6 +4,7 @@
 #include "Collider.h"
 #include "Obj.h"
 #include "ObjMgr.h"
+
 CMonster::CMonster()
 {
 }
@@ -22,7 +23,7 @@ void CMonster::OnCollisionEnter(CCollider* _pOther)
 {
     if (_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_BULLET)
     {
-        m_bActive = false;
+      //  m_bActive = false;
     }
 }
 

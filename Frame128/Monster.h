@@ -1,5 +1,8 @@
 #pragma once
 #include "Unit.h"
+
+#include "Stat.h"
+
 class CMonster :
     public CUnit
 {
@@ -21,7 +24,11 @@ public:
     virtual void Release(void) PURE;
     virtual void    FindTarget();//Obj매니저에서 타겟을 찾아서 넣어줌.
     void	SetRadianToPlayer();//플레이어를 바라보는 각도 찾기.
+    CStat& Get_Stat() { return m_UnitStat; }
+protected:
+    CStat m_UnitStat;
 private:
     CObj* m_pTarget;
+ 
 };
 
