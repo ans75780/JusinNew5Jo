@@ -21,6 +21,7 @@ protected:
 
 public:
 	float Get_ShotInterval() { return m_fShootInterval; }
+
 private:
 	GUN_TYPE	get_Type() { return m_eType; }
 	friend class CBullet;

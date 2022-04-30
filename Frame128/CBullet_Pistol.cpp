@@ -5,10 +5,6 @@
 #include "ObjMgr.h"
 #include "TimeMgr.h"
 
-#include <time.h>
-
-
-
 CBullet_Pistol::CBullet_Pistol()
 {
 }
@@ -19,12 +15,8 @@ CBullet_Pistol::~CBullet_Pistol()
 
 void CBullet_Pistol::Init()
 {
-	srand(unsigned(time(NULL)));
-	int tempx = rand() % 100 + 1;
 
-	m_vPos = { MGR(CObjMgr)->Get_Player()->Get_Pos().x + 45.f * cosf(MGR(CObjMgr)->Get_Player()->Get_Angle())
-		, MGR(CObjMgr)->Get_Player()->Get_Pos().y - 45.f * sinf(MGR(CObjMgr)->Get_Player()->Get_Angle())
-		, 0.f };
+	m_vPos = { 0.f, 0.f, 0.f };
 	m_vScale = { 10.f, 10.f, 0.f };
 
 	m_strName = L"Bullet_Pistol";
@@ -39,103 +31,42 @@ void CBullet_Pistol::Init()
 
 	m_fSpeed = 300.f;
 
-	switch (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir())
+	m_iSpreadRate = 10.f;
+	m_fSpreadX = create_x_spread();
+	m_fSpreadY = create_y_spread();
+
+	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
+	
+	m_vDir;
+
+	
+	
+	vInitPos = MGR(CObjMgr)->Get_Player()->Get_Pos();
+	
+	m_vPos += m_vDir * m_fSpeed * DT;
+	
+	D3DXMatrixTranslation(&m_matPos, m_vPos.x, m_vPos.y, 0.f);
+	
+	D3DXMatrixScaling(&m_matScale
+		, 1.f
+		, 1.f
+		, 0.f);
+	
+	D3DXMatrixTranslation(&m_matTrans
+		, vInitPos.x
+		, vInitPos.y
+		, 0.f);
+	
+	m_matWorld = m_matPos * m_matScale * m_matTrans;
+	
+	for (int i(0); i < 4; ++i)
 	{
-	case DIRECTION::UP:
-	{
-		float tempx = rand() % 3 - 1;
-		m_vDir = { 0.f, -1.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
+		D3DXVec3TransformCoord(&m_vWorldPoint[i]
+			, &m_vPoint[i], &m_matWorld);
 	}
-
-
-	case DIRECTION::DOWN:
-	{
-		m_vDir = { 0.f, 1.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-
-
-	case DIRECTION::LEFT:
-	{
-		m_vDir = { -1.f, 0.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-
-
-	case DIRECTION::RIGHT:
-	{
-		m_vDir = { 1.f, 0.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-
-
-	case DIRECTION::UPLEFT:
-	{
-		m_vDir = { -1.f, -1.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-
-
-	case DIRECTION::UPRIGHT:
-	{
-		m_vDir = { 1.f, -1.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-
-
-	case DIRECTION::DOWNLEFT:
-	{
-		m_vDir = { -1.f, 1.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-	}
-
-
-	case DIRECTION::DOWNRIGHT:
-	{
-		m_vDir = { 1.f, 1.f, 0.f };
-		D3DXVec3Normalize(&m_vDir, &m_vDir);
-		break;
-
-		set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
-
-		vInitPos = MGR(CObjMgr)->Get_Player()->Get_Pos();
-
-		m_vPos += m_vDir * m_fSpeed * DT;
-
-		D3DXMatrixTranslation(&m_matPos, m_vPos.x, m_vPos.y, 0.f);
-
-		D3DXMatrixScaling(&m_matScale
-			, 1.f
-			, 1.f
-			, 0.f);
-
-		D3DXMatrixTranslation(&m_matTrans
-			, vInitPos.x
-			, vInitPos.y
-			, 0.f);
-
-		m_matWorld = m_matPos * m_matScale * m_matTrans;
-
-		for (int i(0); i < 4; ++i)
-		{
-			D3DXVec3TransformCoord(&m_vWorldPoint[i]
-				, &m_vPoint[i], &m_matWorld);
-		}
-
-	}
-
 	CreateCollider();
 
 	m_vLocalPos = m_vPos;
-	}
 }
 
 int CBullet_Pistol::Update()
@@ -156,6 +87,7 @@ int CBullet_Pistol::Update()
 	m_vLocalPos += m_vDir * m_fSpeed * DT;
 
 	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
+
 	D3DXMatrixTranslation(&m_matTrans
 		, m_vPos.x
 		, m_vPos.y, 0.f);
