@@ -38,8 +38,9 @@ void CBullet_SMG::Init()
 	m_fSpreadY = create_y_spread();
 
 	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
-
+	
 	vInitPos = MGR(CObjMgr)->Get_Player()->Get_Pos();
+	m_fRadian = MGR(CObjMgr)->Get_Player()->Get_Radian();
 
 	CreateCollider();
 
@@ -74,11 +75,11 @@ int CBullet_SMG::Update()
 		, 1.f
 		, 0.f);
 
-	float	player_Radian = MGR(CObjMgr)->Get_Player()->Get_Radian();
+	
 
 	D3DXMatrixTranslation(&m_matTrans
-		, vInitPos.x + 50.f * cosf(player_Radian)
-		, vInitPos.y - 45.f * -sinf(player_Radian)
+		, vInitPos.x + 50.f * cosf(m_fRadian)
+		, vInitPos.y - 45.f * sinf(m_fRadian)
 		, 0.f);
 
 	m_matWorld = m_matPos * m_matScale * m_matTrans;
