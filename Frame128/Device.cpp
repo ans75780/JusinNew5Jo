@@ -14,6 +14,21 @@ CDevice::~CDevice()
 	Release();
 }
 
+void CDevice::Draw_Line(D3DXVECTOR3 vecs[],int count, D3DXCOLOR color)
+
+{
+	D3DXVECTOR2 * line = new D3DXVECTOR2[count];
+	for (int i = 0; i < count; i++)
+	{
+		line[i].x = vecs[i % 4].x;
+		line[i].y = vecs[i % 4].y;
+	}
+	DEVICE->Get_Line()->Draw(line, (sizeof(D3DXVECTOR2) * count) / sizeof(D3DXVECTOR2), color);
+	
+	delete[] line;
+	line = nullptr;
+}
+
 //	HRESULT : 성공하게 되면 양수 값을 반환, 실패하게 되면 음수를 반환 시키도록 설계할 예정
 HRESULT CDevice::Init(void)
 {
@@ -67,14 +82,16 @@ HRESULT CDevice::Init(void)
 	{
 		return E_FAIL;
 	}
-
 	// 스프라이트 컴 객체 
-
 	if (FAILED(D3DXCreateSprite(m_pDevice, &m_pSprite)))
 	{
 		return E_FAIL;
 	}
-
+	if (FAILED(D3DXCreateLine(m_pDevice, &m_pLine)))
+	{
+		MessageBox(g_hWnd, L"D3DXCreateLine Failed", NULL, 0);
+		return E_FAIL;
+	}
 		
 	//return E_FAIL;
 	return S_OK;
@@ -97,7 +114,7 @@ void CDevice::Render_Begin(void)
 
 	// 2D이미지를 그릴 수 있도록 장치를 준비(렌더링 옵션) // 알파 테스트가 유효한 상태에서 알파 블랜딩 사용하겠다는 옵션
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
-
+	m_pLine->Begin();
 }
 
 
@@ -107,7 +124,7 @@ void CDevice::Render_Begin(void)
 void CDevice::Render_End(HWND hWnd)
 {
 
-
+	m_pLine->End();
 	m_pSprite->End();
 	m_pDevice->EndScene();
 
@@ -122,6 +139,7 @@ void CDevice::Render_End(HWND hWnd)
 
 void CDevice::Release(void)
 {
+	Safe_Release(m_pLine);
 	Safe_Release(m_pSprite);
 	Safe_Release(m_pDevice);
 	Safe_Release(m_pSDK);

@@ -42,6 +42,11 @@ void CZombie::Init(void)
 
 	CreateCollider();
 	FindTarget();
+	CHand* hand = new CHand(this, DXV3(45, -15, 0));
+	MGR(CObjMgr)->AddObject(OBJ_MONSTER, hand);
+	hand = new CHand(this, DXV3(45, 15, 0));
+	MGR(CObjMgr)->AddObject(OBJ_MONSTER, hand);
+
 }
 
 int CZombie::Update(void)

@@ -77,11 +77,8 @@ void CMainGame::Late_Update(void)
 void CMainGame::Render(void)
 {
 	MGR(CDevice)->Render_Begin();
-
-	MGR(CTimeMgr)->Render(g_hWnd);
-	HDC		hBackBufferDC = CBmpMgr::Get_Instance()->Find_Image(L"BackBuffer");
-	MGR(CSceneMgr)->Render(hBackBufferDC);
-	BitBlt(m_DC, 0, 0, WINCX, WINCY, hBackBufferDC, 0, 0, SRCCOPY);
+	
+	MGR(CSceneMgr)->Render(nullptr);
 
 	MGR(CDevice)->Render_End();
 }
