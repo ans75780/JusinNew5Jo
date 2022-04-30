@@ -8,7 +8,7 @@ public:
 	virtual ~CBullet_Pistol();
 
 public:
-	virtual void Init();
+	virtual void Init(); // 앤 또 정의가 없다고 하고
 	virtual int Update();
 	virtual void Render(HDC hDC);
 	virtual void Release();
