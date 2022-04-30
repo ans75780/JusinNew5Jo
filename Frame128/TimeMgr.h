@@ -8,6 +8,7 @@ struct TimerEventGroup
 {
 	ITimerEvent* pTimerEvent;
 	int iEventNum;
+	float fOriginTime;
 };
 
 

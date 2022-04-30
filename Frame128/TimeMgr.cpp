@@ -96,6 +96,7 @@ void CTimeMgr::AddLoopEvent(float _fTime, ITimerEvent* _pTimerEvent, int _iEvent
 	temp.first = _fTime;
 	temp.second.iEventNum = _iEventNum;
 	temp.second.pTimerEvent = _pTimerEvent;
+	temp.second.fOriginTime = _fTime;
 
 	m_LoopTimerEvents.push_back(temp);
 }
@@ -145,6 +146,7 @@ void CTimeMgr::UpdateTimerEvent()
 		if (elem.first <= 0.0)
 		{
 			elem.second.pTimerEvent->OnTimerEvent(elem.second.iEventNum);
+			elem.first = elem.second.fOriginTime;
 		}
 
 		else

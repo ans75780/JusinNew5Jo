@@ -1,10 +1,10 @@
 #pragma once
 #include "Scene.h"
-
+#include "TimerEvent.h"
 #include "Player.h"
 
 class CStage :
-	public CScene
+	public CScene, public ITimerEvent
 {
 public:
 	CStage();
@@ -16,6 +16,14 @@ public:
 	virtual void Late_Update(void) override;
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
+
+
+	// ITimerEvent을(를) 통해 상속됨
+	virtual void OnTimerEvent(int _iEventNum) override;
+
+private:
+	void SpawnZombie();
+	void SpawnItem();
 
 };
 
