@@ -78,7 +78,7 @@ int CBullet_SMG::Update()
 	
 	D3DXMatrixTranslation(&m_matTrans
 		, vInitPos.x + 50.f * cosf(m_fRadian)
-		, vInitPos.y - 45.f * sinf(m_fRadian)
+		, vInitPos.y/* - 10.f * sinf(m_fRadian)*/
 		, 0.f);
 
 	m_matWorld = m_matPos * m_matScale * m_matTrans;

@@ -172,16 +172,23 @@ void CPlayer::player_change_gun()
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CPistol>::Create());
 		time = m_pGun->Get_ShotInterval();
 	}
-		
-
 	if (KEYAWAY(W))
 	{
 		if (nullptr != m_pGun)
 			m_pGun->Set_Active(false);
-		else if (nullptr == m_pGun)
 
 		m_ePlayerGun = GUN_TYPE::SMG;
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CSMG>::Create());
+		time = m_pGun->Get_ShotInterval();
+	}
+
+	if (KEYAWAY(A))
+	{
+		if (nullptr != m_pGun)
+			m_pGun->Set_Active(false);
+
+		m_ePlayerGun = GUN_TYPE::SHOTGUN;
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CShotgun>::Create());
 		time = m_pGun->Get_ShotInterval();
 	}
 }

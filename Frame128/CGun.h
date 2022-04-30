@@ -13,21 +13,22 @@ public:
 	virtual void Render(HDC hDC);
 	virtual void Release() PURE;
 
+private:
+	GUN_TYPE	get_Type() { return m_eType; }
+	friend class CBullet;
+
 protected:
 	GUN_TYPE	m_eType = GUN_TYPE::END;
-
 	float m_fShootInterval;
-
 	int m_iMaxLoad;
 	int m_iCurLoad;
 
+	void Create_Bullet();
 
 public:
 	float Get_ShotInterval() { return m_fShootInterval; }
 
-private:
-	GUN_TYPE	get_Type() { return m_eType; }
-	friend class CBullet;
+
 
 public:
 	virtual void OnCollision(CCollider * _pOther) PURE;

@@ -179,6 +179,7 @@
     <ClInclude Include="CSMG.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Feature.h" />
+    <ClInclude Include="GunsInclude.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Monster.h" />

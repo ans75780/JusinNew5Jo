@@ -300,6 +300,9 @@
     <ClInclude Include="Stat.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="GunsInclude.h">
+      <Filter>00. MainGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

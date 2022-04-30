@@ -63,11 +63,6 @@ int CPistol::Update()
 	return OBJ_NOEVENT;
 }
 
-void CPistol::Render(HDC hDC)
-{
-	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
-}
-
 void CPistol::Release()
 {
 }
