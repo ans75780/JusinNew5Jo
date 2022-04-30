@@ -2,7 +2,7 @@
 #include "Collider.h"
 #include "Obj.h"
 #include "UserDefineHeaders.h"
-
+#include "Device.h"
 UINT CCollider::g_iNextID = 0;
 
 CCollider::CCollider()	
@@ -50,6 +50,7 @@ void CCollider::Late_Update()
 
 void CCollider::Render(HDC hDC)
 {
+	/*
 	HBRUSH myBrush, oldBrush;
 	HPEN myPen, oldPen;
 	myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
@@ -78,6 +79,8 @@ void CCollider::Render(HDC hDC)
 	SelectObject(hDC, oldPen);
 	DeleteObject(myPen);
 	DeleteObject(myBrush);
+	*/
+	DEVICE->Draw_Line(m_vWheels, 5, D3DCOLOR_ARGB(255,0,255,0));
 }
 
 void CCollider::Set_Owner(CObj* pObj)

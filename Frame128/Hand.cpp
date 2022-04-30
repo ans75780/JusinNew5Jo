@@ -2,6 +2,7 @@
 #include "Hand.h"
 #include "Collider.h"
 #include "Obj.h"
+#include "Device.h"
 CHand::CHand(CObj* _pTarget, DXV3 _vOffset)
 {
 	m_pTarget = _pTarget;
@@ -60,19 +61,7 @@ int CHand::Update(void)
 
 void CHand::Render(HDC hDC)
 {
-	MoveToEx(hDC
-		, int(m_vWorldPoint[0].x)
-		, int(m_vWorldPoint[0].y)
-		, nullptr);
-
-	for (int i(1); i < 4; ++i)
-	{
-		LineTo(hDC
-			, int(m_vWorldPoint[i].x)
-			, int(m_vWorldPoint[i].y));
-	}
-	m_vecComponents[0]->Render(hDC);
-	EllipseDrawCenter(hDC, m_vPos.x , m_vPos.y, 10, 10);
+	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 255, 0, 0));
 }
 
 void CHand::Release(void)

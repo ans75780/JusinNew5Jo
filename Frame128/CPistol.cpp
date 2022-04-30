@@ -65,6 +65,7 @@ int CPistol::Update()
 
 void CPistol::Render(HDC hDC)
 {
+	/*
 	MoveToEx(hDC
 		, int(m_vWorldPoint[0].x)
 		, int(m_vWorldPoint[0].y)
@@ -76,6 +77,9 @@ void CPistol::Render(HDC hDC)
 			, int(m_vWorldPoint[i].x)
 			, int(m_vWorldPoint[i].y));
 	}
+	*/
+	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
+
 }
 
 void CPistol::Release()

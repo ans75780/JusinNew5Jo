@@ -40,6 +40,7 @@
 #define MGR(manger) manger::GetSingleton()
 #define SAFE_DELETE(p){if(p){delete p; p = nullptr;}}
 
+#define DEVICE CDevice::GetSingleton()
 #ifdef _DEBUG
 
 #define _CRTDBG_MAP_ALLOC
