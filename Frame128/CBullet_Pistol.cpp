@@ -4,12 +4,6 @@
 #include "Player.h"
 #include "ObjMgr.h"
 #include "TimeMgr.h"
-
-<<<<<<< Updated upstream
-=======
-#include <time.h>
-
->>>>>>> Stashed changes
 CBullet_Pistol::CBullet_Pistol()
 {
 }
@@ -20,14 +14,11 @@ CBullet_Pistol::~CBullet_Pistol()
 
 void CBullet_Pistol::Init()
 {
-
-<<<<<<< Updated upstream
+	
 	m_vPos = { 0.f, 0.f, 0.f };
-=======
 	m_vPos = { 0.f
 		, 0.f
 		, 0.f };
->>>>>>> Stashed changes
 	m_vScale = { 10.f, 10.f, 0.f };
 
 	m_strName = L"Bullet_Pistol";
@@ -42,11 +33,9 @@ void CBullet_Pistol::Init()
 
 	m_fSpeed = 300.f;
 
-<<<<<<< Updated upstream
 	m_iSpreadRate = 10.f;
 	m_fSpreadX = create_x_spread();
 	m_fSpreadY = create_y_spread();
-=======
 	switch (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir())
 	{
 	case DIRECTION::UP:
@@ -103,7 +92,6 @@ void CBullet_Pistol::Init()
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 		break;
 	}
->>>>>>> Stashed changes
 
 	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
 	
@@ -139,7 +127,9 @@ void CBullet_Pistol::Init()
 	m_vLocalPos = m_vPos;
 }
 
-int CBullet_Pistol::Update()
+	
+
+	int CBullet_Pistol::Update()
 {
 	
 	m_fLifeTime += DT;
