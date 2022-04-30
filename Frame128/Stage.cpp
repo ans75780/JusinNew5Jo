@@ -20,12 +20,11 @@ HRESULT CStage::Init(void)
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
 	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
 	
-	for (int i = 0; i < 2; i++)
+	/*for (int i = 0; i < 500 ; i++)
 	{
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX + rand() % 400, WINCY + rand () % 400, 0));
-	}
-
-	CObj* Coin = CAbstractFactory<CCoin>::Create();
+	}*/
+	/*CObj* Coin = CAbstractFactory<CCoin>::Create();
 	Coin->Set_Pos(DXV3(300.f, 100.f, 0.f));
 	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);
 
@@ -35,17 +34,19 @@ HRESULT CStage::Init(void)
 
 	CObj* Coin3 = CAbstractFactory<CCoin>::Create();
 	Coin3->Set_Pos(DXV3(200.f, 300.f, 0.f));
-	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin3);
+	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin3);*/
 
-
+	MGR(CTimeMgr)->AddLoopEvent(2.f, this, 0);
+	MGR(CTimeMgr)->AddLoopEvent(1.5f, this, 1);
 
 	return S_OK;
 }
 
 void CStage::Update(void)
-{
+{  
 	MGR(CObjMgr)->Update();
 	MGR(CKeyMgr)->update();
+	MGR(CTimeMgr)->Update();
 }
 
 void CStage::Late_Update(void)
@@ -106,6 +107,34 @@ void CStage::Release(void)
 	MGR(CObjMgr)->Delete_ID(OBJ_MONSTER);
 	MGR(CObjMgr)->Delete_ID(OBJ_FEATURE);
 	MGR(CCollisionMgr)->ClearColInfo();
+}
+
+void CStage::OnTimerEvent(int _iEventNum)
+{
+	if (_iEventNum == 0)
+	{
+		SpawnZombie();
+	}
+
+	else if(_iEventNum == 1)
+	{
+		SpawnItem();
+	}
+
+}
+
+void CStage::SpawnZombie()
+{
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX + rand() % 400, WINCY + rand() % 400, 0));
+
+}
+
+void CStage::SpawnItem()
+{
+	CObj* Coin = CAbstractFactory<CCoin>::Create();
+	Coin->Set_Pos(DXV3(rand() % WINCX, rand() % WINCY, 0.f));
+	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);
+
 }
 
 

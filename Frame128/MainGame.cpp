@@ -37,6 +37,8 @@ void CMainGame::Initialize(void)
 	MGR(CSceneMgr)->AddScene("Stage", new CStage);
 	MGR(CSceneMgr)->ChangeScene("Stage");
 	MGR(CSoundMgr)->Init();
+	
+	
 
 	MGR(CDevice)->Set_BufferSize({ WINCX, WINCY });
 
