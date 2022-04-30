@@ -44,7 +44,7 @@ public:
 	void Set_Scale(const DXV3& _DXV3) { m_vScale = _DXV3; };
 	void Set_Angle(float _f) { m_fRadian = D3DXToRadian(_f); }
 	void Set_Radian(float _f) { m_fRadian = _f; }
-	void Set_Active(bool _isActive) { m_bActive = _isActive; }
+	virtual void Set_Active(bool _isActive) { m_bActive = _isActive; }
 	void Set_PosX(float _x) { m_vPos.x = _x; }
 	void Set_PosY(float _y) { m_vPos.y = _y; }
 	void Add_Pos(DXV3 vec) { m_vPos += vec; }

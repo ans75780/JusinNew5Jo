@@ -12,5 +12,7 @@ public:
     virtual int Update(void) override;
     virtual void Render(HDC hDC) override;
     virtual void Release(void) override;
+
+    virtual void Set_Active(bool _isActive) final;
 };
 
