@@ -9,6 +9,8 @@
 
 #include "AbstractFactory.h"
 #include "Hand.h"
+#include "UserDefineHeaders.h"
+
 CZombie::CZombie()
 {
 }
@@ -93,4 +95,16 @@ void CZombie::Render(HDC hDC)
 
 void CZombie::Release(void)
 {
+}
+
+void CZombie::Set_Active(bool _isActive)
+{
+	CObj::Set_Active(_isActive);
+
+	if (!_isActive)
+	{
+		CObj* Coin = CAbstractFactory<CCoin>::Create();
+		Coin->Set_Pos(m_vPos);
+		MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);
+	}
 }
