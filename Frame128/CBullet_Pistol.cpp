@@ -14,7 +14,7 @@ CBullet_Pistol::~CBullet_Pistol()
 
 void CBullet_Pistol::Init()
 {
-	
+
 	m_vPos = { 0.f, 0.f, 0.f };
 	m_vPos = { 0.f
 		, 0.f
@@ -94,29 +94,29 @@ void CBullet_Pistol::Init()
 	}
 
 	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
-	
+
 	m_vDir;
 
-	
-	
+
+
 	vInitPos = MGR(CObjMgr)->Get_Player()->Get_Pos();
-	
+
 	m_vPos += m_vDir * m_fSpeed * DT;
-	
+
 	D3DXMatrixTranslation(&m_matPos, m_vPos.x, m_vPos.y, 0.f);
-	
+
 	D3DXMatrixScaling(&m_matScale
 		, 1.f
 		, 1.f
 		, 0.f);
-	
+
 	D3DXMatrixTranslation(&m_matTrans
 		, vInitPos.x
 		, vInitPos.y
 		, 0.f);
-	
+
 	m_matWorld = m_matPos * m_matScale * m_matTrans;
-	
+
 	for (int i(0); i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&m_vWorldPoint[i]
@@ -125,11 +125,12 @@ void CBullet_Pistol::Init()
 	CreateCollider();
 
 	m_vLocalPos = m_vPos;
+	}
 }
 
 	
 
-	int CBullet_Pistol::Update()
+int CBullet_Pistol::Update()
 {
 	
 	m_fLifeTime += DT;
