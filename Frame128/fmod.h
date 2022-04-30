@@ -709,7 +709,7 @@ typedef enum
     Channel::set3DOcclusion
 ]
 */
-#define FMOD_INIT_NORMAL                     0x00000000 /* All platforms - Initialize normally */
+#define FMOD_INIT_NORMAL                     0x00000000 /* All platforms - Init normally */
 #define FMOD_INIT_STREAM_FROM_UPDATE         0x00000001 /* All platforms - No stream thread is created internally.  Streams are driven from System::update.  Mainly used with non-realtime outputs. */
 #define FMOD_INIT_3D_RIGHTHANDED             0x00000002 /* All platforms - FMOD will treat +X as right, +Y as up and +Z as backwards (towards you). */
 #define FMOD_INIT_SOFTWARE_DISABLE           0x00000004 /* All platforms - Disable software mixer to save memory.  Anything created with FMOD_SOFTWARE will fail and DSP will not work. */

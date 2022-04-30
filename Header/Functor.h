@@ -62,6 +62,20 @@ public:
 	}
 };
 
+template<typename T>
+unsigned long Safe_Release(T& Temp)
+{
+	unsigned long dwRefCnt = 0;
+
+	if (Temp)
+	{
+		dwRefCnt = Temp->Release();
+		Temp = nullptr;
+	}
+
+	return dwRefCnt;
+}
+
 //POINT
 inline POINT PointMake(int x, int y)
 {
