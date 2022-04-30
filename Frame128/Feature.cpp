@@ -88,6 +88,10 @@ void CFeature::OnCollision(CCollider * _pOther)
 
 void CFeature::OnCollisionEnter(CCollider * _pOther)
 {
+	if (_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_BULLET)
+	{
+		Set_Active(false);
+	}
 }
 
 void CFeature::OnCollisionExit(CCollider * _pOther)

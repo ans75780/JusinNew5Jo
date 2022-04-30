@@ -1,30 +1,83 @@
 #pragma once
-#include "../Header/Include.h"
+#include "Include.h"
 #include "SingletonBase.h"
-using namespace std;
 
-#define KEYMAX 256
+enum class KEY_STATE
+{
+	NONE
+	, TAP
+	, HOLD
+	, AWAY
+};
+
+enum class KEY_TYPE
+{
+	LEFT
+	, RIGHT
+	, UP
+	, DOWN
+
+	, Q
+	, W
+	, E
+	, R
+	, A
+	, S
+	, D
+	, F
+	, Z
+	, X
+	, C
+	, V
+	, B
+	, ALT
+	, LSHIFT
+	, SPACE
+	, LCTRL
+	, ENTER
+	, ESC
+	, TAB
+	, LBUTTON
+	, RBUTTON
+	, F1
+	, F2
+	, F3
+	, F4
+	, F5
+	, F6
+	, F7
+	, F8
+	, F9
+	, F10
+	, F11
+	, F12
+
+	, LAST
+};
+
+struct tKeyInfo
+{
+	KEY_STATE   eState;
+	bool        bPrevPush;
+};
 
 class CKeyMgr : public CSingletonBase<CKeyMgr>
 {
-	friend	CSingletonBase;
-private:
-	bitset<KEYMAX> m_keyUp;
-	bitset<KEYMAX> m_keyDown;
+	friend CSingletonBase;
 private:
 	CKeyMgr();
 	~CKeyMgr();
+private:
+	vector<tKeyInfo> m_vecKey;
+
+
 public:
-	HRESULT Init();
-	void release();
+	void init();
+	void update();
 
-	//키가 한번만 눌렸냐?
-	bool isOnceKeyDown(int key);
-	//키가 한번 눌렀다 띄었냐?
-	bool isOnceKeyUp(int key);
-	//키가 계속 눌려있냐?
-	bool isStayKeyDown(int key);
-	//토글키냐?(캡스락, 넘버락)
-	bool isToggleKey(int key);
+public:
+	KEY_STATE get_KeyState(KEY_TYPE _eKey)
+	{
+		return m_vecKey[(int)_eKey].eState;
+	}
 };
-

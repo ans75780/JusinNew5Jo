@@ -31,7 +31,7 @@ void CMainGame::Initialize(void)
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Background.bmp", L"Background");
 
 	//TIMEMANAGER은 windowcpp에서 초기화함(화면 루프 때문에)
-	MGR(CKeyMgr)->Init();
+	MGR(CKeyMgr)->init();
 	MGR(CSceneMgr)->Init();
 	MGR(CSceneMgr)->AddScene("Stage", new CStage);
 	MGR(CSceneMgr)->ChangeScene("Stage");

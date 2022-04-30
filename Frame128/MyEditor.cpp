@@ -15,7 +15,7 @@ CMyEditor::~CMyEditor()
 
 void CMyEditor::Key_Input(void)
 {
-	if (MGR(CKeyMgr)->isOnceKeyDown('Q'))
+	/*if (MGR(CKeyMgr)->isOnceKeyDown('Q'))
 	{
 		CTileMgr::GetSingleton()->Save("Stage1.dat");
 	}
@@ -54,7 +54,7 @@ void CMyEditor::Key_Input(void)
 		Pt.y -= (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 
 		CTileMgr::GetSingleton()->Picking_Tile(Pt, 1, 0);
-	}
+	}*/
 
 }
 
