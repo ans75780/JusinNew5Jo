@@ -8,12 +8,6 @@ public:
 	CBullet();
 	virtual ~CBullet();
 
-	float create_x_spread();
-
-	float create_y_spread();
-
-	void set_bullet_dir(DIRECTION _eDir);
-
 public:
 	virtual void Init() PURE;
 	virtual int Update() PURE;
@@ -28,19 +22,19 @@ public:
 	virtual void OnTriggerEnter(CCollider * _pOther) PURE;
 	virtual void OnTriggerExit(CCollider * _pOther) PURE;
 
+protected:
+	float create_x_spread();
+	float create_y_spread();
+	void set_bullet_dir(DIRECTION _eDir);
 
 protected:
 	DXV3	vInitPos;
 	DXMAT	m_matPos;
-
-
 	DXV3	m_vLocalPos;
 
-protected:
 	float	m_fLifeTime;
 	
-	int m_iSpreadRate;
+	int	m_iSpreadRate;
 	float m_fSpreadX;
 	float m_fSpreadY;
-
 };
