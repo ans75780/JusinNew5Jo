@@ -166,6 +166,7 @@
     <ClInclude Include="BmpMgr.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CBullet_Pistol.h" />
+    <ClInclude Include="CBullet_Shotgun.h" />
     <ClInclude Include="CBullet_SMG.h" />
     <ClInclude Include="CGun.h" />
     <ClInclude Include="Coin.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentBase.h" />
     <ClInclude Include="CPistol.h" />
+    <ClInclude Include="CShotgun.h" />
     <ClInclude Include="CSMG.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Feature.h" />
@@ -214,10 +216,12 @@
     <ClCompile Include="BmpMgr.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CBullet_Pistol.cpp" />
+    <ClCompile Include="CBullet_Shotgun.cpp" />
     <ClCompile Include="CBullet_SMG.cpp" />
     <ClCompile Include="CGun.cpp" />
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="CPistol.cpp" />
+    <ClCompile Include="CShotgun.cpp" />
     <ClCompile Include="CSMG.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Feature.cpp" />

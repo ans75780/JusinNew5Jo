@@ -14,9 +14,12 @@ public:
 	virtual void Release() PURE;
 
 protected:
-
 	GUN_TYPE	m_eType = GUN_TYPE::END;
+
 	float m_fShootInterval;
+
+	int m_iMaxLoad;
+	int m_iCurLoad;
 
 
 public:

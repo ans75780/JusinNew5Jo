@@ -139,6 +139,12 @@
     <Filter Include="01. Obj\Unit\Bullet\Bullet_SMG">
       <UniqueIdentifier>{a30c30de-ecf8-4952-aa5a-488e74b1c3f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\Gun\Shotgun">
+      <UniqueIdentifier>{937d94dd-128d-4f2c-b9d0-c21741e0d033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Bullet\Bullet_Shotgun">
+      <UniqueIdentifier>{dc2504a2-80a1-4fca-a14a-d86c70e80699}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -285,6 +291,12 @@
     <ClInclude Include="CBullet_SMG.h">
       <Filter>01. Obj\Unit\Bullet\Bullet_SMG</Filter>
     </ClInclude>
+    <ClInclude Include="CShotgun.h">
+      <Filter>01. Obj\Gun\Shotgun</Filter>
+    </ClInclude>
+    <ClInclude Include="CBullet_Shotgun.h">
+      <Filter>01. Obj\Unit\Bullet\Bullet_Shotgun</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -412,6 +424,12 @@
     </ClCompile>
     <ClCompile Include="CBullet_SMG.cpp">
       <Filter>01. Obj\Unit\Bullet\Bullet_SMG</Filter>
+    </ClCompile>
+    <ClCompile Include="CShotgun.cpp">
+      <Filter>01. Obj\Gun\Shotgun</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet_Shotgun.cpp">
+      <Filter>01. Obj\Unit\Bullet\Bullet_Shotgun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
