@@ -10,6 +10,7 @@
 #include "AbstractFactory.h"
 #include "CGun.h"
 #include "CPistol.h"
+#include "CSMG.h"
 #include "AbstractFactory.h"
 
 CPlayer::CPlayer()
@@ -75,9 +76,7 @@ void CPlayer::Render(HDC hDC)
 {
 	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
 
-	LineTo(hDC
-		, int(m_vWorldPoint[0].x)
-		, int(m_vWorldPoint[0].y));
+	
 
 	EllipseDrawCenter(hDC
 		, int(m_vWorldPoint[1].x)
@@ -174,10 +173,12 @@ void CPlayer::player_change_gun()
 
 	if (KEYAWAY(W))
 	{
-		if (nullptr != m_pGun) m_pGun->Set_Active(false);
+		if (nullptr != m_pGun)
+			m_pGun->Set_Active(false);
+		else if (nullptr == m_pGun)
 
-		m_ePlayerGun = GUN_TYPE::PISTOL;
-		MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CPistol>::Create());
+		m_ePlayerGun = GUN_TYPE::SMG;
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CSMG>::Create());
 		time = m_pGun->Get_ShotInterval();
 	}
 }

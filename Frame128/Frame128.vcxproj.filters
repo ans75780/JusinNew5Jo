@@ -133,6 +133,12 @@
     <Filter Include="04. Texture\01. MultiTexture">
       <UniqueIdentifier>{f16a4f92-6444-4f0b-9a4a-d9f333725145}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Obj\Gun\SMG">
+      <UniqueIdentifier>{ed8d56cc-59d5-467d-aff6-b0aff3c4d552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Bullet\Bullet_SMG">
+      <UniqueIdentifier>{a30c30de-ecf8-4952-aa5a-488e74b1c3f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -273,6 +279,12 @@
     <ClInclude Include="MultiTexture.h">
       <Filter>04. Texture\01. MultiTexture</Filter>
     </ClInclude>
+    <ClInclude Include="CSMG.h">
+      <Filter>01. Obj\Gun\SMG</Filter>
+    </ClInclude>
+    <ClInclude Include="CBullet_SMG.h">
+      <Filter>01. Obj\Unit\Bullet\Bullet_SMG</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -394,6 +406,12 @@
     </ClCompile>
     <ClCompile Include="MultiTexture.cpp">
       <Filter>04. Texture\01. MultiTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="CSMG.cpp">
+      <Filter>01. Obj\Gun\SMG</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet_SMG.cpp">
+      <Filter>01. Obj\Unit\Bullet\Bullet_SMG</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

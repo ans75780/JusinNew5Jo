@@ -1,14 +1,12 @@
 #pragma once
-
-#include "Include.h"
-
 #include "CGun.h"
-class CPistol :
+class CSMG :
 	public CGun
 {
 public:
-	CPistol();
-	virtual ~CPistol();
+	CSMG();
+	virtual ~CSMG();
+
 
 public:
 	virtual void Init();

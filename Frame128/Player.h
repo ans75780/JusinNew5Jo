@@ -3,7 +3,6 @@
 #include "Unit.h"
 
 
-
 class CGun;
 
 class CPlayer :

@@ -24,6 +24,7 @@ HRESULT CStage::Init(void)
 	{
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX + rand() % 400, WINCY + rand () % 400, 0));
 	}
+
 	CObj* Coin = CAbstractFactory<CCoin>::Create();
 	Coin->Set_Pos(DXV3(300.f, 100.f, 0.f));
 	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);
