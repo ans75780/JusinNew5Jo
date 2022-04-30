@@ -92,7 +92,22 @@ HRESULT CDevice::Init(void)
 		MessageBox(g_hWnd, L"D3DXCreateLine Failed", NULL, 0);
 		return E_FAIL;
 	}
-		
+	D3DXFONT_DESC desc;
+	desc.CharSet = HANGUL_CHARSET;
+	desc.Height = 50;
+	desc.Width = 30;
+	desc.Weight = FW_NORMAL;
+	desc.Quality = DEFAULT_QUALITY;
+	desc.MipLevels = 1;
+	desc.Italic = 0;
+	swprintf_s(desc.FaceName, L"Arial");
+	desc.OutputPrecision = OUT_DEFAULT_PRECIS;
+	desc.PitchAndFamily = FF_DONTCARE;
+	if (FAILED(D3DXCreateFontIndirect(m_pDevice, &desc, &m_pFont)))
+	{
+		MessageBox(g_hWnd, L"D3DXCreateFont Failed", NULL, 0);
+		return E_FAIL;
+	}
 	//return E_FAIL;
 	return S_OK;
 }
@@ -136,9 +151,9 @@ void CDevice::Render_End(HWND hWnd)
 	m_pDevice->Present(NULL, NULL, hWnd, NULL);
 
 }
-
 void CDevice::Release(void)
 {
+	Safe_Release(m_pFont);
 	Safe_Release(m_pLine);
 	Safe_Release(m_pSprite);
 	Safe_Release(m_pDevice);

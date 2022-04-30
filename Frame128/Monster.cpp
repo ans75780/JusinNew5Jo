@@ -15,14 +15,15 @@ CMonster::~CMonster()
 
 void CMonster::OnCollision(CCollider* _pOther)
 {
-    if (_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_BULLET)
-    {
-        m_bActive = false;
-    }
+   
 }
 
 void CMonster::OnCollisionEnter(CCollider* _pOther)
 {
+    if (_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_BULLET)
+    {
+        m_bActive = false;
+    }
 }
 
 void CMonster::OnCollisionExit(CCollider* _pOther)

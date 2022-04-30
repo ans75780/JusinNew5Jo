@@ -46,7 +46,6 @@ void CCollisionMgr::CollisionUpdate(list<CObj*>& Dest, list<CObj*>& Sour)
 			//out 받을 float 두 개. 
 			float _w;
 			float _h;
-
 			if (IsOBBCollision(pDestCol, pSourCol))//CollisionCheckStart
 			{
 				//현재 충돌중이다.

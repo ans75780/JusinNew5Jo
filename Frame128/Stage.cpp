@@ -86,6 +86,7 @@ void CStage::Late_Update(void)
 
 void CStage::Render(HDC hDC)
 {
+	/*
 	int		iScrollX = (int)CScrollMgr::Get_Instance()->Get_ScrollX();
 	int		iScrollY = (int)CScrollMgr::Get_Instance()->Get_ScrollY();
 	HDC img = CBmpMgr::Get_Instance()->Find_Image(L"Background");
@@ -98,7 +99,21 @@ void CStage::Render(HDC hDC)
 		0,
 		0,
 		SRCCOPY);
+	*/
 	MGR(CObjMgr)->Render(hDC);
+	RECT rc = { 100,0,0,0 };
+	TCHAR	str[MAX_STR];
+	int zombieCount = 0;
+	list<CObj*> monster_List = MGR(CObjMgr)->Get_ObjList(OBJ_MONSTER);
+	for_each(monster_List.begin(), monster_List.end(),
+		[&](CObj* monster)
+		{
+			if (monster->Get_Name() == L"Zombie")
+				zombieCount++;
+		}
+	);
+	swprintf_s(str, L"남은 좀비 : %d", zombieCount);
+	DEVICE->Get_Font()->DrawTextW(nullptr, str, -1, &rc, DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
 void CStage::Release(void)

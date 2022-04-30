@@ -17,6 +17,7 @@ public:
 	LPDIRECT3DDEVICE9		Get_Device(void) { return m_pDevice; }
 	LPD3DXSPRITE			Get_Sprite(void) { return m_pSprite; }
 	LPD3DXLINE			Get_Line(void) { return m_pLine; }
+	LPD3DXFONT			Get_Font(void) { return m_pFont; }
 	void			Draw_Line(D3DXVECTOR3 vertex[], int count, D3DXCOLOR color = D3DCOLOR_ARGB(255, 255, 255, 255));
 
 
@@ -45,7 +46,7 @@ private:
 	LPDIRECT3DDEVICE9	m_pDevice;	// 그래픽 장치를 통한 렌더링을 제어하는 객체 포인터
 	LPD3DXSPRITE		m_pSprite;	// dx상에서 2D 이미지를 출력해주는 com 객체 포인터
 	LPD3DXLINE		m_pLine; //dx상에서 2D라인을 출력해주는 컴 객체 포인터
-
+	LPD3DXFONT		m_pFont;
 
 	POINT m_BufferSize;
 	

@@ -76,8 +76,6 @@ void CPlayer::Render(HDC hDC)
 {
 	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
 
-	
-
 	EllipseDrawCenter(hDC
 		, int(m_vWorldPoint[1].x)
 		, int(m_vWorldPoint[1].y), 10, 10);
