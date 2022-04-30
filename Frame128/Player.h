@@ -1,7 +1,7 @@
 #pragma once
 #include "Include.h"
 #include "Unit.h"
-
+#include "Stat.h"
 
 class CGun;
 
@@ -18,14 +18,11 @@ public:
     virtual void Release();
 
 public:
-
 	DIRECTION m_eDirection = DIRECTION::NONE;
 	float tik, time;
 	bool bShoot;
 	bool bPressSpace;
 	CGun* m_pGun = nullptr;
-
-
 public:
 	void set_gun(CGun* _pGun) {
 		m_pGun = _pGun;
@@ -54,6 +51,8 @@ private:
 private:
 	//virtual void CalcMat();
 	int             m_iCoin;
-	GUN_TYPE		m_ePlayerGun = GUN_TYPE::END;
+	GUN_TYPE	m_ePlayerGun = GUN_TYPE::END;
+	CStat			m_UnitStat;
+	
 };
 

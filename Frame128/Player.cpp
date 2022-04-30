@@ -12,10 +12,14 @@
 #include "CPistol.h"
 #include "CSMG.h"
 #include "AbstractFactory.h"
+#include "Stat.h"
 
 CPlayer::CPlayer()
 	: tik(0.f), time(0.f), bPressSpace(false), bShoot(false)
 {
+	m_UnitStat.Set_Atk(10.f);
+	m_UnitStat.Set_Hp(100.f);
+	m_UnitStat.Set_MaxHp(100.f);
 }
 
 CPlayer::~CPlayer() { Release(); }

@@ -10,6 +10,7 @@
 #include "AbstractFactory.h"
 #include "Hand.h"
 #include "UserDefineHeaders.h"
+#include "Stat.h"
 
 CZombie::CZombie()
 {
@@ -22,6 +23,10 @@ CZombie::~CZombie()
 
 void CZombie::Init(void)
 {
+	m_UnitStat.Set_Atk(5.f);
+	m_UnitStat.Set_Hp(30.f);
+	m_UnitStat.Set_MaxHp(30.f);
+
 	m_vPos = { 400, 100, 0.f };
 	m_vScale = { 50.f, 50.f, 0.f };
 
@@ -53,6 +58,18 @@ void CZombie::Init(void)
 
 int CZombie::Update(void)
 {
+	if (m_UnitStat.Get_Hp() < 1)
+	{
+		Set_Active(false);
+	}
+	if (m_bActive == false)
+	{
+		return OBJ_DEAD;
+	}
+	if (KEYTAP(R))
+	{ 
+		m_UnitStat.Damaged(100);
+	}
 	SetRadianToPlayer();
 	//m_fRadian = D3DXToRadian(90.f);
 	CalcMat();
