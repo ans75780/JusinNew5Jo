@@ -5,6 +5,11 @@
 #include "ObjMgr.h"
 #include "TimeMgr.h"
 
+<<<<<<< Updated upstream
+=======
+#include <time.h>
+
+>>>>>>> Stashed changes
 CBullet_Pistol::CBullet_Pistol()
 {
 }
@@ -16,7 +21,13 @@ CBullet_Pistol::~CBullet_Pistol()
 void CBullet_Pistol::Init()
 {
 
+<<<<<<< Updated upstream
 	m_vPos = { 0.f, 0.f, 0.f };
+=======
+	m_vPos = { 0.f
+		, 0.f
+		, 0.f };
+>>>>>>> Stashed changes
 	m_vScale = { 10.f, 10.f, 0.f };
 
 	m_strName = L"Bullet_Pistol";
@@ -31,9 +42,68 @@ void CBullet_Pistol::Init()
 
 	m_fSpeed = 300.f;
 
+<<<<<<< Updated upstream
 	m_iSpreadRate = 10.f;
 	m_fSpreadX = create_x_spread();
 	m_fSpreadY = create_y_spread();
+=======
+	switch (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir())
+	{
+	case DIRECTION::UP:
+	{
+		m_vDir = { 0.f, -1.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+	}
+
+
+	case DIRECTION::DOWN:
+	{
+		m_vDir = { 0.f, 1.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+	}
+
+
+	case DIRECTION::LEFT:
+	{
+		m_vDir = { -1.f, 0.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+	}
+
+
+	case DIRECTION::RIGHT:
+	{
+		m_vDir = { 1.f, 0.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+	}
+
+
+	case DIRECTION::UPLEFT:
+	{
+		m_vDir = { -1.f, -1.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+	}
+
+
+	case DIRECTION::UPRIGHT:
+	{
+		m_vDir = { 1.f, -1.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+	}
+
+
+	case DIRECTION::DOWNLEFT:
+	{
+		m_vDir = { -1.f, 1.f, 0.f };
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		break;
+	}
+>>>>>>> Stashed changes
 
 	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
 	
@@ -103,9 +173,6 @@ int CBullet_Pistol::Update()
 		,vInitPos.x
 		,vInitPos.y
 		, 0.f);
-
-
-	// 총알이 나가게 할건데
 	
 	m_matWorld = m_matScale * m_matTrans;
 

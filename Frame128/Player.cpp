@@ -92,7 +92,20 @@ void CPlayer::Render(HDC hDC)
 
 	EllipseDrawCenter(hDC
 		, int(m_vWorldPoint[1].x)
+<<<<<<< Updated upstream
 		, int(m_vWorldPoint[1].y), 10, 10);
+=======
+		, int(m_vWorldPoint[1].y)
+		, 10, 10);
+
+	EllipseDrawCenter(hDC
+		, int(m_vWorldPoint[2].x)
+		, int(m_vWorldPoint[2].y)
+		, 10, 10);
+
+
+#pragma endregion __
+>>>>>>> Stashed changes
 
 	EllipseDrawCenter(hDC
 		, int(m_vWorldPoint[2].x)
@@ -110,6 +123,10 @@ void CPlayer::Release(void)
 void CPlayer::key_input()
 {
 	m_fSpeed = 100.f;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 	player_movement();
 	player_change_gun();
 
@@ -124,8 +141,6 @@ void CPlayer::key_input()
 			tik = 0.f;
 		}
 	}
-
-
 
 	if (KEYAWAY(E))
 	{

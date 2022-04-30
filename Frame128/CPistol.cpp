@@ -25,7 +25,6 @@ void CPistol::Init()
 	Set_Initial_Points();
 	m_fShootInterval = 0.1f;
 
-
 	m_bActive = true;
 	m_eID = OBJID::OBJ_GUN;
 	m_eRenderID = RENDERID::RENDER_OBJ;
@@ -38,7 +37,6 @@ int CPistol::Update()
 {
 	if (false == m_bActive)
 		return OBJ_DEAD;
-
 
 	float	PlayerRadian = MGR(CObjMgr)->Get_Player()->Get_Radian();
 
