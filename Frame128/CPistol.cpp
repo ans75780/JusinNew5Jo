@@ -2,6 +2,7 @@
 #include "CPistol.h"
 
 #include "ObjMgr.h"
+#include "UserDefineHeaders.h"
 
 CPistol::CPistol()
 {

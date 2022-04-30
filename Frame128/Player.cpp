@@ -6,20 +6,14 @@
 #include "ObjMgr.h"
 
 #include "CBullet_Pistol.h"
-<<<<<<< Updated upstream
 
 #include "AbstractFactory.h"
-
-CPlayer::CPlayer()
-=======
-#include "CBullet_SMG.h"
 #include "CGun.h"
 #include "CPistol.h"
 #include "AbstractFactory.h"
 
 CPlayer::CPlayer()
 	: tik(0.f), time(0.f), bPressSpace(false), bShoot(false)
->>>>>>> Stashed changes
 {
 }
 
@@ -82,11 +76,10 @@ void CPlayer::Init(void)
 
 	m_fRadian = D3DXToRadian(-90.f);
 
-<<<<<<< Updated upstream
+
 #pragma endregion __
-=======
+
 	time = 0.06f;
->>>>>>> Stashed changes
 }
 
 int CPlayer::Update(void)
@@ -171,7 +164,6 @@ void CPlayer::Release(void)
 void CPlayer::key_input()
 {
 	m_fSpeed = 100.f;
-<<<<<<< Updated upstream
 		
 #pragma region original version (tank mode)
 	//if (MGR(CKeyMgr)->isStayKeyDown('A'))
@@ -213,8 +205,7 @@ void CPlayer::key_input()
 
 #pragma region 8방향이동으로 수정, 이동방향을 바라보도록 수정중
 	// 움직이는 키는 임시로 I(상), K(하), J(좌), L(우)
-	if (MGR(CKeyMgr)->isStayKeyDown(VK_UP))
-=======
+
 	player_movement();
 	player_change_gun();
 
@@ -245,67 +236,41 @@ void CPlayer::key_input()
 void CPlayer::player_movement()
 {
 	if (KEYHOLD(UP))
->>>>>>> Stashed changes
 	{
 		// 상 이동
 		m_eDirection = DIRECTION::UP;
-<<<<<<< Updated upstream
-		if (MGR(CKeyMgr)->isStayKeyDown(VK_LEFT))
-		{
-			m_eDirection = DIRECTION::UPLEFT;
-		}
-		else if (MGR(CKeyMgr)->isStayKeyDown(VK_RIGHT))
-		{
-=======
-
+		
 		if (KEYHOLD(LEFT))
 			m_eDirection = DIRECTION::UPLEFT;
+
 		else if (KEYHOLD(RIGHT))
->>>>>>> Stashed changes
 			m_eDirection = DIRECTION::UPRIGHT;
-		}
+		
 	}
 
 	else if (KEYHOLD(DOWN))
 	{
 		// 하 이동
 		m_eDirection = DIRECTION::DOWN;
-<<<<<<< Updated upstream
-		if (MGR(CKeyMgr)->isStayKeyDown(VK_LEFT))
-		{
-			m_eDirection = DIRECTION::DOWNLEFT;
-		}
-		else if (MGR(CKeyMgr)->isStayKeyDown(VK_RIGHT))
-		{
-=======
+		
 
-		if (KEYHOLD(LEFT))
-			m_eDirection = DIRECTION::DOWNLEFT;
-		else if (KEYHOLD(RIGHT))
->>>>>>> Stashed changes
-			m_eDirection = DIRECTION::DOWNRIGHT;
-		}
+			if (KEYHOLD(LEFT))
+				m_eDirection = DIRECTION::DOWNLEFT;
+
+			else if (KEYHOLD(RIGHT))
+				m_eDirection = DIRECTION::DOWNRIGHT;
+		
 	}
 
-<<<<<<< Updated upstream
-	else if (MGR(CKeyMgr)->isStayKeyDown(VK_LEFT))
-	{
+	
 		// 좌 이동
-=======
 	else if (KEYHOLD(LEFT))
->>>>>>> Stashed changes
 		m_eDirection = DIRECTION::LEFT;
-	}
 
-<<<<<<< Updated upstream
-	else if (MGR(CKeyMgr)->isStayKeyDown(VK_RIGHT))
-	{
-		// 우 이동
-=======
+	
 	else if (KEYHOLD(RIGHT))
->>>>>>> Stashed changes
 		m_eDirection = DIRECTION::RIGHT;
-	}
+
 #pragma endregion __
 
 	else
@@ -315,18 +280,10 @@ void CPlayer::player_movement()
 		m_fSpeed = 0.f;
 	}
 
-<<<<<<< Updated upstream
-
-	if (MGR(CKeyMgr)->isStayKeyDown(VK_SPACE))
-	{
-		// 총의 종류에 따라 쏘는 총알이 달라지도록 변경
-		// create bullet
-		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Pistol>::Create(m_vPos.x, m_vPos.y, m_fRadian));
-	}
-
-
 	CalcMat();
-=======
+}
+
+
 void CPlayer::player_change_gun()
 {
 	if (KEYAWAY(Q))
@@ -348,7 +305,6 @@ void CPlayer::player_change_gun()
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CPistol>::Create());
 		time = m_pGun->Get_ShotInterval();
 	}
->>>>>>> Stashed changes
 }
 
 void CPlayer::player_direction(DIRECTION _eDir)

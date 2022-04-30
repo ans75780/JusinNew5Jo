@@ -6,12 +6,6 @@
 #include "Collider.h"
 
 CBullet::CBullet()
-<<<<<<< Updated upstream
-	: m_fLifeTime(0.f)
-{}
-
-CBullet::~CBullet() {}
-=======
 	: m_fLifeTime(0.f), m_iSpreadRate(0),
 	m_fSpreadX(0.f), m_fSpreadY(0.f)
 {
@@ -72,4 +66,3 @@ void CBullet::set_bullet_dir(DIRECTION _eDir)
 
 	D3DXVec3Normalize(&m_vDir, &m_vDir);
 }
->>>>>>> Stashed changes

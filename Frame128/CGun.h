@@ -14,12 +14,10 @@ public:
 	virtual void Release() PURE;
 
 protected:
-<<<<<<< Updated upstream
+
 	GUN_TYPE	m_eType = GUN_TYPE::END;
-=======
-	GUN_TYPE	m_eType = GUN_TYPE::NONE;
 	float m_fShootInterval;
->>>>>>> Stashed changes
+
 
 public:
 	float Get_ShotInterval() { return m_fShootInterval; }
