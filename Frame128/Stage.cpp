@@ -2,6 +2,7 @@
 #include "Stage.h"
 
 #include "UserDefineHeaders.h"
+#include "CBoss_hyde.h"
 
 CStage::CStage()
 {
@@ -24,6 +25,7 @@ HRESULT CStage::Init(void)
 	}
 
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
+	MGR(CObjMgr)->AddObject(OBJ_BOSS, CAbstractFactory<CBoss_hyde>::Create());
 	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
 	mapSize.x = float(MGR(CTextureMgr)->Get_Texture(L"Background")->tImgInfo.Width);
 	mapSize.y = 600.f;

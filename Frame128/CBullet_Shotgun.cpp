@@ -30,7 +30,7 @@ void CBullet_Shotgun::Init()
 
 	Set_Initial_Points();
 
-	m_fSpeed = 1000.f;
+	m_fSpeed = 800.f;
 
 	m_bActive = true;
 	m_eID = OBJID::OBJ_BULLET;
@@ -46,6 +46,37 @@ void CBullet_Shotgun::Init()
 	m_fSpreadY = create_y_spread();
 
 	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
+}
+
+int CBullet_Shotgun::Update()
+{
+	if (m_fLifeTime >= 3)
+		return OBJ_DEAD;
+
+	if (false == m_bActive)
+		return OBJ_DEAD;
+
+	m_fBulletSizeRate -= 0.04f;
+	if (m_fBulletSizeRate <= 0)
+		return OBJ_DEAD;
+
+	D3DXMatrixScaling(&m_matScale, m_fBulletSizeRate, m_fBulletSizeRate, 0.f);
+
+	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
+
+	m_matWorld = m_matScale * m_matTrans;
+
+
+	for (int i(0); i < 4; ++i)
+	{
+		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
+	}
+
+	D3DXVec3TransformNormal(&m_vWorldDir, &m_vDir, &m_matRotZ);
+
+	m_vPos += m_vWorldDir * m_fSpeed * DT;
+
+	return OBJ_NOEVENT;
 }
 
 void CBullet_Shotgun::OnCollision(CCollider * _pOther)

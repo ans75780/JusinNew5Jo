@@ -12,6 +12,20 @@ private:
 
 public:
 	CObj* Get_Player() { return m_ObjList[OBJ_PLAYER].front(); }
+	CObj* Get_Boss1() { return m_ObjList[OBJID::OBJ_BOSS].front(); }
+	CObj* Get_Boss2()
+	{
+		auto& iter = m_ObjList[OBJID::OBJ_BOSS].front();
+		++iter;
+		return iter;
+	}
+	CObj* Get_Boss3()
+	{
+		auto& iter = m_ObjList[OBJID::OBJ_BOSS].front();
+		++iter;
+		++iter;
+		return iter;
+	}
 	CObj* Get_Target(OBJID eID, CObj* pObj);
 	list<CObj*>& Get_ObjList(OBJID _eiD) { return m_ObjList[_eiD]; }
 public:

@@ -9,6 +9,7 @@ public:
 
 public:
 	virtual void Init();
+	virtual int Update();
 
 public:
 	virtual void OnCollision(CCollider * _pOther);

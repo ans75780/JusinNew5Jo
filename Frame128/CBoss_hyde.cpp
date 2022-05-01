@@ -7,8 +7,10 @@
 #include "Hand.h"
 #include "UserDefineHeaders.h"
 #include "Stat.h"
+#include "CBullet_Boss.h"
 
 CBoss_hyde::CBoss_hyde()
+	: m_ftik(0.f), m_fshoot_interval(0.f)
 {
 }
 
@@ -27,7 +29,7 @@ void CBoss_hyde::Init(void)
 
 	Set_Initial_Points();
 
-	m_fSpeed = 300.f;
+	m_fSpeed = 20.f;
 
 	m_bActive = true;
 	m_eID = OBJID::OBJ_BOSS;
@@ -36,9 +38,10 @@ void CBoss_hyde::Init(void)
 
 	Set_Matrix_to_Identity();
 
+	m_fshoot_interval = 0.1f;
+
 	CreateCollider();
 	FindTarget();
-
 }
 
 int CBoss_hyde::Update(void)
@@ -54,6 +57,13 @@ int CBoss_hyde::Update(void)
 	if (KEYTAP(R))
 	{
 		m_UnitStat.Damaged(100);
+	}
+	m_ftik += DT;
+	if (m_ftik >= m_fshoot_interval)
+	{
+		// shoot bullet
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BOSS_BULLET, CAbstractFactory<CBullet_Boss>::Create());
+		m_ftik = 0.f;
 	}
 
 	SetRadianToPlayer();

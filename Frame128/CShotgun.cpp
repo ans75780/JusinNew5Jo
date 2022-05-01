@@ -19,9 +19,9 @@ CShotgun::~CShotgun()
 void CShotgun::Init()
 {
 	dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->set_gun(this);
-	m_vScale = { 65.f, 45.f, 0.f };
+	m_vScale = { 50.f, 30.f, 0.f };
 
-	m_iMaxLoad = 50;
+	m_iMaxLoad = 100;
 	m_iCurLoad = m_iMaxLoad;
 
 	m_strName = L"Shotgun";
@@ -66,9 +66,9 @@ int CShotgun::Update()
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Shotgun>::Create());
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Shotgun>::Create());
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Shotgun>::Create());
-		--m_iCurLoad;
-		--m_iCurLoad;
-		--m_iCurLoad;
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Shotgun>::Create());
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Shotgun>::Create());
+		m_iCurLoad -= 5;
 	}
 
 	return OBJ_NOEVENT;

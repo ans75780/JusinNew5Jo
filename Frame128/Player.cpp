@@ -105,7 +105,7 @@ void CPlayer::key_input()
 
 	player_movement();
 	player_change_gun();
-
+	
 
 	if (KEYHOLD(E))
 	{
@@ -184,11 +184,16 @@ void CPlayer::player_change_gun()
 	if (KEYAWAY(A))
 	{
 		if (nullptr != m_pGun)
+		{
 			m_pGun->Set_Active(false);
-
-		m_ePlayerGun = GUN_TYPE::SHOTGUN;
-		MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CShotgun>::Create());
-		time = m_pGun->Get_ShotInterval();
+			m_pGun = nullptr;
+		}
+		else
+		{
+			m_ePlayerGun = GUN_TYPE::SHOTGUN;
+			MGR(CObjMgr)->AddObject(OBJID::OBJ_GUN, CAbstractFactory<CShotgun>::Create());
+			time = m_pGun->Get_ShotInterval();
+		}
 	}
 }
 

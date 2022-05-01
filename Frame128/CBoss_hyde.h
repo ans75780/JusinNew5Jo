@@ -12,5 +12,8 @@ public:
 	virtual int Update(void);
 	virtual void Render(HDC hDC);
 	virtual void Release(void);
-};
 
+private:
+	float m_fshoot_interval;
+	float m_ftik;
+};
