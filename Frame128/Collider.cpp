@@ -146,10 +146,30 @@ void CCollider::CalcCollision(CCollider* _pOther)
 		{
 			DXV3 Dir = m_vFinalPos - _pOther->Get_FinalPos();
 			D3DXVec3Normalize(&Dir, &Dir);
-			Dir *= 10000.f * DT;
+			//Dir *= 10000.f * DT;
 
 			this->Get_Owner()->Add_Pos(Dir);
 		}
+	}
+
+	if (this->Get_Owner()->Get_ID() == OBJID::OBJ_MONSTER &&
+		_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_BULLET)
+	{
+		DXV3 Dir = m_vFinalPos - _pOther->Get_FinalPos();
+		D3DXVec3Normalize(&Dir, &Dir);
+		//Dir *= 100000.f * DT;
+
+		this->Get_Owner()->Add_Pos(Dir);
+	}
+
+	else if (this->Get_Owner()->Get_ID() == OBJID::OBJ_BULLET &&
+		_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_MONSTER)
+	{
+		DXV3 Dir = _pOther->Get_FinalPos() - m_vFinalPos;
+		D3DXVec3Normalize(&Dir, &Dir);
+		//Dir *= 100000.f * DT;
+
+		_pOther->Get_Owner()->Add_Pos(Dir);
 	}
 
 	else if (this->Get_Owner()->Get_ID() == OBJID::OBJ_PLAYER &&
@@ -157,8 +177,8 @@ void CCollider::CalcCollision(CCollider* _pOther)
 	{
 		DXV3 Dir = m_vFinalPos - _pOther->Get_FinalPos();
 		D3DXVec3Normalize(&Dir, &Dir);
-		Dir *= 15;
 
+		//Dir *= 10000.f * DT;
 		this->Get_Owner()->Add_Pos(Dir);
 	}
 

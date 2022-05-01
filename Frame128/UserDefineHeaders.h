@@ -23,10 +23,12 @@
 #include "Bullet.h"
 #include "CGun.h"
 #include "Zombie.h"
+#include "GiantZombie.h"
 #include "Hand.h"
 #include "CPistol.h"
 #include "CBullet_Pistol.h"
 #include "Coin.h"
+
 
 //Scene
 #include "Stage.h"

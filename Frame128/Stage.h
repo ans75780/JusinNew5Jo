@@ -23,6 +23,7 @@ public:
 
 private:
 	void SpawnZombie();
+	void SpawnRageZombie();
 	void SpawnItem();
 	DXV3	pt;
 	DXV3 mapSize;
