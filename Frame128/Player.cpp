@@ -155,7 +155,6 @@ void CPlayer::player_movement()
 
 	else
 	{
-		m_eDirection = DIRECTION::NONE;
 		m_fSpeed = 0.f;
 	}
 

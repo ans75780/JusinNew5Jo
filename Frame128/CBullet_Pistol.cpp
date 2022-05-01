@@ -18,33 +18,31 @@ CBullet_Pistol::~CBullet_Pistol()
 
 void CBullet_Pistol::Init()
 {
-	m_vPos = { 0.f, 0.f, 0.f };
+	m_vPos = { MGR(CObjMgr)->Get_Player()->Get_Pos().x
+		, MGR(CObjMgr)->Get_Player()->Get_Pos().y
+		, 0.f };
+
 	m_vScale = { 10.f, 10.f, 0.f };
 
-	m_strName = L"Bullet_Pistol";
+	m_fAtk = 1.f;
 
 	Set_Initial_Points();
+
+	m_fSpeed = 300.f;
 
 	m_bActive = true;
 	m_eID = OBJID::OBJ_BULLET;
 	m_eRenderID = RENDERID::RENDER_OBJ;
+	m_strName = L"Bullet_Pistol";
 
 	Set_Matrix_to_Identity();
-
-	m_fSpeed = 300.f;
+	CreateCollider();
 
 	m_iSpreadRate = 10.f;
 	m_fSpreadX = create_x_spread();
 	m_fSpreadY = create_y_spread();
 
 	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
-
-	vInitPos = MGR(CObjMgr)->Get_Player()->Get_Pos();
-	m_fRadian = MGR(CObjMgr)->Get_Player()->Get_Radian();
-
-	CreateCollider();
-
-	m_vLocalPos = m_vPos;
 }
 	
 int CBullet_Pistol::Update()
@@ -58,7 +56,7 @@ int CBullet_Pistol::Update()
 		return OBJ_DEAD;
 	
 	m_vPos += m_vDir * m_fSpeed * DT;
-	m_vLocalPos += m_vDir * m_fSpeed * DT;
+	m_vWorldPos += m_vDir * m_fSpeed * DT;
 	
 	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
 	
@@ -67,8 +65,8 @@ int CBullet_Pistol::Update()
 		, m_vPos.y, 0.f);
 	
 	D3DXMatrixTranslation(&m_matPos
-		, m_vLocalPos.x
-		, m_vLocalPos.y, 0.f);
+		, m_vWorldPos.x
+		, m_vWorldPos.y, 0.f);
 	
 	D3DXMatrixScaling(&m_matScale
 		, 1.f
@@ -76,8 +74,8 @@ int CBullet_Pistol::Update()
 		, 0.f);
 
 	D3DXMatrixTranslation(&m_matTrans
-		, vInitPos.x + 50.f * cosf(m_fRadian)
-		, vInitPos.y - 45.f * sinf(m_fRadian)
+		, m_vInitPos.x + 50.f * cosf(m_fRadian)
+		, m_vInitPos.y - 45.f * sinf(m_fRadian)
 		, 0.f);
 	
 	m_matWorld = m_matPos * m_matScale * m_matTrans;

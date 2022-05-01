@@ -39,12 +39,12 @@ void CBullet_Shotgun::Init()
 
 	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
 
-	vInitPos = MGR(CObjMgr)->Get_Player()->Get_Pos();
+	m_vInitPos = MGR(CObjMgr)->Get_Player()->Get_Pos();
 	m_fRadian = MGR(CObjMgr)->Get_Player()->Get_Radian();
 
 	CreateCollider();
 
-	m_vLocalPos = m_vPos;
+	m_vWorldPos = m_vPos;
 }
 
 int CBullet_Shotgun::Update()
@@ -58,7 +58,7 @@ int CBullet_Shotgun::Update()
 		return OBJ_DEAD;
 
 	m_vPos += m_vDir * m_fSpeed * DT;
-	m_vLocalPos += m_vDir * m_fSpeed * DT;
+	m_vWorldPos += m_vDir * m_fSpeed * DT;
 
 	m_fBulletSizeRate -= 0.01f;
 	
@@ -71,12 +71,12 @@ int CBullet_Shotgun::Update()
 		, 0.f);
 
 	D3DXMatrixTranslation(&m_matPos
-		, m_vLocalPos.x
-		, m_vLocalPos.y, 0.f);
+		, m_vWorldPos.x
+		, m_vWorldPos.y, 0.f);
 
 	D3DXMatrixTranslation(&m_matTrans
-		, vInitPos.x + 50.f * cosf(m_fRadian)
-		, vInitPos.y - 45.f * sinf(m_fRadian)
+		, m_vInitPos.x + 50.f * cosf(m_fRadian)
+		, m_vInitPos.y - 45.f * sinf(m_fRadian)
 		, 0.f);
 
 	m_matWorld = m_matPos * m_matScale * m_matTrans;

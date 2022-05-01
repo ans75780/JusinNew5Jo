@@ -7,9 +7,11 @@
 
 CBullet::CBullet()
 	: m_fLifeTime(0.f), m_iSpreadRate(0),
-	m_fSpreadX(0.f), m_fSpreadY(0.f)
+	m_fSpreadX(0.f), m_fSpreadY(0.f),
+	m_fAtk(0.f)
 {
 	D3DXMatrixIdentity(&m_matPos);
+	ZeroMemory(&m_vWorldPos, sizeof(DXV3));
 	ZeroMemory(&m_vLocalPos, sizeof(DXV3));
 }
 

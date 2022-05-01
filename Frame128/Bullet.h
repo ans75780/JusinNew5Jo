@@ -28,13 +28,18 @@ protected:
 	void set_bullet_dir(DIRECTION _eDir);
 
 protected:
-	DXV3	vInitPos;
 	DXMAT	m_matPos;
-	DXV3	m_vLocalPos;
+
+
+	DXV3	m_vLocalPos;	// 로컬 좌표계 위치
+	DXV3	m_vInitPos;		// 초기 위치
+	DXV3	m_vWorldPos;	// 월드 좌표계 위치
 
 	float	m_fLifeTime;
 	
 	int	m_iSpreadRate;
 	float m_fSpreadX;
 	float m_fSpreadY;
+
+	float m_fAtk;
 };
