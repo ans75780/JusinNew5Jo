@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "CBullet_Pistol.h"
 
-
+#include "Collider.h"
 #include "Device.h"
 #include "Player.h"
 #include "ObjMgr.h"
 #include "TimeMgr.h"
+#include "Stat.h"
+#include "Monster.h"
 
 
 CBullet_Pistol::CBullet_Pistol()
@@ -24,7 +26,7 @@ void CBullet_Pistol::Init()
 
 	m_vScale = { 10.f, 10.f, 0.f };
 
-	m_fAtk = 1.f;
+	m_fAtk = 5.f;
 
 	Set_Initial_Points();
 
@@ -44,65 +46,6 @@ void CBullet_Pistol::Init()
 
 	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
 }
-	
-int CBullet_Pistol::Update()
-{
-	m_fLifeTime += DT;
-	
-	if (false == m_bActive)
-		return OBJ_DEAD;
-	
-	if (m_fLifeTime >= 3)
-		return OBJ_DEAD;
-	
-	m_vPos += m_vDir * m_fSpeed * DT;
-	m_vWorldPos += m_vDir * m_fSpeed * DT;
-	
-	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
-	
-	D3DXMatrixTranslation(&m_matTrans
-		, m_vPos.x
-		, m_vPos.y, 0.f);
-	
-	D3DXMatrixTranslation(&m_matPos
-		, m_vWorldPos.x
-		, m_vWorldPos.y, 0.f);
-	
-	D3DXMatrixScaling(&m_matScale
-		, 1.f
-		, 1.f
-		, 0.f);
-
-	D3DXMatrixTranslation(&m_matTrans
-		, m_vInitPos.x + 50.f * cosf(m_fRadian)
-		, m_vInitPos.y - 45.f * sinf(m_fRadian)
-		, 0.f);
-	
-	m_matWorld = m_matPos * m_matScale * m_matTrans;
-	
-	for (int i(0); i < 4; ++i)
-	{
-		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
-	}
-	
-	return OBJ_NOEVENT;
-}
-
-void CBullet_Pistol::Render(HDC hDC)
-{
-	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
-
-	for (auto& iter : m_vecComponents)
-		iter->Render(hDC);
-}
-
-
-void CBullet_Pistol::Release()
-{
-	for_each(m_vecComponents.begin(), m_vecComponents.end(), Safe_Delete<CComponent*>);
-	m_vecComponents.clear();
-	m_strName.clear();
-}
 
 void CBullet_Pistol::OnCollision(CCollider * _pOther)
 {
@@ -110,6 +53,14 @@ void CBullet_Pistol::OnCollision(CCollider * _pOther)
 
 void CBullet_Pistol::OnCollisionEnter(CCollider * _pOther)
 {
+	if (_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_MONSTER)
+	{
+		if (_pOther->Get_Owner()->Get_Name() == L"Zombie")
+		{
+			dynamic_cast<CMonster*>(_pOther->Get_Owner())->Get_Stat().Damaged(m_fAtk);
+		}
+		m_bActive = false;
+	}
 }
 
 void CBullet_Pistol::OnCollisionExit(CCollider * _pOther)

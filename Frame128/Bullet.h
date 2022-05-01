@@ -10,9 +10,9 @@ public:
 
 public:
 	virtual void Init() PURE;
-	virtual int Update() PURE;
-	virtual void Render(HDC hDC) PURE;
-	virtual void Release() PURE;
+	virtual int Update();
+	virtual void Render(HDC hDC);
+	virtual void Release();
 
 public:
 	virtual void OnCollision(CCollider * _pOther) PURE;
