@@ -61,7 +61,7 @@ int CHand::Update(void)
 
 void CHand::Render(HDC hDC)
 {
-	//DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 255, 0, 0));
+	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 255, 0, 0));
 }
 
 void CHand::Release(void)

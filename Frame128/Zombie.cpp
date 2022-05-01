@@ -23,9 +23,9 @@ CZombie::~CZombie()
 
 void CZombie::Init(void)
 {
-	m_UnitStat.Set_Atk(15.f);
-	m_UnitStat.Set_Hp(10.f);
-	m_UnitStat.Set_MaxHp(10.f);
+	m_UnitStat.Set_Atk(5.f);
+	m_UnitStat.Set_Hp(30.f);
+	m_UnitStat.Set_MaxHp(30.f);
 
 	m_vPos = { 400, 100, 0.f };
 	m_vScale = { 50.f, 50.f, 0.f };
@@ -55,17 +55,8 @@ void CZombie::Init(void)
 	MGR(CObjMgr)->AddObject(OBJ_MONSTER, hand);
 
 	m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);
-
 	m_fCurTime = 0.75;
-	D3DXMatrixScaling(&m_matScale, m_vScale.x / m_pTexInfo->tImgInfo.Width, m_vScale.y / m_pTexInfo->tImgInfo.Height, 0.f);
-	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);
-	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
-	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
-	for (int i(0); i < 4; ++i)
-	{
-		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
-	}
-	D3DXVec3TransformNormal(&m_vWorldDir, &m_vDir, &m_matRotZ);
+
 }
 
 int CZombie::Update(void)
@@ -84,18 +75,14 @@ int CZombie::Update(void)
 	}
 	SetRadianToPlayer();
 	//m_fRadian = D3DXToRadian(90.f);
-
-	//CalcMat();
-	D3DXMatrixScaling(&m_matScale, m_vScale.x / m_pTexInfo->tImgInfo.Width, m_vScale.y / m_pTexInfo->tImgInfo.Height, 0.f);
-	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);
-	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
-	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
+	CalcMat();
 	for (int i(0); i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
 	}
 	D3DXVec3TransformNormal(&m_vWorldDir, &m_vDir, &m_matRotZ);
 	m_vMoveSize = m_vWorldDir * m_fSpeed * DT;
+
 	m_vPos += m_vMoveSize;
 	int a = 10;
 	float DTDT = DT;
@@ -137,6 +124,9 @@ void CZombie::Render(HDC hDC)
 	EllipseDrawCenter(hDC, m_vWorldPoint[2].x, m_vWorldPoint[2].y, 10, 10);*/
 
 	MGR(CDevice)->Get_Sprite()->SetTransform(&m_matWorld);
+	
+	
+
 	/*m_iTexIndex = (m_iTexIndex + 1) % 16;
 	m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);*/
 	
@@ -150,7 +140,7 @@ void CZombie::Render(HDC hDC)
 		nullptr,	// 위치 좌표에 대한 vec3 구조체 포인터, null인 경우 스크린 상 0,0,에 좌표 출력
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	//m_vecComponents[0]->Render(hDC);
+	m_vecComponents[0]->Render(hDC);
 }
 
 void CZombie::Release(void)
