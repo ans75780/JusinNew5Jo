@@ -315,6 +315,9 @@
     <ClInclude Include="CBoss_hyde.h">
       <Filter>01. Obj\Unit\Monster\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="GiantZombie.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -457,6 +460,9 @@
     </ClCompile>
     <ClCompile Include="CBoss_hyde.cpp">
       <Filter>01. Obj\Unit\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="GiantZombie.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

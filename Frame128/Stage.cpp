@@ -47,7 +47,8 @@ HRESULT CStage::Init(void)
 	Coin3->Set_Pos(DXV3(200.f, 300.f, 0.f));
 	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin3);*/
 
-	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CGiantZombie>::Create(WINCX / 2 + rand() % 400, WINCY / 2 + rand() % 400, 0));
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER
+		, CAbstractFactory<CGiantZombie>::Create(float(WINCX / 2 + rand() % 400), float(WINCY / 2 + rand() % 400), 0.f));
 
 	MGR(CTimeMgr)->AddLoopEvent(2.f, this, 0);
 	MGR(CTimeMgr)->AddLoopEvent(7.f, this, 1);
@@ -185,13 +186,13 @@ void CStage::OnTimerEvent(int _iEventNum)
 
 void CStage::SpawnZombie()
 {
-	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX /2 + rand() % 400, WINCY / 2 + rand() % 400, 0));
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(float(WINCX /2 + rand() % 400), float(WINCY / 2 + rand() % 400), 0.f));
 
 }
 
 void CStage::SpawnRageZombie()
 {
-	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CGiantZombie>::Create(WINCX / 2  + rand() % 400, WINCY / 2 + rand() % 400, 0));
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CGiantZombie>::Create(float(WINCX / 2  + rand() % 400), float(WINCY / 2 + rand() % 400), 0.f));
 }
 
 void CStage::SpawnItem()

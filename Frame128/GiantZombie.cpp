@@ -83,7 +83,7 @@ int CGiantZombie::Update(void)
 	if (m_iColor > 0)
 	{
 		m_vImgScale *= 1 + (DT * 0.2f);
-		m_iColor -= (m_iColor * DT * 0.05f) + DT;
+		m_iColor -= int((m_iColor * DT * 0.05f) + DT);
 		m_fSpeed *= 1 + (DT * 0.46f);
 		m_fImgTime -= DT * 0.2f;
 	}
