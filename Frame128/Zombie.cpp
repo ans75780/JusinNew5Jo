@@ -55,6 +55,7 @@ void CZombie::Init(void)
 	MGR(CObjMgr)->AddObject(OBJ_MONSTER, hand);
 
 	m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);
+	m_fCurTime = 0.75;
 
 }
 
@@ -84,7 +85,19 @@ int CZombie::Update(void)
 
 	m_vPos += m_vMoveSize;
 	int a = 10;
+	float DTDT = DT;
 
+	//CurTime이 0보다 작으면 이미지 교체
+	if (m_fCurTime <= 0.1f)
+	{
+		m_iTexIndex = (m_iTexIndex + 1) % 16;
+		m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);
+		m_fCurTime = 0.75;
+	}
+	else
+	{
+		m_fCurTime -= DT;
+	}
 
     return 0;
 }
@@ -112,29 +125,7 @@ void CZombie::Render(HDC hDC)
 
 	MGR(CDevice)->Get_Sprite()->SetTransform(&m_matWorld);
 	
-	float DTDT = DT;
-
-	//CurTime이 0보다 작으면 이미지 교체
-	if (m_fCurTime <= 0.f)
-	{
-		m_iTexIndex = (m_iTexIndex + 1) % 16;
-		m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);
-
-		m_fCurTime = 0.003f;
-	}
-	else
-	{
-		m_fCurTime -= MGR(CTimeMgr)->getElasedTime();
-
-		int i = 0;
-		//
-		//안깎여
-		//fCurTime 
-		//아
-		//DT가 엄청 작아 왜 이러지
-		//DT가 100배는 작은듯?
-		//내가 한번 CurTime을 0.003으로 해볼게
-	}
+	
 
 	/*m_iTexIndex = (m_iTexIndex + 1) % 16;
 	m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);*/

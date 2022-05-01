@@ -39,10 +39,11 @@ void CMainGame::Initialize(void)
 	{
 		assert(false);
 	}
-
-	
-
-
+	if (FAILED(MGR(CTextureMgr)->InsertTexture(L"../Image/Background/Background.png", TEX_SINGLE, L"Background")))
+	{
+		assert(false);
+		return;
+	}
 	//TIMEMANAGER은 windowcpp에서 초기화함(화면 루프 때문에)
 	MGR(CKeyMgr)->init();
 	MGR(CSceneMgr)->Init();

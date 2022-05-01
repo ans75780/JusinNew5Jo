@@ -24,6 +24,9 @@ public:
 private:
 	void SpawnZombie();
 	void SpawnItem();
-
+	DXV3	pt;
+	DXV3 mapSize;
+	DXV3 half;
+	RECT rc;
 };
 

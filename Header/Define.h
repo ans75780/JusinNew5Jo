@@ -1,7 +1,10 @@
 #pragma once
 #define WINCX	800
 #define WINCY	600	
-	    
+	   
+#define WINCX_HALF (WINCX / 2)
+#define WINCY_HALF (WINCY / 2)
+
 #define TILECX	64
 #define TILECY	64
 	    

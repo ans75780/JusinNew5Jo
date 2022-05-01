@@ -25,7 +25,10 @@ HRESULT CStage::Init(void)
 
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
 	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
-	
+	mapSize.x = MGR(CTextureMgr)->Get_Texture(L"Background")->tImgInfo.Width;
+	mapSize.y = 600;
+	mapSize.z = 0;
+	pt = { 0,0,0 };
 	/*for (int i = 0; i < 500 ; i++)
 	{
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX + rand() % 400, WINCY + rand () % 400, 0));
@@ -44,7 +47,7 @@ HRESULT CStage::Init(void)
 
 	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX / 2 /* + rand() % 400*/, WINCY / 2/* + rand() % 400*/, 0));
 
-	MGR(CTimeMgr)->AddLoopEvent(0.1f, this, 0);
+	MGR(CTimeMgr)->AddLoopEvent(3.f, this, 0);
 	MGR(CTimeMgr)->AddLoopEvent(1.5f, this, 1);
 
 	return S_OK;
@@ -96,6 +99,22 @@ void CStage::Late_Update(void)
 		MGR(CObjMgr)->Get_ObjList(OBJID::OBJ_MONSTER),
 		MGR(CObjMgr)->Get_ObjList(OBJID::OBJ_MONSTER)
 	);
+
+	pt = MGR(CObjMgr)->Get_Player()->Get_Pos();
+	if (pt.x + WINCX_HALF >= mapSize.x)
+		pt.x = mapSize.x - WINCX_HALF;
+	else if (pt.x - WINCX_HALF < 0)
+		pt.x = WINCX_HALF;
+
+	if (pt.y + WINCY_HALF >= mapSize.y)
+		pt.y = mapSize.y - WINCY_HALF;
+	else if (pt.y - WINCY_HALF < 0)
+		pt.y = WINCY_HALF;
+
+	rc.left = pt.x - WINCX_HALF;
+	rc.right = pt.x + WINCX_HALF;
+	rc.top = pt.y - WINCY_HALF;
+	rc.bottom = pt.y + WINCY_HALF;
 }
 
 void CStage::Render(HDC hDC)
@@ -114,6 +133,16 @@ void CStage::Render(HDC hDC)
 		0,
 		SRCCOPY);
 	*/
+	//백그라운드 출력
+	DXMAT matWorld;
+	D3DXMatrixTranslation(&matWorld, mapSize.x / 2, mapSize.y / 2, 0);
+	DEVICE->Get_Sprite()->SetTransform(&matWorld);
+	DEVICE->Get_Sprite()->Draw(MGR(CTextureMgr)->Get_Texture(L"Background")->pTexture, // 텍스처 객체
+	&rc,	// 출력할 이미지 영역에 대한 렉트 구조체 포인터, null인 경우 이미지의 0, 0기준으로 출력
+	&D3DXVECTOR3(mapSize.x / 2, mapSize.y / 2, -1),	// 출력할 이미지의 중심 축에 대한 vec3 구조체 포인터, null인 경우 0, 0이 중심 좌표
+	&D3DXVECTOR3(0, 0, 0),	// 위치 좌표에 대한 vec3 구조체 포인터, null인 경우 스크린 상 0,0,에 좌표 출력
+	D3DCOLOR_ARGB(255, 255, 255, 255));	// 출력할 원본 이미지와 섞을 색상 값, 0xffffffff 값을 넣어주면 원본색 유지
+	//백그라운드 출력 끝
 	MGR(CObjMgr)->Render(hDC);
 	RECT rc = { 100,0,0,0 };
 	TCHAR	str[MAX_STR];
