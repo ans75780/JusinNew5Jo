@@ -23,13 +23,13 @@ void CBullet_Boss::Init()
 		0.f
 	};
 
-	m_vScale = { 50.f, 10.f, 0.f };
+	m_vScale = { 50.f, 50.f, 0.f };
 
 	m_fAtk = 50.f;
 
 	Set_Initial_Points();
 
-	m_fSpeed = 200.f;
+	m_fSpeed = 300.f;
 
 	m_bActive = true;
 
@@ -45,6 +45,7 @@ void CBullet_Boss::Init()
 	m_fSpreadY = create_y_spread();
 
 	FindTarget();
+	SetRadianToPlayer();
 }
 
 int CBullet_Boss::Update()
@@ -59,7 +60,7 @@ int CBullet_Boss::Update()
 	if (m_fBulletSizeRate <= 0)
 		return OBJ_DEAD;
 
-	SetRadianToPlayer();
+	
 
 	D3DXMatrixScaling(&m_matScale, m_fBulletSizeRate, m_fBulletSizeRate, 0.f);
 	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);

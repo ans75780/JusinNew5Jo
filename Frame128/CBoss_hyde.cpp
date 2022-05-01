@@ -38,7 +38,7 @@ void CBoss_hyde::Init(void)
 
 	Set_Matrix_to_Identity();
 
-	m_fshoot_interval = 0.1f;
+	m_fshoot_interval = 0.01f;
 
 	CreateCollider();
 	FindTarget();
