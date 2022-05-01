@@ -5,6 +5,8 @@
 #include "ObjMgr.h"
 #include "TimeMgr.h"
 #include "Collider.h"
+#include "TextureMgr.h"
+
 
 CBullet::CBullet()
 	: m_fLifeTime(0.f), m_iSpreadRate(0),
@@ -14,12 +16,19 @@ CBullet::CBullet()
 	D3DXMatrixIdentity(&m_matPos);
 	ZeroMemory(&m_vWorldPos, sizeof(DXV3));
 	ZeroMemory(&m_vLocalPos, sizeof(DXV3));
+
+	m_fRadian = MGR(CObjMgr)->Get_Player()->Get_Radian();
+	m_bNowAppear = true;
+	m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Bullet");
+	D3DXMatrixScaling(&m_matScale, m_vScale.x / m_pTexInfo->tImgInfo.Width, m_vScale.y / m_pTexInfo->tImgInfo.Height, 0.f);
+	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
 }
 
 CBullet::~CBullet() {}
 
 int CBullet::Update()
 {
+	m_bNowAppear = false;
 	float tempDT = DT;
 	m_fLifeTime += DT;
 	if (m_fLifeTime >= 3)
@@ -28,18 +37,15 @@ int CBullet::Update()
 	if (false == m_bActive)
 		return OBJ_DEAD;
 
-	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
-
+	D3DXMatrixScaling(&m_matScale, m_vScale.x / m_pTexInfo->tImgInfo.Width,m_vScale.y / m_pTexInfo->tImgInfo.Height, 1.f);
 	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
 
-	m_matWorld = m_matScale * m_matTrans;
-
+	m_matWorld = m_matScale  * m_matTrans;
 
 	for (int i(0); i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
 	}
-
 	D3DXVec3TransformNormal(&m_vWorldDir, &m_vDir, &m_matRotZ);
 
 	m_vPos += m_vWorldDir * m_fSpeed * DT;
@@ -49,8 +55,15 @@ int CBullet::Update()
 
 void CBullet::Render(HDC hDC)
 {
-	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
-
+	if (m_bNowAppear)
+		return;
+	//DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
+	MGR(CDevice)->Get_Sprite()->SetTransform(&m_matWorld);
+	MGR(CDevice)->Get_Sprite()->Draw(m_pTexInfo->pTexture, // 텍스처 객체
+		nullptr,	// 출력할 이미지 영역에 대한 렉트 구조체 포인터, null인 경우 이미지의 0, 0기준으로 출력
+		&D3DXVECTOR3(m_pTexInfo->tImgInfo.Width / 2, m_pTexInfo->tImgInfo.Height / 2, 0.f),	// 출력할 이미지의 중심 축에 대한 vec3 구조체 포인터, null인 경우 0, 0이 중심 좌표
+		nullptr,	// 위치 좌표에 대한 vec3 구조체 포인터, null인 경우 스크린 상 0,0,에 좌표 출력
+		D3DCOLOR_ARGB(255, 255, 255, 255));
 	for (auto& iter : m_vecComponents)
 		iter->Render(hDC);
 }

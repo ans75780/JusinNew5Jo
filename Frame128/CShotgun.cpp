@@ -7,6 +7,7 @@
 
 #include "Player.h"
 #include "CBullet_Shotgun.h"
+#include "SoundMgr.h"
 
 CShotgun::CShotgun()
 {
@@ -21,14 +22,13 @@ void CShotgun::Init()
 	dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->set_gun(this);
 	m_vScale = { 50.f, 30.f, 0.f };
 
-	m_iMaxLoad = 100;
+	m_iMaxLoad = INT_MAX;
 	m_iCurLoad = m_iMaxLoad;
 
 	m_strName = L"Shotgun";
 
 	Set_Initial_Points();
-	m_fShootInterval = 0.2f;
-
+	m_fShootInterval = 1.5f;
 	m_bActive = true;
 	m_eID = OBJID::OBJ_GUN;
 	m_eRenderID = RENDERID::RENDER_OBJ;
@@ -69,6 +69,16 @@ int CShotgun::Update()
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Shotgun>::Create());
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Shotgun>::Create());
 		m_iCurLoad -= 5;
+		if (MGR(SoundMgr)->IsPlaySound("Shotgun_Shoot"))
+		{
+			MGR(SoundMgr)->Stop("Shotgun_Shoot");
+
+			MGR(SoundMgr)->Play("Shotgun_Shoot");
+
+		}
+		else
+			MGR(SoundMgr)->Play("Shotgun_Shoot");
+
 	}
 
 	return OBJ_NOEVENT;

@@ -93,14 +93,14 @@ HRESULT CDevice::Init(void)
 		return E_FAIL;
 	}
 	D3DXFONT_DESC desc;
-	desc.CharSet = HANGUL_CHARSET;
+	desc.CharSet = DEFAULT_CHARSET;
 	desc.Height = 50;
-	desc.Width = 30;
+	desc.Width = 25;
 	desc.Weight = FW_NORMAL;
 	desc.Quality = DEFAULT_QUALITY;
 	desc.MipLevels = 1;
 	desc.Italic = 0;
-	swprintf_s(desc.FaceName, L"Arial");
+	swprintf_s(desc.FaceName, L"Impact");
 	desc.OutputPrecision = OUT_DEFAULT_PRECIS;
 	desc.PitchAndFamily = FF_DONTCARE;
 	if (FAILED(D3DXCreateFontIndirect(m_pDevice, &desc, &m_pFont)))
@@ -121,8 +121,6 @@ void CDevice::Render_Begin(void)
 					D3DCOLOR_ARGB(255, 125, 125, 125),	// 백 버퍼의 색상
 					1.f,		// 깊이 버퍼의 초기화 값(매우 중요!!!!!!!!!!!!!)
 					0);			// 스텐실 버퍼의 초기화 값
-
-	
 	// 여기서부터 후면 버퍼에 그리기를 시작하겠다.
 	m_pDevice->BeginScene();
 
@@ -130,6 +128,9 @@ void CDevice::Render_Begin(void)
 	// 2D이미지를 그릴 수 있도록 장치를 준비(렌더링 옵션) // 알파 테스트가 유효한 상태에서 알파 블랜딩 사용하겠다는 옵션
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 	m_pLine->Begin();
+
+	
+
 }
 
 

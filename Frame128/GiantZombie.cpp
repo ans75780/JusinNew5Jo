@@ -15,17 +15,17 @@ void CGiantZombie::Init(void)
 {
 	m_UnitStat.Set_Atk(15.f);
 	m_UnitStat.Set_Hp(60.f);
-	m_UnitStat.Set_MaxHp(10.f);
+	m_UnitStat.Set_MaxHp(60.f);
 
 	m_vPos = { 400, 100, 0.f };
-	m_vScale = { 50.f, 50.f, 0.f };
+	m_vScale = { 250.f, 250.f, 0.f };
 
 	m_vPoint[0] = { -m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
 	m_vPoint[1] = { m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
 	m_vPoint[2] = { m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
 	m_vPoint[3] = { -m_vScale.x * 0.5f, m_vScale.y * 0.5f, 0.f };
 
-	m_fSpeed = 10;
+	m_fSpeed = 30;
 
 	m_bActive = true;
 	m_eID = OBJID::OBJ_MONSTER;
@@ -50,7 +50,7 @@ void CGiantZombie::Init(void)
 
 	m_vImgScale = { m_vScale.x / m_pTexInfo->tImgInfo.Width ,m_vScale.y / m_pTexInfo->tImgInfo.Height, 0.f };
 
-	D3DXMatrixScaling(&m_matScale, m_vScale.x, m_vScale.y, 0.f);
+	D3DXMatrixScaling(&m_matScale, m_vScale.x / m_pTexInfo->tImgInfo.Width, m_vScale.y / m_pTexInfo->tImgInfo.Height, 0.f);
 	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);
 	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
 	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
@@ -59,10 +59,12 @@ void CGiantZombie::Init(void)
 		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
 	}
 	D3DXVec3TransformNormal(&m_vWorldDir, &m_vDir, &m_matRotZ);
+	m_bUpdated = false;
 }
 
 int CGiantZombie::Update(void)
 {
+	m_bUpdated = true;
 	if (m_UnitStat.Get_Hp() < 1)
 	{
 		Set_Active(false);
@@ -79,20 +81,29 @@ int CGiantZombie::Update(void)
 	//m_fRadian = D3DXToRadian(90.f);
 
 	//CalcMat();
-
+	/*
 	if (m_iColor > 0)
 	{
-		m_vImgScale *= 1 + (DT * 0.2f);
+		
+		if (m_vImgScale.x > 3.f)
+		{
+			m_vImgScale.x = 2.f;
+			m_vImgScale.y = 2.f;
+			m_vImgScale.z = 1.f;
+		}
+		else
+			m_vImgScale *= 1 + (DT * 0.2f);
 		m_iColor -= int((m_iColor * DT * 0.05f) + DT);
-		m_fSpeed *= 1 + (DT * 0.46f);
+		if (m_fSpeed > 35)
+		{
+			m_fSpeed = 35.f;
+		}
+		else
+			m_fSpeed *= 1 + (DT * 0.46f);
 		m_fImgTime -= DT * 0.2f;
 	}
-	
-
-
-	
-
-	D3DXMatrixScaling(&m_matScale, m_vImgScale.x, m_vImgScale.y, 0.f);
+	*/
+	D3DXMatrixScaling(&m_matScale, m_vScale.x / m_pTexInfo->tImgInfo.Width, m_vScale.y / m_pTexInfo->tImgInfo.Height, 0.f);
 	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);
 	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
 	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
@@ -121,7 +132,8 @@ int CGiantZombie::Update(void)
 
 void CGiantZombie::Render(HDC hDC)
 {
-
+	if (!m_bUpdated)
+		return;
 	MGR(CDevice)->Get_Sprite()->SetTransform(&m_matWorld);
 
 
@@ -132,7 +144,7 @@ void CGiantZombie::Render(HDC hDC)
 		nullptr,	// 출력할 이미지 영역에 대한 렉트 구조체 포인터, null인 경우 이미지의 0, 0기준으로 출력
 		&D3DXVECTOR3(Half_Width, Half_Height, 0.f),	// 출력할 이미지의 중심 축에 대한 vec3 구조체 포인터, null인 경우 0, 0이 중심 좌표
 		nullptr,	// 위치 좌표에 대한 vec3 구조체 포인터, null인 경우 스크린 상 0,0,에 좌표 출력
-		D3DCOLOR_ARGB(255, 255, m_iColor, m_iColor));
+		D3DCOLOR_ARGB(255, 119, 128, 61));
 
 	
 }
@@ -147,8 +159,24 @@ void CGiantZombie::Set_Active(bool _isActive)
 
 	if (!_isActive)
 	{
+		MGR(SoundMgr)->Play("Zombie_Dead");
+
 		CObj* Coin = CAbstractFactory<CCoin>::Create();
 		Coin->Set_Pos(m_vPos);
+		MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);
+
+		Coin = CAbstractFactory<CCoin>::Create();
+		DXV3 pos2 = m_vPos;
+		pos2.x += 30;
+		pos2.y += 30;
+		Coin->Set_Pos(pos2);
+		MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);
+
+	
+		Coin = CAbstractFactory<CCoin>::Create();
+		pos2 = m_vPos;
+		pos2.x += 30;
+		Coin->Set_Pos(pos2);
 		MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);
 	}
 }

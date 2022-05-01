@@ -4,7 +4,7 @@
 #include "Device.h"
 #include "ObjMgr.h"
 #include "AbstractFactory.h"
-
+#include "SoundMgr.h"
 #include "Player.h"
 #include "CBullet_SMG.h"
 
@@ -64,6 +64,9 @@ int CSMG::Update()
 
 	if (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->shoot())
 	{
+		if (!MGR(SoundMgr)->IsPlaySound("SMG_Shoot"))
+			MGR(SoundMgr)->Play("SMG_Shoot");
+	
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_SMG>::Create());
 		--m_iCurLoad;
 	}

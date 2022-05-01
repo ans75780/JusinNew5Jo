@@ -80,7 +80,7 @@ void CCollider::Render(HDC hDC)
 	DeleteObject(myPen);
 	DeleteObject(myBrush);
 	*/
-	DEVICE->Draw_Line(m_vWheels, 5, D3DCOLOR_ARGB(255,0,255,0));
+	//DEVICE->Draw_Line(m_vWheels, 5, D3DCOLOR_ARGB(255,0,255,0));
 }
 
 void CCollider::Set_Owner(CObj* pObj)

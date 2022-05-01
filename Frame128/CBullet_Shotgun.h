@@ -10,7 +10,7 @@ public:
 public:
 	virtual void Init();
 	virtual int Update();
-
+	virtual void Render(HDC hDC);
 public:
 	virtual void OnCollision(CCollider * _pOther);
 	virtual void OnCollisionEnter(CCollider * _pOther);

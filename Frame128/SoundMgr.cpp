@@ -1,146 +1,192 @@
 #include "stdafx.h"
 #include "SoundMgr.h"
 
-CSoundMgr* CSoundMgr::m_pInstance = nullptr;
-CSoundMgr::CSoundMgr()
+SoundMgr::SoundMgr()
+	:m_system(NULL), m_channel(NULL), m_sound(NULL)
 {
-	m_pSystem = nullptr;
 }
 
 
-CSoundMgr::~CSoundMgr()
+SoundMgr::~SoundMgr()
 {
 	Release();
 }
 
-void CSoundMgr::Init()
+HRESULT SoundMgr::Init()
 {
-	// 사운드를 담당하는 대표객체를 생성하는 함수
-	FMOD_System_Create(&m_pSystem);
+	// 사운드 시스템 생성
+	System_Create(&m_system);
 
-	// 1. 시스템 포인터, 2. 사용할 가상채널 수 , 초기화 방식) 
-	FMOD_System_Init(m_pSystem, 32, FMOD_INIT_NORMAL, NULL);
+	// flag는 옵션
+	m_system->init(TOTALSOUNDBUFFER, FMOD_INIT_NORMAL, 0);
 
-	LoadSoundFile();
-}
-void CSoundMgr::Release()
-{
-	for (auto& Mypair : m_mapSound)
-	{
-		delete[] Mypair.first;
-		FMOD_Sound_Release(Mypair.second);
-	}
-	m_mapSound.clear();
+	m_sound = new Sound * [TOTALSOUNDBUFFER];
+	m_channel = new Channel * [TOTALSOUNDBUFFER];
 
-	FMOD_System_Release(m_pSystem);
-	FMOD_System_Close(m_pSystem);
-}
-
-void CSoundMgr::PlaySound(TCHAR* pSoundKey, CHANNELID eID, float fVolume)
-{
-	map<TCHAR*, FMOD_SOUND*>::iterator iter;
-
-	// iter = find_if(m_mapSound.begin(), m_mapSound.end(), CTag_Finder(pSoundKey));
-	iter = find_if(m_mapSound.begin(), m_mapSound.end(),
-		[&](auto& iter)->bool
-		{
-			return !lstrcmp(pSoundKey, iter.first);
-		});
-
-	if (iter == m_mapSound.end())
-		return;
-
-	FMOD_BOOL bPlay = FALSE;
-
-	if (FMOD_Channel_IsPlaying(m_pChannelArr[eID], &bPlay))
-	{
-		FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, iter->second, FALSE, &m_pChannelArr[eID]);
+	// ZeroMemory로 해도됨
+	/// memset ZeroMemory로 초기화시 문제 발생함
+	/// 그냥 반복문 돌려서 초기화 시킴
+	//memset(m_sound, 0, sizeof(Sound*) * TOTALSOUNDBUFFER);
+	//memset(m_channel, 0, sizeof(Channel*) * TOTALSOUNDBUFFER);
+	//ZeroMemory(m_sound, sizeof(Sound*) * TOTALSOUNDBUFFER);
+	//ZeroMemory(m_channel, sizeof(Channel*) * TOTALSOUNDBUFFER);
+	for (int i = 0; i < TOTALSOUNDBUFFER; i++) {
+		m_sound[i] = NULL;
+		m_channel[i] = NULL;
 	}
 
-	FMOD_Channel_SetVolume(m_pChannelArr[eID], fVolume);
-
-	FMOD_System_Update(m_pSystem);
+	return S_OK;
 }
 
-void CSoundMgr::PlayBGM(TCHAR* pSoundKey, float fVolume)
+void SoundMgr::Release()
 {
-	map<TCHAR*, FMOD_SOUND*>::iterator iter;
-
-	// iter = find_if(m_mapSound.begin(), m_mapSound.end(), CTag_Finder(pSoundKey));
-	iter = find_if(m_mapSound.begin(), m_mapSound.end(), [&](auto& iter)->bool
-		{
-			return !lstrcmp(pSoundKey, iter.first);
-		});
-
-	if (iter == m_mapSound.end())
-		return;
-
-	FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, iter->second, FALSE, &m_pChannelArr[SOUND_BGM]);
-	FMOD_Channel_SetMode(m_pChannelArr[SOUND_BGM], FMOD_LOOP_NORMAL);
-	FMOD_Channel_SetVolume(m_pChannelArr[SOUND_BGM], fVolume);
-	FMOD_System_Update(m_pSystem);
-}
-
-void CSoundMgr::StopSound(CHANNELID eID)
-{
-	FMOD_Channel_Stop(m_pChannelArr[eID]);
-}
-
-void CSoundMgr::StopAll()
-{
-	for (int i = 0; i < MAXCHANNEL; ++i)
-		FMOD_Channel_Stop(m_pChannelArr[i]);
-}
-
-void CSoundMgr::SetChannelVolume(CHANNELID eID, float fVolume)
-{
-	FMOD_Channel_SetVolume(m_pChannelArr[eID], fVolume);
-
-	FMOD_System_Update(m_pSystem);
-}
-
-void CSoundMgr::LoadSoundFile()
-{
-	// _finddata_t : <io.h>에서 제공하며 파일 정보를 저장하는 구조체
-	_finddata_t fd;
-
-	// _findfirst : <io.h>에서 제공하며 사용자가 설정한 경로 내에서 가장 첫 번째 파일을 찾는 함수
-	long handle = long(_findfirst("../Sound/*.*", &fd));
-
-	if (handle == -1)
-		return;
-
-	int iResult = 0;
-
-	char szCurPath[128] = "../Sound/";
-	char szFullPath[128] = "";
-
-	while (iResult != -1)
-	{
-		strcpy_s(szFullPath, szCurPath);
-
-		// "../ Sound/Success.wav"
-		strcat_s(szFullPath, fd.name);
-
-		FMOD_SOUND* pSound = nullptr;
-
-		FMOD_RESULT eRes = FMOD_System_CreateSound(m_pSystem, szFullPath, FMOD_HARDWARE, 0, &pSound);
-
-		if (eRes == FMOD_OK)
-		{
-			int iLength = int(strlen(fd.name) + 1);
-
-			TCHAR* pSoundKey = new TCHAR[iLength];
-			ZeroMemory(pSoundKey, sizeof(TCHAR) * iLength);
-
-			// 아스키 코드 문자열을 유니코드 문자열로 변환시켜주는 함수
-			MultiByteToWideChar(CP_ACP, 0, fd.name, iLength, pSoundKey, iLength);
-
-			m_mapSound.emplace(pSoundKey, pSound);
+	if (m_channel != NULL || m_sound != NULL) {
+		for (int i = 0; i < TOTALSOUNDBUFFER; i++) {
+			if (m_channel != NULL) {
+				// fmod는 사운드 관리해야할 부분을 
+				// channel이 가지고 있는 경우가 있음
+				if (m_channel[i]) m_channel[i]->stop();
+			}
+			if (m_sound != NULL) {
+				if (m_sound[i]) m_sound[i]->release();
+			}
 		}
-		//_findnext : <io.h>에서 제공하며 다음 위치의 파일을 찾는 함수, 더이상 없다면 -1을 리턴
-		iResult = _findnext(handle, &fd);
 	}
-	FMOD_System_Update(m_pSystem);
-	_findclose(handle);
+	SAFE_DELETE_ARRAY(m_sound);
+	SAFE_DELETE_ARRAY(m_channel);
+
+	if (m_system != NULL) {
+		m_system->release();
+		m_system->close();
+	}
+
+	// test
+	// fmod 에서 3d 쓰고 싶으면 이런거 설정하면 된다고 함
+	// 3d 음향 거리값 설정 가능
+	//m_channel[0]->set3DMinMaxDistance()
+	// 3d 음향 위치값 설정 가능
+	//m_channel[0]->set3DCustomRolloff()
+	// 도플러 효과도 줄 수 있음
+}
+
+void SoundMgr::Update()
+{
+	m_system->update();
+}
+
+void SoundMgr::AddSound(string keyName, string fileName, bool bgm, bool loop)
+{
+	// stream sound 차이는 크게 없는데
+	// stream은 sound가 일렬로 쭉 저장되는데
+	// sound는 그냥 저장된다고 보면됨
+	// 저장되는 방식이 다름
+
+	if (loop) {
+		if (bgm) {
+			// string.c_str() string char* 형으로 변경 해주는거
+			m_system->createStream(fileName.c_str(),
+				FMOD_LOOP_NORMAL, NULL,
+				&m_sound[m_totalSounds.size()]);
+		}
+		else {
+			m_system->createSound(fileName.c_str(),
+				FMOD_LOOP_NORMAL, NULL,
+				&m_sound[m_totalSounds.size()]);
+		}
+	}
+	else {
+		m_system->createSound(fileName.c_str(),
+			FMOD_DEFAULT, NULL,
+			&m_sound[m_totalSounds.size()]);
+	}
+	m_totalSounds[keyName] = &m_sound[m_totalSounds.size()];
+}
+
+void SoundMgr::Play(string keyName, float volume)
+{
+	// channel에서 플레이해야되서 count도 돌리는거
+	int count = 0;
+	map<string, Sound**>::iterator iter;
+	for (iter = m_totalSounds.begin();
+		iter != m_totalSounds.end(); ++iter, count++) {
+		if (keyName == iter->first) {
+			// false는 바로 일시정지 시킬지 결정
+			m_system->playSound(FMOD_CHANNEL_FREE,
+				*iter->second, false, &m_channel[count]);
+			m_channel[count]->setVolume(volume);
+			break;
+		}
+	}
+}
+
+void SoundMgr::Stop(string keyName)
+{
+	int count = 0;
+	map<string, Sound**>::iterator iter;
+	for (iter = m_totalSounds.begin();
+		iter != m_totalSounds.end(); ++iter, count++) {
+		if (keyName == iter->first) {
+			m_channel[count]->stop();
+			break;
+		}
+	}
+}
+
+void SoundMgr::Pause(string keyName)
+{
+	int count = 0;
+	map<string, Sound**>::iterator iter;
+	for (iter = m_totalSounds.begin();
+		iter != m_totalSounds.end(); ++iter, count++) {
+		if (keyName == iter->first) {
+			m_channel[count]->setPaused(true);
+			break;
+		}
+	}
+}
+
+void SoundMgr::Resume(string keyName)
+{
+	int count = 0;
+	map<string, Sound**>::iterator iter;
+	for (iter = m_totalSounds.begin();
+		iter != m_totalSounds.end(); ++iter, count++) {
+		if (keyName == iter->first) {
+			m_channel[count]->setPaused(false);
+			break;
+		}
+	}
+}
+
+bool SoundMgr::IsPlaySound(string keyName)
+{
+	bool isPlay;
+
+	int count = 0;
+	map<string, Sound**>::iterator iter;
+	for (iter = m_totalSounds.begin();
+		iter != m_totalSounds.end(); ++iter, count++) {
+		if (keyName == iter->first) {
+			m_channel[count]->isPlaying(&isPlay);
+			break;
+		}
+	}
+	return isPlay;
+}
+
+bool SoundMgr::isPauseSound(string keyName)
+{
+	bool isPaused;
+
+	int count = 0;
+	map<string, Sound**>::iterator iter;
+	for (iter = m_totalSounds.begin();
+		iter != m_totalSounds.end(); ++iter, count++) {
+		if (keyName == iter->first) {
+			m_channel[count]->getPaused(&isPaused);
+			break;
+		}
+	}
+
+	return isPaused;
 }

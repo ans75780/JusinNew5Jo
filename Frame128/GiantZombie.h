@@ -21,5 +21,6 @@ private:
     float m_fImgTime = 0.75f;
     float m_fCurTime = m_fImgTime;
     int m_iColor = 255;
+    bool    m_bUpdated;
 };
 

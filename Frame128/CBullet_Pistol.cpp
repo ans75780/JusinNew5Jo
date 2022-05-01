@@ -7,6 +7,7 @@
 #include "ObjMgr.h"
 #include "TimeMgr.h"
 #include "Stat.h"
+#include "TextureMgr.h"
 #include "Monster.h"
 
 
@@ -30,7 +31,7 @@ void CBullet_Pistol::Init()
 
 	Set_Initial_Points();
 
-	m_fSpeed = 300.f;
+	m_fSpeed = 1600.f;
 
 	m_bActive = true;
 	m_eID = OBJID::OBJ_BULLET;
@@ -45,6 +46,7 @@ void CBullet_Pistol::Init()
 	m_fSpreadY = create_y_spread();
 
 	set_bullet_dir(dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->get_eDir());
+
 }
 
 void CBullet_Pistol::OnCollision(CCollider * _pOther)

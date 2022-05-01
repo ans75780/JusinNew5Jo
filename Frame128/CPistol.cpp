@@ -7,7 +7,7 @@
 
 #include "Player.h"
 #include "CBullet_Pistol.h"
-
+#include "SoundMgr.h"
 CPistol::CPistol()
 {
 }
@@ -58,6 +58,7 @@ int CPistol::Update()
 
 	if (dynamic_cast<CPlayer*>(MGR(CObjMgr)->Get_Player())->shoot())
 	{
+		MGR(SoundMgr)->Play("Pistol_Shoot");
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BULLET, CAbstractFactory<CBullet_Pistol>::Create());
 	}
 	return OBJ_NOEVENT;

@@ -17,5 +17,5 @@ CGun::~CGun() {}
 
 void CGun::Render(HDC hDC)
 {
-	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
+	//DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
 }

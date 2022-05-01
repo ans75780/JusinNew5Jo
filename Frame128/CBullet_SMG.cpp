@@ -23,14 +23,11 @@ void CBullet_SMG::Init()
 	m_vPos = { MGR(CObjMgr)->Get_Player()->Get_Pos().x
 		, MGR(CObjMgr)->Get_Player()->Get_Pos().y
 		, 0.f };
-
 	m_vScale = { 12.f, 12.f, 0.f };
-
 	m_fAtk = 1.f;
-
 	Set_Initial_Points();
 
-	m_fSpeed = 500.f;
+	m_fSpeed = 1200.f;
 	
 	m_bActive = true;
 	m_eID = OBJID::OBJ_BULLET;

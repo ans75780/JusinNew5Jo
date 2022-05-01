@@ -11,8 +11,9 @@
 #include "MyEditor.h"
 #include "CollisionMgr.h"
 #include "UserDefineHeaders.h"
-
-
+#include "RandomMgr.h"
+#include "Camera.h"
+#include "SoundMgr.h"
 CMainGame::CMainGame()
 {
 
@@ -44,13 +45,38 @@ void CMainGame::Initialize(void)
 		assert(false);
 		return;
 	}
+	if (FAILED(MGR(CTextureMgr)->InsertTexture(L"../Image/Bullet.png", TEX_SINGLE, L"Bullet")))
+	{
+		assert(false);
+		return;
+	}
+
+	if (FAILED(MGR(CTextureMgr)->InsertTexture(L"../Image/Player/Pistol/Idle/survivor-idle_handgun_%d.png", TEX_MULTI, L"Pistol", L"Idle", 20)))
+	{
+		assert(false);
+		return;
+	}
+	if (FAILED(MGR(CTextureMgr)->InsertTexture(L"../Image/Coin%d.png", TEX_MULTI, L"Item", L"Coin", 2)))
+	{
+		assert(false);
+		return;
+	}
+	MGR(SoundMgr)->Init();
+	MGR(SoundMgr)->AddSound("Bgm", "../Sound/Bgm.mp3",  true, true);
+	MGR(SoundMgr)->AddSound("Walk", "../Sound/Walk.mp3", false,true);
+	MGR(SoundMgr)->AddSound("Zombie_Dead", "../Sound/Zombie_Dead.mp3");
+	MGR(SoundMgr)->AddSound("Pistol_Shoot", "../Sound/Pistol_Shoot.mp3");
+	MGR(SoundMgr)->AddSound("SMG_Shoot", "../Sound/SMG_Shoot.mp3");
+	MGR(SoundMgr)->AddSound("Shotgun_Shoot", "../Sound/Shotgun_Shoot.mp3");
+
+
+
 	//TIMEMANAGER은 windowcpp에서 초기화함(화면 루프 때문에)
 	MGR(CKeyMgr)->init();
 	MGR(CSceneMgr)->Init();
 	MGR(CSceneMgr)->AddScene("Stage", new CStage);
 	MGR(CSceneMgr)->ChangeScene("Stage");
-	MGR(CSoundMgr)->Init();
-	
+
 	
 
 	
@@ -80,6 +106,7 @@ void CMainGame::Update(void)
 void CMainGame::Late_Update(void)
 {
 	MGR(CSceneMgr)->Late_Update();
+	MGR(SoundMgr)->Update();
 }
 
 void CMainGame::Render(void)
@@ -99,7 +126,7 @@ void CMainGame::Release(void)
 	MGR(CObjMgr)->ReleaseSingleton();
 	MGR(CKeyMgr)->ReleaseSingleton();
 	MGR(CTimeMgr)->ReleaseSingleton();
-	MGR(CSoundMgr)->ReleaseSingleton();
+	MGR(SoundMgr)->ReleaseSingleton();
 	MGR(CCollisionMgr)->ReleaseSingleton();
 	MGR(CDevice)->ReleaseSingleton();
 	MGR(CTextureMgr)->ReleaseSingleton();

@@ -41,5 +41,6 @@ protected:
 	float m_fSpreadX;
 	float m_fSpreadY;
 
-	float m_fAtk;
+	float	m_fAtk;
+	bool	m_bNowAppear;
 };

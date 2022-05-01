@@ -53,6 +53,8 @@ private:
 	int             m_iCoin;
 	GUN_TYPE	m_ePlayerGun = GUN_TYPE::END;
 	CStat			m_UnitStat;
-	
+	float m_fCurTime = 0.003f;
+	TCHAR	szStr[MAX_STR];
+	DIRECTION	m_ePrevDir;
 };
 

@@ -57,3 +57,6 @@
 #endif // _DEBUG
 
 using namespace std;
+
+
+#define SAFE_DELETE_ARRAY(p){delete[] p; p = nullptr;}

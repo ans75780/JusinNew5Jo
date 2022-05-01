@@ -151,6 +151,9 @@
     <Filter Include="01. Obj\Unit\Monster\Boss">
       <UniqueIdentifier>{b7fe17ff-6d34-495f-bf25-a49bef6e3509}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{a63d11a8-d0eb-4143-8094-a65fe5622784}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -318,6 +321,15 @@
     <ClInclude Include="GiantZombie.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomMgr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RageZombie.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -462,6 +474,15 @@
       <Filter>01. Obj\Unit\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="GiantZombie.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomMgr.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RageZombie.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

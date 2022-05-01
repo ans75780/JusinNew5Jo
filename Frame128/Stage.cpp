@@ -3,6 +3,9 @@
 
 #include "UserDefineHeaders.h"
 #include "CBoss_hyde.h"
+#include "RandomMgr.h"
+#include "Camera.h"
+#include "SoundMgr.h"
 
 CStage::CStage()
 {
@@ -25,8 +28,8 @@ HRESULT CStage::Init(void)
 	}
 
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
-	MGR(CObjMgr)->AddObject(OBJ_BOSS, CAbstractFactory<CBoss_hyde>::Create());
-	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
+	//MGR(CObjMgr)->AddObject(OBJ_BOSS, CAbstractFactory<CBoss_hyde>::Create());
+	//MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
 	mapSize.x = float(MGR(CTextureMgr)->Get_Texture(L"Background")->tImgInfo.Width);
 	mapSize.y = 600.f;
 	mapSize.z = 0;
@@ -46,13 +49,19 @@ HRESULT CStage::Init(void)
 	CObj* Coin3 = CAbstractFactory<CCoin>::Create();
 	Coin3->Set_Pos(DXV3(200.f, 300.f, 0.f));
 	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin3);*/
-
+	/*
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER
+		, CAbstractFactory<CZombie>::Create(float(WINCX / 2 + rand() % 400), float(WINCY / 2 + rand() % 400), 0.f));
 	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER
 		, CAbstractFactory<CGiantZombie>::Create(float(WINCX / 2 + rand() % 400), float(WINCY / 2 + rand() % 400), 0.f));
-
+		*/
 	MGR(CTimeMgr)->AddLoopEvent(2.f, this, 0);
-	MGR(CTimeMgr)->AddLoopEvent(7.f, this, 1);
+	MGR(CTimeMgr)->AddLoopEvent(6.f, this, 1);
+	MGR(CTimeMgr)->AddLoopEvent(10.f, this, 2);
+	MGR(CCamera)->SetTarget(MGR(CObjMgr)->Get_Player());
 
+	MGR(SoundMgr)->Play("Bgm");
+	int a = 0;
 	return S_OK;
 }
 
@@ -61,6 +70,9 @@ void CStage::Update(void)
 	MGR(CObjMgr)->Update();
 	MGR(CKeyMgr)->update();
 	MGR(CTimeMgr)->Update();
+	MGR(CCamera)->Update();
+
+
 }
 
 void CStage::Late_Update(void)
@@ -113,7 +125,10 @@ void CStage::Late_Update(void)
 		pt.y = mapSize.y - WINCY_HALF;
 	else if (pt.y - WINCY_HALF < 0)
 		pt.y = WINCY_HALF;
-
+	if (MGR(CCamera)->isShake())
+	{
+		pt += MGR(CCamera)->Get_ShakePos();
+	}
 	rc.left = long(pt.x - WINCX_HALF);
 	rc.right = long(pt.x + WINCX_HALF);
 	rc.top = long(pt.y - WINCY_HALF);
@@ -146,8 +161,10 @@ void CStage::Render(HDC hDC)
 	&D3DXVECTOR3(0, 0, 0),	// 위치 좌표에 대한 vec3 구조체 포인터, null인 경우 스크린 상 0,0,에 좌표 출력
 	D3DCOLOR_ARGB(255, 255, 255, 255));	// 출력할 원본 이미지와 섞을 색상 값, 0xffffffff 값을 넣어주면 원본색 유지
 	//백그라운드 출력 끝
+
+
 	MGR(CObjMgr)->Render(hDC);
-	RECT rc = { 100,0,0,0 };
+	RECT rc = { 300,0,0,0 };
 	TCHAR	str[MAX_STR];
 	int zombieCount = 0;
 	list<CObj*> monster_List = MGR(CObjMgr)->Get_ObjList(OBJ_MONSTER);
@@ -158,7 +175,7 @@ void CStage::Render(HDC hDC)
 				zombieCount++;
 		}
 	);
-	swprintf_s(str, L"남은 좀비 : %d", zombieCount);
+	swprintf_s(str, L"LEFT JUSIN ZOMBIE : %d", zombieCount);
 	DEVICE->Get_Font()->DrawTextW(nullptr, str, -1, &rc, DT_NOCLIP, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
@@ -181,18 +198,59 @@ void CStage::OnTimerEvent(int _iEventNum)
 	{
 		SpawnRageZombie();
 	}
-
+	else if (_iEventNum == 2)
+	{
+		SpawnGiantZombie();
+	}
 }
 
 void CStage::SpawnZombie()
 {
-	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(float(WINCX /2 + rand() % 400), float(WINCY / 2 + rand() % 400), 0.f));
+	DXV3 spawnPoint;
+
+	if (MGR(CRandomMgr)->getInt(2))
+		spawnPoint.x = MGR(CRandomMgr)->getFromFloatTo(100, 400) * -1;
+	else
+		spawnPoint.x = MGR(CRandomMgr)->getFromFloatTo(900, 1200);
+	if (MGR(CRandomMgr)->getInt(2))
+		spawnPoint.y = MGR(CRandomMgr)->getFromFloatTo(100, 400) * -1;
+	else
+		spawnPoint.y = MGR(CRandomMgr)->getFromFloatTo(700, 900);
+
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(spawnPoint.x, spawnPoint.y, 0.f));
 
 }
 
 void CStage::SpawnRageZombie()
 {
-	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CGiantZombie>::Create(float(WINCX / 2  + rand() % 400), float(WINCY / 2 + rand() % 400), 0.f));
+	DXV3 spawnPoint;
+
+	if (MGR(CRandomMgr)->getInt(2))
+		spawnPoint.x = MGR(CRandomMgr)->getFromFloatTo(100, 400) * -1;
+	else
+		spawnPoint.x = MGR(CRandomMgr)->getFromFloatTo(900, 1200);
+	if (MGR(CRandomMgr)->getInt(2))
+		spawnPoint.y = MGR(CRandomMgr)->getFromFloatTo(100, 400) * -1;
+	else
+		spawnPoint.y = MGR(CRandomMgr)->getFromFloatTo(700, 900);
+
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CRageZombie>::Create(spawnPoint.x, spawnPoint.y, 0.f));
+}
+
+void CStage::SpawnGiantZombie()
+{
+	DXV3 spawnPoint;
+
+	if (MGR(CRandomMgr)->getInt(2))
+		spawnPoint.x = MGR(CRandomMgr)->getFromFloatTo(100, 400) * -1;
+	else
+		spawnPoint.x = MGR(CRandomMgr)->getFromFloatTo(900, 1200);
+	if (MGR(CRandomMgr)->getInt(2))
+		spawnPoint.y = MGR(CRandomMgr)->getFromFloatTo(100, 400) * -1;
+	else
+		spawnPoint.y = MGR(CRandomMgr)->getFromFloatTo(700, 900);
+
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CGiantZombie>::Create(spawnPoint.x, spawnPoint.y, 0.f));
 }
 
 void CStage::SpawnItem()

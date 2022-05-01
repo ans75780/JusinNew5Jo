@@ -24,6 +24,7 @@
 #include "CGun.h"
 #include "Zombie.h"
 #include "GiantZombie.h"
+#include "RageZombie.h"
 #include "Hand.h"
 #include "CPistol.h"
 #include "CBullet_Pistol.h"

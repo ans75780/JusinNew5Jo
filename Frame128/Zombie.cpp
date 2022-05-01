@@ -28,7 +28,7 @@ void CZombie::Init(void)
 	m_UnitStat.Set_MaxHp(30.f);
 
 	m_vPos = { 400, 100, 0.f };
-	m_vScale = { 50.f, 50.f, 0.f };
+	m_vScale = { 75.f, 75.f, 0.f };
 
 	m_vPoint[0] = { -m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
 	m_vPoint[1] = { m_vScale.x * 0.5f, -m_vScale.y * 0.5f, 0.f };
@@ -56,11 +56,13 @@ void CZombie::Init(void)
 
 	m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);
 	m_fCurTime = 0.75;
+	m_bUpdated = false;
 
 }
 
 int CZombie::Update(void)
 {
+	m_bUpdated = true;
 	if (m_UnitStat.Get_Hp() < 1)
 	{
 		Set_Active(false);
@@ -75,7 +77,11 @@ int CZombie::Update(void)
 	}
 	SetRadianToPlayer();
 	//m_fRadian = D3DXToRadian(90.f);
-	CalcMat();
+	//CalcMat();
+	D3DXMatrixScaling(&m_matScale, m_vScale.x / m_pTexInfo->tImgInfo.Width, m_vScale.y / m_pTexInfo->tImgInfo.Height, 0.f);
+	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);
+	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
+	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
 	for (int i(0); i < 4; ++i)
 	{
 		D3DXVec3TransformCoord(&m_vWorldPoint[i], &m_vPoint[i], &m_matWorld);
@@ -122,7 +128,12 @@ void CZombie::Render(HDC hDC)
 
 	EllipseDrawCenter(hDC, m_vWorldPoint[1].x, m_vWorldPoint[1].y, 10, 10);
 	EllipseDrawCenter(hDC, m_vWorldPoint[2].x, m_vWorldPoint[2].y, 10, 10);*/
-
+	if (!m_bUpdated)
+		return;
+	if (m_vPos.x < -50 || m_vPos.x > 1400)
+		return;
+	if (m_vPos.y < -50 || m_vPos.y > 700)
+		return;
 	MGR(CDevice)->Get_Sprite()->SetTransform(&m_matWorld);
 	
 	
@@ -153,6 +164,7 @@ void CZombie::Set_Active(bool _isActive)
 
 	if (!_isActive)
 	{
+		MGR(SoundMgr)->Play("Zombie_Dead");
 		CObj* Coin = CAbstractFactory<CCoin>::Create();
 		Coin->Set_Pos(m_vPos);
 		MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);

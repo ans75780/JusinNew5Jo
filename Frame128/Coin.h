@@ -28,6 +28,7 @@ public:
     virtual void OnTriggerEnter(CCollider* _pOther) override;
 
     virtual void OnTriggerExit(CCollider* _pOther) override;
-
+private:
+    bool    m_bUpdated;
 };
 

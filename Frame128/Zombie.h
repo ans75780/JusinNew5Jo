@@ -17,5 +17,6 @@ public:
 
 private:
     float m_fCurTime = 0.003f;
+    bool    m_bUpdated;
 };
 
