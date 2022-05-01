@@ -20,6 +20,7 @@ CBullet::~CBullet() {}
 
 int CBullet::Update()
 {
+	float tempDT = DT;
 	m_fLifeTime += DT;
 	if (m_fLifeTime >= 3)
 		return OBJ_DEAD;

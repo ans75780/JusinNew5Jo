@@ -23,12 +23,8 @@ protected:
 	int m_iMaxLoad;
 	int m_iCurLoad;
 
-	/*void Create_Bullet();*/
-
 public:
 	float Get_ShotInterval() { return m_fShootInterval; }
-
-
 
 public:
 	virtual void OnCollision(CCollider * _pOther) PURE;
