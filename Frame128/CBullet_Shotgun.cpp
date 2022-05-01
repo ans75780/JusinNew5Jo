@@ -18,7 +18,7 @@ CBullet_Shotgun::~CBullet_Shotgun()
 void CBullet_Shotgun::Init()
 {
 	m_vPos = { 0.f, 0.f, 0.f };
-	m_vScale = { 20.f, 20.f, 0.f };
+	m_vScale = { 30.f, 30.f, 0.f };
 
 	m_strName = L"Bullet_Shotgun";
 

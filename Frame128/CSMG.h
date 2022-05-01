@@ -10,7 +10,7 @@ public:
 
 public:
 	virtual void Init();
-	/*virtual int Update();*/
+	virtual int Update();
 	virtual void Release();
 
 public:

@@ -9,7 +9,7 @@ public:
 
 public:
 	virtual void Init() PURE;
-	virtual int Update();
+	virtual int Update() PURE;
 	virtual void Render(HDC hDC);
 	virtual void Release() PURE;
 
@@ -23,7 +23,7 @@ protected:
 	int m_iMaxLoad;
 	int m_iCurLoad;
 
-	void Create_Bullet();
+	/*void Create_Bullet();*/
 
 public:
 	float Get_ShotInterval() { return m_fShootInterval; }
