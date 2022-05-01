@@ -17,6 +17,12 @@ HRESULT CStage::Init(void)
 	srand(unsigned(time(NULL)));
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/BackBuffer.bmp", L"BackGround");
 
+	if (FAILED(MGR(CTextureMgr)->InsertTexture(L"../Image/Monster/skeleton-move_%d.png", TEX_MULTI, L"Monster", L"Zombie", 16)))
+	{
+		assert(false);
+		return S_OK;
+	}
+
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
 	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
 	
@@ -36,7 +42,9 @@ HRESULT CStage::Init(void)
 	Coin3->Set_Pos(DXV3(200.f, 300.f, 0.f));
 	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin3);*/
 
-	MGR(CTimeMgr)->AddLoopEvent(2.f, this, 0);
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX / 2 /* + rand() % 400*/, WINCY / 2/* + rand() % 400*/, 0));
+
+	MGR(CTimeMgr)->AddLoopEvent(0.1f, this, 0);
 	MGR(CTimeMgr)->AddLoopEvent(1.5f, this, 1);
 
 	return S_OK;
@@ -81,6 +89,12 @@ void CStage::Late_Update(void)
 	(
 		MGR(CObjMgr)->Get_ObjList(OBJID::OBJ_BULLET),
 		MGR(CObjMgr)->Get_ObjList(OBJ_MONSTER)
+	);
+
+	MGR(CCollisionMgr)->CollisionUpdate
+	(
+		MGR(CObjMgr)->Get_ObjList(OBJID::OBJ_MONSTER),
+		MGR(CObjMgr)->Get_ObjList(OBJID::OBJ_MONSTER)
 	);
 }
 
@@ -133,14 +147,14 @@ void CStage::OnTimerEvent(int _iEventNum)
 
 	else if(_iEventNum == 1)
 	{
-		SpawnItem();
+		//SpawnItem();
 	}
 
 }
 
 void CStage::SpawnZombie()
 {
-	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX + rand() % 400, WINCY + rand() % 400, 0));
+	MGR(CObjMgr)->AddObject(OBJID::OBJ_MONSTER, CAbstractFactory<CZombie>::Create(WINCX /2 /* + rand() % 400*/, WINCY / 2/* + rand() % 400*/, 0));
 
 }
 

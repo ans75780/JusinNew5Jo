@@ -54,6 +54,8 @@ void CZombie::Init(void)
 	hand = new CHand(this, DXV3(45, 15, 0));
 	MGR(CObjMgr)->AddObject(OBJ_MONSTER, hand);
 
+	m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);
+
 }
 
 int CZombie::Update(void)
@@ -89,7 +91,7 @@ int CZombie::Update(void)
 
 void CZombie::Render(HDC hDC)
 {
-	MoveToEx(hDC
+	/*MoveToEx(hDC
 		, int(m_vWorldPoint[0].x)
 		, int(m_vWorldPoint[0].y)
 		, nullptr);
@@ -106,7 +108,47 @@ void CZombie::Render(HDC hDC)
 		, int(m_vWorldPoint[0].y));
 
 	EllipseDrawCenter(hDC, m_vWorldPoint[1].x, m_vWorldPoint[1].y, 10, 10);
-	EllipseDrawCenter(hDC, m_vWorldPoint[2].x, m_vWorldPoint[2].y, 10, 10);
+	EllipseDrawCenter(hDC, m_vWorldPoint[2].x, m_vWorldPoint[2].y, 10, 10);*/
+
+	MGR(CDevice)->Get_Sprite()->SetTransform(&m_matWorld);
+	
+	float DTDT = DT;
+
+	//CurTime이 0보다 작으면 이미지 교체
+	if (m_fCurTime <= 0.f)
+	{
+		m_iTexIndex = (m_iTexIndex + 1) % 16;
+		m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);
+
+		m_fCurTime = 0.003f;
+	}
+	else
+	{
+		m_fCurTime -= MGR(CTimeMgr)->getElasedTime();
+
+		int i = 0;
+		//
+		//안깎여
+		//fCurTime 
+		//아
+		//DT가 엄청 작아 왜 이러지
+		//DT가 100배는 작은듯?
+		//내가 한번 CurTime을 0.003으로 해볼게
+	}
+
+	/*m_iTexIndex = (m_iTexIndex + 1) % 16;
+	m_pTexInfo = MGR(CTextureMgr)->Get_Texture(L"Monster", L"Zombie", m_iTexIndex);*/
+	
+
+	float Half_Width = m_pTexInfo->tImgInfo.Width * 0.5f;
+	float Half_Height = m_pTexInfo->tImgInfo.Height * 0.5f;
+
+	MGR(CDevice)->Get_Sprite()->Draw(m_pTexInfo->pTexture, // 텍스처 객체
+		nullptr,	// 출력할 이미지 영역에 대한 렉트 구조체 포인터, null인 경우 이미지의 0, 0기준으로 출력
+		&D3DXVECTOR3(Half_Width, Half_Height, 0.f),	// 출력할 이미지의 중심 축에 대한 vec3 구조체 포인터, null인 경우 0, 0이 중심 좌표
+		nullptr,	// 위치 좌표에 대한 vec3 구조체 포인터, null인 경우 스크린 상 0,0,에 좌표 출력
+		D3DCOLOR_ARGB(255, 255, 255, 255));
+
 	m_vecComponents[0]->Render(hDC);
 }
 

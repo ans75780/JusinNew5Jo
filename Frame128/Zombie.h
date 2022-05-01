@@ -14,5 +14,8 @@ public:
     virtual void Release(void) override;
 
     virtual void Set_Active(bool _isActive) final;
+
+private:
+    float m_fCurTime = 0.003f;
 };
 

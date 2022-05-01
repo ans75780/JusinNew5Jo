@@ -27,9 +27,21 @@ void CMainGame::Initialize(void)
 {
 	m_DC = GetDC(g_hWnd);
 
+	
 
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/BackBuffer.bmp", L"BackBuffer");
 	CBmpMgr::Get_Instance()->Insert_Bmp(L"../Image/Background.bmp", L"Background");
+
+
+	MGR(CDevice)->Set_BufferSize({ WINCX, WINCY });
+
+	if (FAILED(MGR(CDevice)->Init()))
+	{
+		assert(false);
+	}
+
+	
+
 
 	//TIMEMANAGER은 windowcpp에서 초기화함(화면 루프 때문에)
 	MGR(CKeyMgr)->init();
@@ -40,12 +52,9 @@ void CMainGame::Initialize(void)
 	
 	
 
-	MGR(CDevice)->Set_BufferSize({ WINCX, WINCY });
+	
 
-	if (FAILED(MGR(CDevice)->Init()))
-	{
-		assert(false);
-	}
+	
 
 	/*m_pSingle = new CSingleTexture;
 	m_pSingle->InsertTexture(L"../Texture/Cube.png");*/
@@ -56,13 +65,9 @@ void CMainGame::Initialize(void)
 	{
 		assert(false);
 		return;
-	}
-
-	if (FAILED(MGR(CTextureMgr)->InsertTexture(L"../Texture/Stage/Terrain/Tile/Tile%d.png", TEX_MULTI, L"Terrain", L"Tile", 36)))
-	{
-		assert(false);
-		return;
 	}*/
+
+	
 
 }
 

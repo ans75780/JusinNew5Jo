@@ -128,58 +128,39 @@ void CCollider::OnTriggerExit(CCollider* _pOther)
 
 void CCollider::CalcCollision(CCollider* _pOther)
 {
+	wstring myStr = this->Get_Owner()->Get_Name();
+	wstring otherStr = _pOther->Get_Owner()->Get_Name();
+
+	int i = 0;
+
 	if (this->Get_Owner()->Get_ID() == OBJID::OBJ_FEATURE)
 	{
 		return;
 	}
 
-	m_pOwner->Add_Pos(-m_pOwner->Get_MoveSize());
+	if (this->Get_Owner()->Get_ID() == OBJID::OBJ_MONSTER &&
+		_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_MONSTER)
+	{
+		if (this->Get_Owner()->Get_Name() == L"Zombie" &&
+			_pOther->Get_Owner()->Get_Name() == L"Zombie")
+		{
+			DXV3 Dir = m_vFinalPos - _pOther->Get_FinalPos();
+			D3DXVec3Normalize(&Dir, &Dir);
+			Dir *= 10000.f * DT;
 
+			this->Get_Owner()->Add_Pos(Dir);
+		}
+	}
 
+	else if (this->Get_Owner()->Get_ID() == OBJID::OBJ_PLAYER &&
+		_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_MONSTER)
+	{
+		DXV3 Dir = m_vFinalPos - _pOther->Get_FinalPos();
+		D3DXVec3Normalize(&Dir, &Dir);
+		Dir *= 15;
 
-	//float _W = 0;
-	//float _H = 0;
-
-	//MGR(CCollisionMgr)->IsCollision(&_W, &_H, this, _pOther);
-
-	//if (_W > _H)
-	//{
-	//	if (this->m_pOwner->Get_Pos().y < _pOther->m_pOwner->Get_Pos().y)
-	//	{
-	//		this->m_pOwner->Add_Pos(DXV3(0.f, -_H, 0));
-	//		
-	//	}
-
-	//	else
-	//	{
-	//		this->m_pOwner->Add_Pos(DXV3(0.f, _H, 0));
-
-	//		//_pOther->m_pOwner->Add_Pos(DXV3(0.f, -_H));
-
-	//		//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(0.f, -OffsetY));
-	//	}
-	//}
-
-	//else
-	//{
-	//	if (this->m_pOwner->Get_Pos().x < _pOther->m_pOwner->Get_Pos().x)
-	//	{
-
-	//		this->m_pOwner->Add_Pos(DXV3(-_W, 0.f, 0));
-
-	//		//_pOther->m_pOwner->Add_Pos(DXV3(_W, 0.f));
-
-	//		//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(OffsetX, 0.f));
-	//	}
-
-	//	else
-	//	{
-	//		this->m_pOwner->Add_Pos(DXV3(_W, 0.f, 0));
-
-	//		//_pOther->m_pOwner->Add_Pos(DXV3(-_W, 0.f));
-	//		//_Other->GetOwner()->GetTransform()->Move_Position(CPOINT(-OffsetX, 0.f));
-	//	}
-	//}
+		this->Get_Owner()->Add_Pos(Dir);
+	}
 
 	SyncOwnerPos();
 

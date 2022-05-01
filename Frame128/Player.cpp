@@ -241,10 +241,21 @@ void CPlayer::player_direction(DIRECTION _eDir)
 
 void CPlayer::OnCollision(CCollider * _pOther)
 {
+	if (_pOther->Get_Owner()->Get_ID() == OBJID::OBJ_MONSTER)
+	{
+		DXV3 Dir = m_vPos - _pOther->Get_FinalPos();
+		D3DXVec3Normalize(&Dir, &Dir);
+		Dir *= 15;
+
+		Add_Pos(Dir);
+	}
+
 }
 
 void CPlayer::OnCollisionEnter(CCollider * _pOther)
 {
+	
+
 }
 
 void CPlayer::OnCollisionExit(CCollider * _pOther)

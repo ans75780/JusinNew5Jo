@@ -79,4 +79,6 @@ void CObj::CalcMat()
 	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
 	m_matWorld = m_matScale * m_matRotZ * m_matTrans;
 
+	
+
 }

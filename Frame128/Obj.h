@@ -100,5 +100,8 @@ protected:
 
 	DXV3		m_vDirPos;
 	DXV3		m_vMoveSize = {};
+
+	const TEXINFO* m_pTexInfo = nullptr;
+	int			m_iTexIndex = 0;
 };
 

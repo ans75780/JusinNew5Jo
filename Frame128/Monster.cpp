@@ -16,6 +16,7 @@ CMonster::~CMonster()
 
 void CMonster::OnCollision(CCollider* _pOther)
 {
+    
    
 }
 
@@ -25,6 +26,7 @@ void CMonster::OnCollisionEnter(CCollider* _pOther)
     {
       //  m_bActive = false;
     }
+
 }
 
 void CMonster::OnCollisionExit(CCollider* _pOther)
