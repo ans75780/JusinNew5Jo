@@ -25,8 +25,8 @@ HRESULT CStage::Init(void)
 
 	MGR(CObjMgr)->AddObject(OBJ_PLAYER, CAbstractFactory<CPlayer>::Create());
 	MGR(CObjMgr)->AddObject(OBJ_FEATURE, CAbstractFactory<CFeature>::Create(100,100,0));
-	mapSize.x = MGR(CTextureMgr)->Get_Texture(L"Background")->tImgInfo.Width;
-	mapSize.y = 600;
+	mapSize.x = float(MGR(CTextureMgr)->Get_Texture(L"Background")->tImgInfo.Width);
+	mapSize.y = 600.f;
 	mapSize.z = 0;
 	pt = { 0,0,0 };
 	/*for (int i = 0; i < 500 ; i++)
@@ -111,10 +111,10 @@ void CStage::Late_Update(void)
 	else if (pt.y - WINCY_HALF < 0)
 		pt.y = WINCY_HALF;
 
-	rc.left = pt.x - WINCX_HALF;
-	rc.right = pt.x + WINCX_HALF;
-	rc.top = pt.y - WINCY_HALF;
-	rc.bottom = pt.y + WINCY_HALF;
+	rc.left = long(pt.x - WINCX_HALF);
+	rc.right = long(pt.x + WINCX_HALF);
+	rc.top = long(pt.y - WINCY_HALF);
+	rc.bottom = long(pt.y + WINCY_HALF);
 }
 
 void CStage::Render(HDC hDC)
@@ -190,7 +190,7 @@ void CStage::SpawnZombie()
 void CStage::SpawnItem()
 {
 	CObj* Coin = CAbstractFactory<CCoin>::Create();
-	Coin->Set_Pos(DXV3(rand() % WINCX, rand() % WINCY, 0.f));
+	Coin->Set_Pos(DXV3(float(rand() % WINCX), float(rand() % WINCY), 0.f));
 	MGR(CObjMgr)->AddObject(OBJ_ITEM, Coin);
 
 }

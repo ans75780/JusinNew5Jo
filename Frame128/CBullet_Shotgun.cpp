@@ -41,7 +41,7 @@ void CBullet_Shotgun::Init()
 	CreateCollider();
 	
 
-	m_iSpreadRate = 30.f;
+	m_iSpreadRate = 50;
 	m_fSpreadX = create_x_spread();
 	m_fSpreadY = create_y_spread();
 

@@ -40,7 +40,7 @@ void CBullet_Pistol::Init()
 	Set_Matrix_to_Identity();
 	CreateCollider();
 
-	m_iSpreadRate = 10.f;
+	m_iSpreadRate = 10;
 	m_fSpreadX = create_x_spread();
 	m_fSpreadY = create_y_spread();
 
