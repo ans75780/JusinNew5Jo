@@ -9,7 +9,8 @@ public:
 
 public:
 	virtual void Init() override;
-	virtual int Update();
+	virtual int Update() override;
+	virtual void Render(HDC hDC) override;
 
 public:
 	virtual void OnCollision(CCollider * _pOther) override;

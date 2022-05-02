@@ -8,9 +8,11 @@ public:
 	virtual ~CBullet_Boss2();
 
 public:
-	// CBullet을(를) 통해 상속됨
 	virtual void Init() override;
-	virtual int Update();
+	virtual int Update() override;
+	virtual void Render(HDC hDC) override;
+
+public:
 	virtual void OnCollision(CCollider * _pOther) override;
 	virtual void OnCollisionEnter(CCollider * _pOther) override;
 	virtual void OnCollisionExit(CCollider * _pOther) override;

@@ -8,8 +8,9 @@ public:
 	virtual ~CBullet_Boss();
 
 public:
-	virtual void Init();
-	virtual int Update();
+	virtual void Init() override;
+	virtual int Update() override;
+	virtual void Render(HDC hDC) override;
 
 public:
 	virtual void OnCollision(CCollider * _pOther);

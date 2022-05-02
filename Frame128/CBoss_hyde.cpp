@@ -76,7 +76,7 @@ int CBoss_hyde::Update(void)
 	if (m_ftik2 >= m_fshoot_interval2)
 	{
 		// shoot bullet
-		MGR(CObjMgr)->AddObject(OBJID::OBJ_BOSS_BULLET, CAbstractFactory<CBullet_Boss2>::Create());
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BOSS_BULLET2, CAbstractFactory<CBullet_Boss2>::Create());
 		m_ftik2 = 0.f;
 	}
 
@@ -84,7 +84,7 @@ int CBoss_hyde::Update(void)
 	if (m_ftik3 >= m_fshoot_interval3)
 	{
 		// shoot bullet
-		MGR(CObjMgr)->AddObject(OBJID::OBJ_BOSS_BULLET, CAbstractFactory<CBullet_Boss3>::Create());
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BOSS_BULLET3, CAbstractFactory<CBullet_Boss3>::Create());
 		m_ftik3 = 0.f;
 	}
 	

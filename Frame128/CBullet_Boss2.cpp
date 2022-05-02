@@ -21,7 +21,7 @@ void CBullet_Boss2::Init()
 		0.f
 	};
 
-	m_vScale = { 300.f, 10.f, 0.f };
+	m_vScale = { 100.f, 10.f, 0.f };
 
 	m_fAtk = 50.f;
 
@@ -31,7 +31,7 @@ void CBullet_Boss2::Init()
 
 	m_bActive = true;
 
-	m_eID = OBJID::OBJ_BOSS_BULLET;
+	m_eID = OBJID::OBJ_BOSS_BULLET2;
 	m_eRenderID = RENDERID::RENDER_OBJ;
 	m_strName = L"Boss_hyde_bullet2";
 
@@ -47,6 +47,10 @@ void CBullet_Boss2::Init()
 
 int CBullet_Boss2::Update()
 {
+	m_bNowAppear = false;
+
+	m_fLifeTime += DT;
+
 	if (m_fLifeTime >= 2)
 		return OBJ_DEAD;
 
@@ -75,6 +79,11 @@ int CBullet_Boss2::Update()
 	m_vPos += m_vWorldDir * m_fSpeed * DT;
 
 	return OBJ_NOEVENT;
+}
+
+void CBullet_Boss2::Render(HDC hDC)
+{
+	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
 }
 
 void CBullet_Boss2::OnCollision(CCollider * _pOther)

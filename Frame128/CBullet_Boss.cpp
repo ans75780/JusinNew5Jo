@@ -49,6 +49,10 @@ void CBullet_Boss::Init()
 
 int CBullet_Boss::Update()
 {
+	m_bNowAppear = false;
+
+	m_fLifeTime += DT;
+
 	if (m_fLifeTime >= 3)
 		return OBJ_DEAD;
 
@@ -76,6 +80,11 @@ int CBullet_Boss::Update()
 	m_vPos += m_vWorldDir * m_fSpeed * DT;
 
 	return OBJ_NOEVENT;
+}
+
+void CBullet_Boss::Render(HDC hDC)
+{
+	DEVICE->Draw_Line(m_vWorldPoint, 5, D3DCOLOR_ARGB(255, 0, 255, 0));
 }
 
 void CBullet_Boss::OnCollision(CCollider * _pOther)
