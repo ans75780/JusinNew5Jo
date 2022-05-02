@@ -15,5 +15,9 @@ public:
 
 private:
 	float m_fshoot_interval;
+	float m_fshoot_interval2;
+	float m_fshoot_interval3;
 	float m_ftik;
+	float m_ftik2;
+	float m_ftik3;
 };

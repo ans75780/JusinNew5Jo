@@ -22,6 +22,10 @@ public:
 	virtual void OnTriggerEnter(CCollider * _pOther) PURE;
 	virtual void OnTriggerExit(CCollider * _pOther) PURE;
 
+public:
+	void FindTarget();
+	void SetRadianToPlayer();
+
 protected:
 	float create_x_spread();
 	float create_y_spread();
@@ -43,4 +47,8 @@ protected:
 
 	float	m_fAtk;
 	bool	m_bNowAppear;
+
+	float m_fReduceRate;
+	float m_fBulletSizeRate;
+	CObj* m_pTarget;
 };

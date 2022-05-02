@@ -168,6 +168,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CBoss_hyde.h" />
     <ClInclude Include="CBullet_Boss.h" />
+    <ClInclude Include="CBullet_Boss2.h" />
+    <ClInclude Include="CBullet_Boss3.h" />
     <ClInclude Include="CBullet_Pistol.h" />
     <ClInclude Include="CBullet_Shotgun.h" />
     <ClInclude Include="CBullet_SMG.h" />
@@ -226,6 +228,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CBoss_hyde.cpp" />
     <ClCompile Include="CBullet_Boss.cpp" />
+    <ClCompile Include="CBullet_Boss2.cpp" />
+    <ClCompile Include="CBullet_Boss3.cpp" />
     <ClCompile Include="CBullet_Pistol.cpp" />
     <ClCompile Include="CBullet_Shotgun.cpp" />
     <ClCompile Include="CBullet_SMG.cpp" />

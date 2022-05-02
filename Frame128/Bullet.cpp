@@ -11,7 +11,8 @@
 CBullet::CBullet()
 	: m_fLifeTime(0.f), m_iSpreadRate(0),
 	m_fSpreadX(0.f), m_fSpreadY(0.f),
-	m_fAtk(0.f)
+	m_fAtk(0.f), m_fReduceRate(0.f), m_fBulletSizeRate(0.f),
+	m_pTarget(nullptr)
 {
 	D3DXMatrixIdentity(&m_matPos);
 	ZeroMemory(&m_vWorldPos, sizeof(DXV3));
@@ -61,7 +62,7 @@ void CBullet::Render(HDC hDC)
 	MGR(CDevice)->Get_Sprite()->SetTransform(&m_matWorld);
 	MGR(CDevice)->Get_Sprite()->Draw(m_pTexInfo->pTexture, // 텍스처 객체
 		nullptr,	// 출력할 이미지 영역에 대한 렉트 구조체 포인터, null인 경우 이미지의 0, 0기준으로 출력
-		&D3DXVECTOR3(m_pTexInfo->tImgInfo.Width / 2, m_pTexInfo->tImgInfo.Height / 2, 0.f),	// 출력할 이미지의 중심 축에 대한 vec3 구조체 포인터, null인 경우 0, 0이 중심 좌표
+		&D3DXVECTOR3(float(m_pTexInfo->tImgInfo.Width / 2), float(m_pTexInfo->tImgInfo.Height / 2), 0.f),	// 출력할 이미지의 중심 축에 대한 vec3 구조체 포인터, null인 경우 0, 0이 중심 좌표
 		nullptr,	// 위치 좌표에 대한 vec3 구조체 포인터, null인 경우 스크린 상 0,0,에 좌표 출력
 		D3DCOLOR_ARGB(255, 255, 255, 255));
 	for (auto& iter : m_vecComponents)
@@ -73,6 +74,24 @@ void CBullet::Release()
 	for_each(m_vecComponents.begin(), m_vecComponents.end(), Safe_Delete<CComponent*>);
 	m_vecComponents.clear();
 	m_strName.clear();
+}
+
+void CBullet::FindTarget()
+{
+	m_pTarget = MGR(CObjMgr)->Get_Player();
+}
+
+void CBullet::SetRadianToPlayer()
+{
+	//플레이어에서 자신의 위치를 빼서 방향벡터를 만들고, 정규화시켜줌
+	D3DXVECTOR3 dirVec = m_pTarget->Get_Pos() - m_vPos;
+	D3DXVec3Normalize(&dirVec, &dirVec);//정규화된 벡터나옴.
+	//룩 벡터랑(가로) 정규화된 방향 벡터랑 내적한 값(코사인)을 아크코사인에 넣어 라디안값으로변경
+	m_fRadian = acosf(D3DXVec3Dot(&m_vDir, &dirVec));
+	if (m_vPos.y > m_pTarget->Get_Pos().y)
+	{
+		m_fRadian = PI2 - m_fRadian;
+	}
 }
 
 float CBullet::create_x_spread()

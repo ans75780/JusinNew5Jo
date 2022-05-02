@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "CBullet_Boss.h"
+#include "CBullet_Boss3.h"
 
 #include "Collider.h"
 #include "Device.h"
@@ -9,12 +9,13 @@
 #include "Stat.h"
 #include "Monster.h"
 
-CBullet_Boss::CBullet_Boss()
-{}
+CBullet_Boss3::CBullet_Boss3()
+{
+}
 
-CBullet_Boss::~CBullet_Boss() { Release(); }
+CBullet_Boss3::~CBullet_Boss3() { Release(); }
 
-void CBullet_Boss::Init()
+void CBullet_Boss3::Init()
 {
 	m_vPos = {
 		MGR(CObjMgr)->Get_Boss1()->Get_Pos().x,
@@ -22,19 +23,19 @@ void CBullet_Boss::Init()
 		0.f
 	};
 
-	m_vScale = { 50.f, 50.f, 0.f };
+	m_vScale = { 10.f, 10.f, 0.f };
 
 	m_fAtk = 50.f;
 
 	Set_Initial_Points();
 
-	m_fSpeed = 300.f;
+	m_fSpeed = 240.f;
 
 	m_bActive = true;
 
 	m_eID = OBJID::OBJ_BOSS_BULLET;
 	m_eRenderID = RENDERID::RENDER_OBJ;
-	m_strName = L"Boss_hyde_bullet";
+	m_strName = L"Boss_hyde_bullet3";
 
 	Set_Matrix_to_Identity();
 	CreateCollider();
@@ -47,7 +48,7 @@ void CBullet_Boss::Init()
 	SetRadianToPlayer();
 }
 
-int CBullet_Boss::Update()
+int CBullet_Boss3::Update()
 {
 	if (m_fLifeTime >= 3)
 		return OBJ_DEAD;
@@ -55,11 +56,11 @@ int CBullet_Boss::Update()
 	if (false == m_bActive)
 		return OBJ_DEAD;
 
-	m_fBulletSizeRate -= 0.01f;
-	if (m_fBulletSizeRate <= 0)
+	m_fBulletSizeRate += 0.01f;
+	if (m_fBulletSizeRate >= 3.f)
 		return OBJ_DEAD;
 
-	
+
 
 	D3DXMatrixScaling(&m_matScale, m_fBulletSizeRate, m_fBulletSizeRate, 0.f);
 	D3DXMatrixRotationZ(&m_matRotZ, m_fRadian);
@@ -78,26 +79,26 @@ int CBullet_Boss::Update()
 	return OBJ_NOEVENT;
 }
 
-void CBullet_Boss::OnCollision(CCollider * _pOther)
+void CBullet_Boss3::OnCollision(CCollider * _pOther)
 {
 }
 
-void CBullet_Boss::OnCollisionEnter(CCollider * _pOther)
+void CBullet_Boss3::OnCollisionEnter(CCollider * _pOther)
 {
 }
 
-void CBullet_Boss::OnCollisionExit(CCollider * _pOther)
+void CBullet_Boss3::OnCollisionExit(CCollider * _pOther)
 {
 }
 
-void CBullet_Boss::OnTrigger(CCollider * _pOther)
+void CBullet_Boss3::OnTrigger(CCollider * _pOther)
 {
 }
 
-void CBullet_Boss::OnTriggerEnter(CCollider * _pOther)
+void CBullet_Boss3::OnTriggerEnter(CCollider * _pOther)
 {
 }
 
-void CBullet_Boss::OnTriggerExit(CCollider * _pOther)
+void CBullet_Boss3::OnTriggerExit(CCollider * _pOther)
 {
 }

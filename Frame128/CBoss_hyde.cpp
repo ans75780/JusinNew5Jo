@@ -8,15 +8,17 @@
 #include "UserDefineHeaders.h"
 #include "Stat.h"
 #include "CBullet_Boss.h"
+#include "CBullet_Boss2.h"
+#include "CBullet_Boss3.h"
 
 CBoss_hyde::CBoss_hyde()
-	: m_ftik(0.f), m_fshoot_interval(0.f)
+	: m_ftik(0.f), m_fshoot_interval(0.f),
+	m_ftik2(0.f), m_fshoot_interval2(0.f),
+	m_ftik3(0.f), m_fshoot_interval3(0.f)
 {
 }
 
-CBoss_hyde::~CBoss_hyde()
-{
-}
+CBoss_hyde::~CBoss_hyde() { Release(); }
 
 void CBoss_hyde::Init(void)
 {
@@ -39,6 +41,8 @@ void CBoss_hyde::Init(void)
 	Set_Matrix_to_Identity();
 
 	m_fshoot_interval = 0.01f;
+	m_fshoot_interval2 = 1.f;
+	m_fshoot_interval3 = 0.5f;
 
 	CreateCollider();
 	FindTarget();
@@ -58,6 +62,7 @@ int CBoss_hyde::Update(void)
 	{
 		m_UnitStat.Damaged(100);
 	}
+
 	m_ftik += DT;
 	if (m_ftik >= m_fshoot_interval)
 	{
@@ -65,6 +70,24 @@ int CBoss_hyde::Update(void)
 		MGR(CObjMgr)->AddObject(OBJID::OBJ_BOSS_BULLET, CAbstractFactory<CBullet_Boss>::Create());
 		m_ftik = 0.f;
 	}
+
+
+	m_ftik2 += DT;
+	if (m_ftik2 >= m_fshoot_interval2)
+	{
+		// shoot bullet
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BOSS_BULLET, CAbstractFactory<CBullet_Boss2>::Create());
+		m_ftik2 = 0.f;
+	}
+
+	m_ftik3 += DT;
+	if (m_ftik3 >= m_fshoot_interval3)
+	{
+		// shoot bullet
+		MGR(CObjMgr)->AddObject(OBJID::OBJ_BOSS_BULLET, CAbstractFactory<CBullet_Boss3>::Create());
+		m_ftik3 = 0.f;
+	}
+	
 
 	SetRadianToPlayer();
 

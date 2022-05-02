@@ -18,14 +18,4 @@ public:
 	virtual void OnTrigger(CCollider * _pOther);
 	virtual void OnTriggerEnter(CCollider * _pOther);
 	virtual void OnTriggerExit(CCollider * _pOther);
-
-
-public:
-	void FindTarget();
-	void SetRadianToPlayer();
-
-private:
-	float m_fReduceRate;
-	float m_fBulletSizeRate;
-	CObj* m_pTarget;
 };

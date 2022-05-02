@@ -67,7 +67,7 @@ void CCamera::Update()
 			break;
 		}
 		//Æ½ ´ç º¸Á¤°ª¸¸Å­ ½¦ÀÌÅ© ÆÄ¿ö¸¦ •ûÁÜ
-		float fAmount = MGR(CRandomMgr)->getFromFloatTo(1, 3) * 0.1;
+		float fAmount = float(MGR(CRandomMgr)->getFromFloatTo(1, 3) * 0.1);
 		m_fShakePower -= fAmount;
 		if (m_fShakePower < 0.1f)//Èçµå´Â ÆÄ¿ö°¡ 0.1º¸´Ù ÀÛ´Ù¸é Èçµé±â ¸ØÃã
 		{

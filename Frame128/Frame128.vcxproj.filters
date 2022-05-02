@@ -145,14 +145,23 @@
     <Filter Include="01. Obj\Unit\Bullet\Bullet_Shotgun">
       <UniqueIdentifier>{dc2504a2-80a1-4fca-a14a-d86c70e80699}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Obj\Unit\Bullet\Bullet_Boss">
-      <UniqueIdentifier>{19857365-a433-41aa-8dd0-34c9cad112f9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Obj\Unit\Monster\Boss">
       <UniqueIdentifier>{b7fe17ff-6d34-495f-bf25-a49bef6e3509}</UniqueIdentifier>
     </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{a63d11a8-d0eb-4143-8094-a65fe5622784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Bullet\Boss_Bullet">
+      <UniqueIdentifier>{ff8973a6-73aa-4d8c-a088-0b724afbc4d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss">
+      <UniqueIdentifier>{19857365-a433-41aa-8dd0-34c9cad112f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss2">
+      <UniqueIdentifier>{7ad53af1-fca1-47fd-823d-81d45e0a2c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss3">
+      <UniqueIdentifier>{d77cfc3d-8696-4a52-9b41-c968f34164e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -313,7 +322,7 @@
       <Filter>00. MainGame</Filter>
     </ClInclude>
     <ClInclude Include="CBullet_Boss.h">
-      <Filter>01. Obj\Unit\Bullet\Bullet_Boss</Filter>
+      <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss</Filter>
     </ClInclude>
     <ClInclude Include="CBoss_hyde.h">
       <Filter>01. Obj\Unit\Monster\Boss</Filter>
@@ -329,6 +338,12 @@
     </ClInclude>
     <ClInclude Include="RageZombie.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CBullet_Boss2.h">
+      <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss2</Filter>
+    </ClInclude>
+    <ClInclude Include="CBullet_Boss3.h">
+      <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -468,7 +483,7 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CBullet_Boss.cpp">
-      <Filter>01. Obj\Unit\Bullet\Bullet_Boss</Filter>
+      <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss</Filter>
     </ClCompile>
     <ClCompile Include="CBoss_hyde.cpp">
       <Filter>01. Obj\Unit\Monster\Boss</Filter>
@@ -484,6 +499,12 @@
     </ClCompile>
     <ClCompile Include="RageZombie.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet_Boss2.cpp">
+      <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss2</Filter>
+    </ClCompile>
+    <ClCompile Include="CBullet_Boss3.cpp">
+      <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
