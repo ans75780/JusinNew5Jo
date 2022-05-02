@@ -148,9 +148,6 @@
     <Filter Include="01. Obj\Unit\Monster\Boss">
       <UniqueIdentifier>{b7fe17ff-6d34-495f-bf25-a49bef6e3509}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Camera">
-      <UniqueIdentifier>{a63d11a8-d0eb-4143-8094-a65fe5622784}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Obj\Unit\Bullet\Boss_Bullet">
       <UniqueIdentifier>{ff8973a6-73aa-4d8c-a088-0b724afbc4d3}</UniqueIdentifier>
     </Filter>
@@ -162,6 +159,21 @@
     </Filter>
     <Filter Include="01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss3">
       <UniqueIdentifier>{d77cfc3d-8696-4a52-9b41-c968f34164e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Monster\Giant Zombie">
+      <UniqueIdentifier>{d305307d-f2ea-4512-8382-8a3ed861492a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Unit\Monster\Rage Zombie">
+      <UniqueIdentifier>{9de72115-b2ee-43f1-9284-567af74f374a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\11. Camera">
+      <UniqueIdentifier>{a63d11a8-d0eb-4143-8094-a65fe5622784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. Design\10. RandomMgr">
+      <UniqueIdentifier>{e185c888-6949-4142-ad9a-a88c700c6a9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Obj\Stat">
+      <UniqueIdentifier>{696657c8-e3f6-4ab4-b390-dc01a8970f4b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -315,9 +327,6 @@
     <ClInclude Include="CBullet_Shotgun.h">
       <Filter>01. Obj\Unit\Bullet\Bullet_Shotgun</Filter>
     </ClInclude>
-    <ClInclude Include="Stat.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="GunsInclude.h">
       <Filter>00. MainGame</Filter>
     </ClInclude>
@@ -327,23 +336,26 @@
     <ClInclude Include="CBoss_hyde.h">
       <Filter>01. Obj\Unit\Monster\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="GiantZombie.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomMgr.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="RageZombie.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CBullet_Boss2.h">
       <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss2</Filter>
     </ClInclude>
     <ClInclude Include="CBullet_Boss3.h">
       <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss3</Filter>
+    </ClInclude>
+    <ClInclude Include="GiantZombie.h">
+      <Filter>01. Obj\Unit\Monster\Giant Zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="RageZombie.h">
+      <Filter>01. Obj\Unit\Monster\Rage Zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomMgr.h">
+      <Filter>98. Design\10. RandomMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>98. Design\11. Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Stat.h">
+      <Filter>01. Obj\Stat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -479,32 +491,32 @@
     <ClCompile Include="CBullet_Shotgun.cpp">
       <Filter>01. Obj\Unit\Bullet\Bullet_Shotgun</Filter>
     </ClCompile>
-    <ClCompile Include="Stat.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CBullet_Boss.cpp">
       <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss</Filter>
     </ClCompile>
     <ClCompile Include="CBoss_hyde.cpp">
       <Filter>01. Obj\Unit\Monster\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="GiantZombie.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomMgr.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="RageZombie.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CBullet_Boss2.cpp">
       <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss2</Filter>
     </ClCompile>
     <ClCompile Include="CBullet_Boss3.cpp">
       <Filter>01. Obj\Unit\Bullet\Boss_Bullet\Bullet_Boss3</Filter>
+    </ClCompile>
+    <ClCompile Include="GiantZombie.cpp">
+      <Filter>01. Obj\Unit\Monster\Giant Zombie</Filter>
+    </ClCompile>
+    <ClCompile Include="RageZombie.cpp">
+      <Filter>01. Obj\Unit\Monster\Rage Zombie</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomMgr.cpp">
+      <Filter>98. Design\10. RandomMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>98. Design\11. Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Stat.cpp">
+      <Filter>01. Obj\Stat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

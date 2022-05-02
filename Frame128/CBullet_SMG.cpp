@@ -10,13 +10,9 @@
 #include "Monster.h"
 
 
-CBullet_SMG::CBullet_SMG()
-{
-}
+CBullet_SMG::CBullet_SMG() {}
 
-CBullet_SMG::~CBullet_SMG()
-{
-}
+CBullet_SMG::~CBullet_SMG() { Release(); }
 
 void CBullet_SMG::Init()
 {

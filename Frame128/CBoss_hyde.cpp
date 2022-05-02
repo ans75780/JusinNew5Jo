@@ -15,8 +15,7 @@ CBoss_hyde::CBoss_hyde()
 	: m_ftik(0.f), m_fshoot_interval(0.f),
 	m_ftik2(0.f), m_fshoot_interval2(0.f),
 	m_ftik3(0.f), m_fshoot_interval3(0.f)
-{
-}
+{}
 
 CBoss_hyde::~CBoss_hyde() { Release(); }
 
@@ -90,7 +89,6 @@ int CBoss_hyde::Update(void)
 	
 
 	SetRadianToPlayer();
-
 	CalcMat();
 
 	for (int i(0); i < 4; ++i)
@@ -120,6 +118,4 @@ void CBoss_hyde::Render(HDC hDC)
 		iter->Render(hDC);
 }
 
-void CBoss_hyde::Release(void)
-{
-}
+void CBoss_hyde::Release(void) {}

@@ -11,13 +11,9 @@
 #include "Monster.h"
 
 
-CBullet_Pistol::CBullet_Pistol()
-{
-}
+CBullet_Pistol::CBullet_Pistol() {}
 
-CBullet_Pistol::~CBullet_Pistol()
-{
-}
+CBullet_Pistol::~CBullet_Pistol() { Release(); }
 
 void CBullet_Pistol::Init()
 {

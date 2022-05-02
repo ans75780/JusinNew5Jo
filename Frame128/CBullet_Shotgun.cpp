@@ -15,9 +15,7 @@ CBullet_Shotgun::CBullet_Shotgun()
 {
 }
 
-CBullet_Shotgun::~CBullet_Shotgun()
-{
-}
+CBullet_Shotgun::~CBullet_Shotgun() { Release(); }
 
 void CBullet_Shotgun::Init()
 {
